@@ -1,4 +1,8 @@
 # author: Ethosa
 
-import VK/Vk
-export Vk
+import
+  VK/Vk,
+  VK/LongPoll
+export
+  Vk,
+  LongPoll
