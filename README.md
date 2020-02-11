@@ -2,7 +2,7 @@
 The Nim framework for VK
 
 ## Getting started
-***Installing***: `nimble install shizuka`
+***Installing***: `nimble install https://github.com/Ethosa/shizuka`
 ***Import***: `import shuzuka`
 
 ### Authorization
@@ -17,4 +17,18 @@ vk = Vk("88005553535", "qwertyuiop", debug=true)
 ```nim
 import shizuka
 vk = AVk("88005553535", "qwertyuiop", debug=true)
+```
+
+### Methods calling
+
+#### Sync
+```nim
+var response = vk~users.get(user_ids="akihayase")
+```
+
+#### Async
+```nim
+import asyncdispatch
+# ...
+var response = waitFor vk~users.get(user_ids="akihayase")
 ```
