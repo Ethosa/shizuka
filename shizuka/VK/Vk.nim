@@ -6,7 +6,7 @@ import json
 export json
 from strutils import `%`
 
-from utils import encode
+from utils import encode, log_in
 
 
 const API_URL: string = "https://api.vk.com/method/"
@@ -16,7 +16,7 @@ type
   VkObj[ClientType] = ref object
     access_token: string
     group_id: int
-    client: ClientType
+    client: ClientType  ## e.g. HttpClient, AsyncHttpClient.
     debug: bool
     version: string
 
@@ -30,20 +30,31 @@ proc Vk*(access_token: string, group_id=0,
   SyncVkObj(access_token: access_token, group_id: group_id,
      client: newHttpClient(), debug: debug, version: version)
 
+proc Vk*(l, p: string, debug=false, version="5.103"): SyncVkObj =
+  ## Auth in VK, using login and password (only for users).
+  var token = log_in(newHttpClient(), l, p, version=version)
+  Vk(token, debug=debug, version=version)
+
 proc AVk*(access_token: string, group_id=0,
             debug=false, version="5.103"): AsyncVkObj =
   ## Auth in VK API via token (user, service or group)
   AsyncVkObj(access_token: access_token, group_id: group_id,
      client: newAsyncHttpClient(), debug: debug, version: version)
 
+proc AVk*(l, p: string, debug=false, version="5.103"): AsyncVkObj =
+  ## Auth in VK, using login and password (only for users).
+  var token = waitFor log_in(newAsyncHttpClient(), l, p, version=version)
+  AVk(token, debug=debug, version=version)
+
 proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
                   params: JsonNode = %*{}): Future[JsonNode]
-                  {. multisync, discardable .}=
+                  {. multisync, discardable .} =
+  ## Calls any VK API method.
   params["v"] = %vk.version
   params["access_token"] = %vk.access_token
   result = parseJson(
     await vk.client.postContent(
-      API_URL & name & "?" & encode(params)))
+      API_URL & name & "?" & encode params))
 
   if vk.debug:
     if result.hasKey("response"):
@@ -56,6 +67,7 @@ proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
 
 
 macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
+  ## Provides convenient calling VK API methods.
   if body.kind == nnkCall:
     var
       vk = vk
