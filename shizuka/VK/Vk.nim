@@ -9,14 +9,16 @@ from strutils import `%`
 from utils import encode, log_in
 
 
-const API_URL: string = "https://api.vk.com/method/"
+const
+  API_URL: string = "https://api.vk.com/method/"
+  API_VERSION: string = "5.103"
 
 
 type
   VkObj[ClientType] = ref object
     access_token: string
-    group_id: int
-    client: ClientType  ## e.g. HttpClient, AsyncHttpClient.
+    group_id*: int
+    client*: ClientType  ## e.g. HttpClient, AsyncHttpClient.
     debug: bool
     version: string
 
@@ -25,7 +27,7 @@ type
 
 
 proc Vk*(access_token: string, group_id=0,
-         debug=false, version="5.103"): SyncVkObj =
+         debug=false, version=API_VERSION): SyncVkObj =
   ## Auth in VK API via token (user, service or group)
   ##
   ## Arguments:
@@ -38,7 +40,7 @@ proc Vk*(access_token: string, group_id=0,
   SyncVkObj(access_token: access_token, group_id: group_id,
      client: newHttpClient(), debug: debug, version: version)
 
-proc Vk*(l, p: string, debug=false, version="5.103"): SyncVkObj =
+proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
   ## Auth in VK, using login and password (only for users).
   ##
   ## Arguments:
@@ -52,13 +54,13 @@ proc Vk*(l, p: string, debug=false, version="5.103"): SyncVkObj =
   Vk(token, debug=debug, version=version)
 
 proc AVk*(access_token: string, group_id=0,
-            debug=false, version="5.103"): AsyncVkObj =
+            debug=false, version=API_VERSION): AsyncVkObj =
   ## Auth in VK API via token (user, service or group)
   ## see ``Vk``
   AsyncVkObj(access_token: access_token, group_id: group_id,
      client: newAsyncHttpClient(), debug: debug, version: version)
 
-proc AVk*(l, p: string, debug=false, version="5.103"): AsyncVkObj =
+proc AVk*(l, p: string, debug=false, version=API_VERSION): AsyncVkObj =
   ## Auth in VK, using login and password (only for users).
   ## see ``Vk``
   var token = waitFor log_in(newAsyncHttpClient(), l, p, version=version)
