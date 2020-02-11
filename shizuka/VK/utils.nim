@@ -12,6 +12,7 @@ const
 
 
 proc encode*(params: JsonNode): string =
+  ## Encodes Json params to url params
   var res: seq[string] = @[]
   for key, value in params.pairs():
     if value.kind == JString:
@@ -22,6 +23,7 @@ proc encode*(params: JsonNode): string =
 
 proc log_in*(client: HttpClient | AsyncHttpCLient, login, password: string,
             tfcode="", scope="all", version="5.103"): Future[string] {.multisync.} =
+  ## Gets access token via login and password.
   let authData = %*{
     "client_id": CLIENT_ID,
     "client_secret": CLIENT_SECRET,
