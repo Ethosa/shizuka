@@ -101,14 +101,9 @@ macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
   ##   vk~method(param1="value", ...)
   if body.kind == nnkCall:
     var
-      vk = vk
       method_name = body[0].toStrLit
       params = %*{}
-      i = 0
-    for arg in body.children:
-      if i == 0:
-        inc i
-        continue
+    for arg in body[1..^1]:
       params[$arg[0]] = % $arg[1]
     result = newCall(
       "call_method", vk, method_name,
