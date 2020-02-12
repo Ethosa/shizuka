@@ -95,16 +95,21 @@ macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
   ## Provides convenient calling VK API methods.
   ##
   ## Usage with call_method:
-  ##   vk.call_method("method", {"param1": "value", ...})
+  ##   vk.call_method("method", %*{"param1": "value", "param2": 15, ...})
   ##
   ## Usage with this macro:
-  ##   vk~method(param1="value", ...)
+  ##   vk~method(param1="value", param2=15, ...)
   if body.kind == nnkCall:
     var
       method_name = body[0].toStrLit
       params = %*{}
+      value: NimNode
     for arg in body[1..^1]:
-      params[$arg[0]] = % $arg[1]
+      if arg[1].kind != nnkStrLit:
+        value = arg[1].toStrLit
+      else:
+        value = arg[1]
+      params[$arg[0]] = % $value
     result = newCall(
       "call_method", vk, method_name,
       newCall("parseJson", newLit($params)))
