@@ -40,9 +40,9 @@ proc Vk*(access_token: string, group_id=0,
   ##   access_token -- token for calling VK API methods.
   ##
   ## Keyword Arguments:
-  ##   group_id -- group id, if available.
-  ##   debug -- debug log.
-  ##   version -- API version.
+  ## -   ``group_id`` -- group id, if available.
+  ## -   ``debug`` -- debug log.
+  ## -   ``version`` -- API version.
   var client = newHttpClient()
   SyncVkObj(access_token: access_token, group_id: group_id,
      client: client, debug: debug, version: version,
@@ -53,12 +53,12 @@ proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
   ## Auth in VK, using login and password (only for users).
   ##
   ## Arguments:
-  ##   l -- VK login.
-  ##   p -- VK password.
+  ## -   ``l`` -- VK login.
+  ## -   ``p`` -- VK password.
   ##
   ## Keyword Arguments:
-  ##   debug -- debug log.
-  ##   version -- API version.
+  ## -   ``debug`` -- debug log.
+  ## -   ``version`` -- API version.
   var token = log_in(newHttpClient(), l, p, version=version)
   Vk(token, debug=debug, version=version)
 
@@ -86,10 +86,10 @@ proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
   ## Calls any VK API method.
   ##
   ## Arguments:
-  ##   name -- method name, e.g. "messages.send", "users.get"
+  ##   ``name`` -- method name, e.g. "messages.send", "users.get"
   ##
   ## Keyword Arguments:
-  ##   params -- params for method calling.
+  ##   ``params`` -- params for method calling.
   params["v"] = %vk.version
   params["access_token"] = %vk.access_token
   result = parseJson await vk.client.postContent(
@@ -116,19 +116,13 @@ macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
   if body.kind == nnkCall:
     var
       method_name = body[0].toStrLit
-      params = %*{}
+      params = newNimNode nnkTableConstr
       value: NimNode
     for arg in body[1..^1]:
-      if arg[1].kind == nnkNilLit:
-        value = newLit("null")
-      elif arg[1].kind != nnkStrLit:
-        value = arg[1].toStrLit
-      else:
-        value = arg[1]
-      params[$arg[0]] = % $value
+      params.add newTree(nnkExprColonExpr, arg[0].toStrLit, arg[1])
     result = newCall(
       "call_method", vk, method_name,
-      newCall("parseJson", newLit($params)))
+      newCall("%*", params))
 
 macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
   ## This pragma will add the transferred function to the list of functions.
@@ -140,7 +134,7 @@ macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
   ##   vk = Vk(...)
   ##   proc message_new(event: JsonNode) {.eventhadler: vk.} =
   ##     echo event
-  ##   vk.startl_listen
+  ##   vk.start_listen
   if prc.kind == nnkProcDef:
     result = prc.copy()
     let proc_name = $prc[0].toStrLit
@@ -155,6 +149,9 @@ macro start_listen*(vk: AsyncVkObj | SyncVkObj): untyped =
   ## Starts longpoll listen.
   ##
   ## calls methods with ``eventhandler`` pragma, if available.
+  ##
+  ## Usage:
+  ##   vk.start_listen
   result = quote do:
     for event in `vk`.longpoll.listen:
       var etype = event["type"].getStr
