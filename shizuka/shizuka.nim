@@ -4,9 +4,11 @@ import
   VK/Vk,
   VK/LongPoll,
   VK/Keyboard,
-  VK/Button
+  VK/Button,
+  VK/Event
 export
   Vk,
   LongPoll,
   Keyboard,
-  Button
+  Button,
+  Event

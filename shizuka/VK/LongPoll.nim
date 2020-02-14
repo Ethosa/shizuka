@@ -5,6 +5,8 @@ import asyncdispatch
 from strutils import `%`
 import json
 
+from Event import to_event
+
 
 type
   LongPollObj[ClientType] = object
@@ -125,4 +127,4 @@ iterator listen*(lp: LongPollRef | ALongPollRef): JsonNode =
       lp.ts = lp.response["ts"].getStr
 
     for update in lp.response["updates"].elems:
-      yield update
+      yield to_event update
