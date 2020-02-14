@@ -16,6 +16,9 @@ const
 
 
 type
+  VkEvent* = object
+    name*: string
+    prc*: proc(event: JsonNode)
   VkObj[ClientType, LongPollType] = ref object
     access_token: string
     group_id*: int
@@ -23,6 +26,7 @@ type
     debug: bool
     version: string
     longpoll*: LongPollType
+    events*: seq[VkEvent]
 
   SyncVkObj* = VkObj[HttpClient, LongPollRef]
   AsyncVkObj* = VkObj[AsyncHttpClient, ALongPollRef]
@@ -42,8 +46,8 @@ proc Vk*(access_token: string, group_id=0,
   var client = newHttpClient()
   SyncVkObj(access_token: access_token, group_id: group_id,
      client: client, debug: debug, version: version,
-     longpoll: LongPoll(client, group_id, access_token, version,
-                        debug))
+     longpoll: LongPoll(client, group_id, access_token, version, debug),
+     events: @[])
 
 proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
   ## Auth in VK, using login and password (only for users).
@@ -61,16 +65,18 @@ proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
 proc AVk*(access_token: string, group_id=0,
             debug=false, version=API_VERSION): AsyncVkObj =
   ## Auth in VK API via token (user, service or group)
-  ## see ``Vk``
+  ##
+  ## see also `Vk <#Vk,string,int>`_
   var client = newAsyncHttpClient()
   AsyncVkObj(access_token: access_token, group_id: group_id,
      client: client, debug: debug, version: version,
-     longpoll: ALongPoll(client, group_id, access_token, version,
-                         debug))
+     longpoll: ALongPoll(client, group_id, access_token, version, debug),
+     events: @[])
 
 proc AVk*(l, p: string, debug=false, version=API_VERSION): AsyncVkObj =
   ## Auth in VK, using login and password (only for users).
-  ## see ``Vk``
+  ##
+  ## see also `Vk <#Vk,string,string>`_
   var token = waitFor log_in(newAsyncHttpClient(), l, p, version=version)
   AVk(token, debug=debug, version=version)
 
@@ -123,3 +129,36 @@ macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
     result = newCall(
       "call_method", vk, method_name,
       newCall("parseJson", newLit($params)))
+
+macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
+  ## This pragma will add the transferred function to the list of functions.
+  ##
+  ## With a new event, the type of which will be equal to the name of the passed function,
+  ## the passed function will be called.
+  ##
+  ## ..code-block::Nim
+  ##   vk = Vk(...)
+  ##   proc message_new(event: JsonNode) {.eventhadler: vk.} =
+  ##     echo event
+  ##   vk.startl_listen
+  if prc.kind == nnkProcDef:
+    result = prc.copy()
+    let proc_name = $prc[0].toStrLit
+    let proc_ident = newIdentNode proc_name
+    result = quote do:
+      `prc`
+      var event = VkEvent(name: `proc_name`, prc: `proc_ident`)
+      if event notin `vk`.events:
+        `vk`.events.add(event)
+
+macro start_listen*(vk: AsyncVkObj | SyncVkObj): untyped =
+  ## Starts longpoll listen.
+  ##
+  ## calls methods with ``eventhandler`` pragma, if available.
+  result = quote do:
+    for event in `vk`.longpoll.listen:
+      var etype = event["type"].getStr
+      for e in `vk`.events:
+        if etype == e.name:
+          e.prc(event)
+          break
