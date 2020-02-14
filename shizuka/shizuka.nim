@@ -2,7 +2,11 @@
 
 import
   VK/Vk,
-  VK/LongPoll
+  VK/LongPoll,
+  VK/Keyboard,
+  VK/Button
 export
   Vk,
-  LongPoll
+  LongPoll,
+  Keyboard,
+  Button
