@@ -49,6 +49,7 @@ proc add*(keyboard: KeyboardRef, button: JsonNode) =
       keyboard.add button
 
 proc compile*(keyboard: KeyboardRef): JsonNode =
+  ## Compiles keyboard for send to the message.
   result = %*{"buttons" : keyboard.buttons}
   if keyboard.inline:
     result["inline"] = %true
