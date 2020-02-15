@@ -79,6 +79,53 @@ proc format*(upl: UploaderObj, response: JsonNode,
     return output.join ","
 
 
+proc album_photo*(upl: UploaderObj, files: seq[string], album_id: int,
+                  group_id=0, caption=""): Future[JsonNode] {.async.} =
+  ## upload photo in album
+  ## 
+  ## Arguments:
+  ## -   ``files`` -- file paths.
+  ## -   ``album_id``
+  ## 
+  ## Keyword Arguments:
+  ## -   ``group_id``
+  ## -   ``caption`` -- photo caption.
+  data = %*{
+    "album_id": %album_id
+  }
+  if group_id != 0:
+    data["group_id"] = %group_id
+
+  var response = await upl.upload_files(data, files, "photos.getUploadServer")
+  var enddata = %*{
+    "album_id": %album_id,
+    "caption": %caption,
+    "server": %server,
+    "hash": %hash,
+    "photos_list": %photos_list
+  }
+  result = await upl.callAPI("photos.save", enddata)
+
+
+proc audio*(upl: UploaderObj, files: seq[string], artist="",
+            title=""): Future[JsonNode] {.async.} =
+  ## Uploads audio file
+  ##
+  ## Arguments:
+  ## -   ``files`` -- file paths.
+  ##
+  ## Keyword Arguments:
+  ## -   ``artist`` -- songwriter. The default is taken from ID3 tags.
+  ## -   ``title`` -- name of the composition. The default is taken from ID3 tags.
+  var response = await upl.upload_files(%*[], files, "audio.getUploadServer")
+  var data = %*{
+    "hash": response["hash"],
+    "server": response["server"],
+    "audio": response["audio"]
+  }
+  result = await upl.callAPI("audio.save", data)
+
+
 proc message_photo*(upl: UploaderObj, files: seq[string],
                     peer_id: int): Future[JsonNode] {.async.} =
   ## Uploads the photo in message.
