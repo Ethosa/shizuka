@@ -8,6 +8,7 @@ from strutils import `%`
 
 from utils import encode, log_in
 import LongPoll
+import Uploader
 
 
 const
@@ -26,6 +27,7 @@ type
     debug: bool
     version: string
     longpoll*: LongPollType  ## LongPollRef or ALongPollRef.
+    uploader*: UploaderObj
     events*: seq[VkEvent]
 
   SyncVkObj* = VkObj[HttpClient, LongPollRef]
@@ -44,10 +46,11 @@ proc Vk*(access_token: string, group_id=0,
   ## -   ``debug`` -- debug log.
   ## -   ``version`` -- API version.
   var client = newHttpClient()
+  var async_client = newAsyncHttpClient()
   SyncVkObj(access_token: access_token, group_id: group_id,
      client: client, debug: debug, version: version,
      longpoll: LongPoll(client, group_id, access_token, version, debug),
-     events: @[])
+     events: @[], uploader: Uploader(async_client, access_token, version))
 
 proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
   ## Auth in VK, using login and password (only for users).
@@ -72,7 +75,7 @@ proc AVk*(access_token: string, group_id=0,
   AsyncVkObj(access_token: access_token, group_id: group_id,
      client: client, debug: debug, version: version,
      longpoll: ALongPoll(client, group_id, access_token, version, debug),
-     events: @[])
+     events: @[], uploader: Uploader(client, access_token, version))
 
 proc AVk*(l, p: string, debug=false, version=API_VERSION): AsyncVkObj =
   ## Auth in VK, using login and password (only for users).
