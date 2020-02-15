@@ -5,10 +5,14 @@ import
   VK/LongPoll,
   VK/Keyboard,
   VK/Button,
-  VK/Event
+  VK/Event,
+  VK/TemplateElement,
+  VK/Template
 export
   Vk,
   LongPoll,
   Keyboard,
   Button,
-  Event
+  Event,
+  TemplateElement,
+  Template
