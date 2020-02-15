@@ -9,29 +9,16 @@
 ***Installing***: `nimble install https://github.com/Ethosa/shizuka`  
 ***Import***: `import shuzuka`
 
-### Authorization
+## Now supported
+-   Calling any VK API method.
+-   Convenient working with longpoll.
+-   Uploader (work in progress).
+-   Sync/async.
+-   VK keyboards and templates.
 
-#### Sync
-```nim
-import shizuka
-vk = Vk("88005553535", "qwertyuiop", debug=true)
-```
+## FAQ
+*Q*: Where I can learn this library?
+*A*: You can learn it in [wiki](https://github.com/Ethosa/shizuka/wiki).
 
-#### Async
-```nim
-import asyncdispatch
-import shizuka
-vk = AVk("88005553535", "qwertyuiop", debug=true)
-```
-
-### Methods calling
-
-#### Sync
-```nim
-var response = vk~users.get(user_ids="akihayase")
-```
-
-#### Async
-```nim
-var response = waitFor vk~users.get(user_ids="akihayase")
-```
+*Q*: How I can help to develop this library?
+*A*: You can put a star :star: on this repository :3.
