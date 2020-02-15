@@ -2,6 +2,7 @@
 The Nim framework for VK
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![License: LGNUv3](https://img.shields.io/github/license/Ethosa/shizuka)](https://github.com/Ethosa/shizuka/blob/master/LICENSE)
 
 ## Getting started
 ***Installing***: `nimble install https://github.com/Ethosa/shizuka`  
