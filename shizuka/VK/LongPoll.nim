@@ -7,6 +7,8 @@ import json
 
 from Event import to_event
 
+from consts import VK_API_URL
+
 
 type
   LongPollObj[ClientType] = object
@@ -107,7 +109,7 @@ iterator listen*(lp: LongPollRef | ALongPollRef): JsonNode =
     mname = "messages.getLongPollServer"
     url = "https://$#?act=a_check&key=$#&ts=$#&wait=25&mode=202&version=3"
 
-  mname = "https://api.vk.com/method/" & mname & "?access_token=" & lp.access_token
+  mname = VK_API_URL & mname & "?access_token=" & lp.access_token
   mname &= "&v=" & lp.v
   if lp.group_id != 0:
     mname &= "&group_id=" & $lp.group_id

@@ -6,14 +6,10 @@ import json
 export json
 from strutils import `%`
 
+from consts import VK_API_URL, VK_API_DEFAULT_VERSION
 from utils import encode, log_in
 import LongPoll
 import Uploader
-
-
-const
-  API_URL: string = "https://api.vk.com/method/"
-  API_VERSION: string = "5.103"
 
 
 type
@@ -35,11 +31,11 @@ type
 
 
 proc Vk*(access_token: string, group_id=0,
-         debug=false, version=API_VERSION): SyncVkObj =
+         debug=false, version=VK_API_DEFAULT_VERSION): SyncVkObj =
   ## Auth in VK API via token (user, service or group)
   ##
   ## Arguments:
-  ##   access_token -- token for calling VK API methods.
+  ## -   ``access_token`` -- token for calling VK API methods.
   ##
   ## Keyword Arguments:
   ## -   ``group_id`` -- group id, if available.
@@ -52,7 +48,7 @@ proc Vk*(access_token: string, group_id=0,
      longpoll: LongPoll(client, group_id, access_token, version, debug),
      events: @[], uploader: Uploader(async_client, access_token, version))
 
-proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
+proc Vk*(l, p: string, debug=false, version=VK_API_DEFAULT_VERSION): SyncVkObj =
   ## Auth in VK, using login and password (only for users).
   ##
   ## Arguments:
@@ -67,7 +63,7 @@ proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
 
 
 proc AVk*(access_token: string, group_id=0,
-            debug=false, version=API_VERSION): AsyncVkObj =
+            debug=false, version=VK_API_DEFAULT_VERSION): AsyncVkObj =
   ## Auth in VK API via token (user, service or group)
   ##
   ## see also `Vk <#Vk,string,int>`_
@@ -77,7 +73,7 @@ proc AVk*(access_token: string, group_id=0,
      longpoll: ALongPoll(client, group_id, access_token, version, debug),
      events: @[], uploader: Uploader(client, access_token, version))
 
-proc AVk*(l, p: string, debug=false, version=API_VERSION): AsyncVkObj =
+proc AVk*(l, p: string, debug=false, version=VK_API_DEFAULT_VERSION): AsyncVkObj =
   ## Auth in VK, using login and password (only for users).
   ##
   ## see also `Vk <#Vk,string,string>`_
@@ -98,7 +94,7 @@ proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
   params["v"] = %vk.version
   params["access_token"] = %vk.access_token
   result = parseJson await vk.client.postContent(
-      API_URL & name & "?" & encode params)
+      VK_API_URL & name & "?" & encode params)
 
   if vk.debug:
     if result.hasKey("response"):
