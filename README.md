@@ -17,8 +17,8 @@
 -   VK keyboards and templates.
 
 ## FAQ
-*Q*: Where I can learn this library?
+*Q*: Where I can learn this library?  
 *A*: You can learn it in [wiki](https://github.com/Ethosa/shizuka/wiki).
 
-*Q*: How I can help to develop this library?
+*Q*: How I can help to develop this library?  
 *A*: You can put a star :star: on this repository :3.
