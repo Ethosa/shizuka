@@ -11,7 +11,7 @@ type
 
 
 proc `$`*(keyboard: KeyboardRef): string =
-  "keyboard " & keyboard.buttons
+  "keyboard " & $keyboard.buttons
 
 proc Keyboard*(one_time=false, inline=false): KeyboardRef =
   ## Creates a new KeyboardRef object.

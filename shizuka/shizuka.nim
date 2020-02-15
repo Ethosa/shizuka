@@ -7,7 +7,8 @@ import
   VK/Button,
   VK/Event,
   VK/TemplateElement,
-  VK/Template
+  VK/Template,
+  VK/Uploader
 export
   Vk,
   LongPoll,
@@ -15,4 +16,5 @@ export
   Button,
   Event,
   TemplateElement,
-  Template
+  Template,
+  Uploader

@@ -34,10 +34,10 @@ proc add*(te: TemplateElementRef, button: JsonNode) =
 proc to_json*(te: TemplateElementRef): JsonNode =
   ## Converts a template element to place it in a template object.
   result = %*{
-    "title": %te.title
-    "description": %te.description
-    "photo_id": %te.photo_id
-    "buttons": %te.buttons
+    "title": %te.title,
+    "description": %te.description,
+    "photo_id": %te.photo_id,
+    "buttons": %te.buttons,
     "action": %te.action
   }
   if te.action == "open_link":
