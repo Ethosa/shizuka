@@ -1,6 +1,5 @@
 # author: Ethosa
 import json
-from strformat import fmt
 
 
 type
@@ -12,7 +11,7 @@ type
 
 
 proc `$`*(keyboard: KeyboardRef): string =
-  fmt"keyboard {keyboard.buttons}"
+  "keyboard " & keyboard.buttons
 
 proc Keyboard*(one_time=false, inline=false): KeyboardRef =
   ## Creates a new KeyboardRef object.
