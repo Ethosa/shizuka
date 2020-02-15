@@ -2,8 +2,10 @@
 import httpclient
 import asyncdispatch
 import json
+from strutils import join
 
 from utils import encode
+from consts import VK_API_URL
 
 
 type
@@ -21,7 +23,7 @@ proc callAPI(upl: UploaderObj, method_name: string, data: JsonNode): Future[Json
   data["access_token"] = %upl.access_token
   data["v"] = %upl.v
   result = parseJson await upl.client.postContent(
-    "https://api.vk.com/method/" & method_name & "?" & encode data
+    VK_API_URL & method_name & "?" & encode data
   )
 
 
@@ -42,6 +44,39 @@ proc upload_files(upl: UploaderObj, data: JsonNode,
   result = parseJson await upl.client.postContent(
     upload_url["response"]["upload_url"].getStr,
     multipart=uploaded_files)
+
+
+proc get(node: JsonNode, key: string): JsonNode =
+  if node.hasKey(key):
+    return node[key]
+  else:
+    return node
+
+
+proc format*(upl: UploaderObj, response: JsonNode,
+             response_type="photo"): string =
+  ## response formatting
+  ##
+  ## Arguments:
+  ## -   ``response`` -- response after object saved
+  ##
+  ## Keyword Arguments:
+  ## -   ``formtype`` -- "photo", "video", "audio" etc.
+  var resp = response
+  if resp.kind == JObject:
+    resp = resp.get "response"
+  if resp.kind == JObject:
+    resp = resp.get "type"
+
+  if resp.kind == JObject:
+    if resp.hasKey("owner_id") and resp.hasKey("id"):
+      return response_type & $(resp["owner_id"]) & "_" & $(resp["id"])
+  elif resp.kind == JArray:
+    var output: seq[string]
+    for obj in resp.items:
+      if obj.hasKey("owner_id") and obj.hasKey("id"):
+        output.add(response_type & $(obj["owner_id"]) & "_" & $(obj["id"]))
+    return output.join ","
 
 
 proc message_photo*(upl: UploaderObj, files: seq[string],
