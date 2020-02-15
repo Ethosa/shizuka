@@ -16,7 +16,7 @@ const
 
 
 type
-  VkEvent* = object
+  VkEvent* = object  ## Object for eventhandler pragma.
     name*: string
     prc*: proc(event: JsonNode)
   VkObj[ClientType, LongPollType] = ref object
@@ -25,7 +25,7 @@ type
     client*: ClientType  ## e.g. HttpClient, AsyncHttpClient.
     debug: bool
     version: string
-    longpoll*: LongPollType
+    longpoll*: LongPollType  ## LongPollRef or ALongPollRef.
     events*: seq[VkEvent]
 
   SyncVkObj* = VkObj[HttpClient, LongPollRef]
@@ -62,6 +62,7 @@ proc Vk*(l, p: string, debug=false, version=API_VERSION): SyncVkObj =
   var token = log_in(newHttpClient(), l, p, version=version)
   Vk(token, debug=debug, version=version)
 
+
 proc AVk*(access_token: string, group_id=0,
             debug=false, version=API_VERSION): AsyncVkObj =
   ## Auth in VK API via token (user, service or group)
@@ -80,16 +81,17 @@ proc AVk*(l, p: string, debug=false, version=API_VERSION): AsyncVkObj =
   var token = waitFor log_in(newAsyncHttpClient(), l, p, version=version)
   AVk(token, debug=debug, version=version)
 
+
 proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
                   params: JsonNode = %*{}): Future[JsonNode]
                   {. multisync, discardable .} =
   ## Calls any VK API method.
   ##
   ## Arguments:
-  ##   ``name`` -- method name, e.g. "messages.send", "users.get"
+  ## -   ``name`` -- method name, e.g. "messages.send", "users.get"
   ##
   ## Keyword Arguments:
-  ##   ``params`` -- params for method calling.
+  ## -   ``params`` -- params for method calling.
   params["v"] = %vk.version
   params["access_token"] = %vk.access_token
   result = parseJson await vk.client.postContent(
@@ -103,6 +105,7 @@ proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
         "[ERROR]: Error [$#] in called method \"$#\": $#" %
           [result["error"]["error_code"].getStr,
            name, result["error"]["error_msg"].getStr]
+      echo result
 
 
 macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
@@ -117,12 +120,11 @@ macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
     var
       method_name = body[0].toStrLit
       params = newNimNode nnkTableConstr
-      value: NimNode
     for arg in body[1..^1]:
       params.add newTree(nnkExprColonExpr, arg[0].toStrLit, arg[1])
-    result = newCall(
-      "call_method", vk, method_name,
-      newCall("%*", params))
+    result = newCall("call_method", vk,
+                     method_name, newCall("%*", params))
+
 
 macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
   ## This pragma will add the transferred function to the list of functions.
@@ -145,13 +147,14 @@ macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
       if event notin `vk`.events:
         `vk`.events.add(event)
 
+
 macro start_listen*(vk: AsyncVkObj | SyncVkObj): untyped =
   ## Starts longpoll listen.
   ##
   ## calls methods with ``eventhandler`` pragma, if available.
   ##
   ## Usage:
-  ##   vk.start_listen
+  ##   `vk.start_listen`
   result = quote do:
     for event in `vk`.longpoll.listen:
       var etype = event["type"].getStr

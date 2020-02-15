@@ -13,13 +13,15 @@ const
 
 proc encode*(params: JsonNode): string =
   ## Encodes Json params to url params
-  var res: seq[string] = @[]
-  for key, value in params.pairs():
+  var res: seq[string]
+
+  for key, value in params.pairs:
     if value.kind == JString:
       res.add(encodeUrl(key) & "=" & encodeUrl(value.getStr))
     else:
       res.add(encodeUrl(key) & "=" & encodeUrl(fmt"{value}"))
-  res.join("&")
+  res.join "&"
+
 
 proc log_in*(client: HttpClient | AsyncHttpCLient, login, password: string,
             tfcode="", scope="all", version="5.103"): Future[string] {.multisync.} =
