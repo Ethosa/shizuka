@@ -153,7 +153,8 @@ proc chat_photo*(upl: UploaderObj, files: seq[string], chat_id: int,
 
 
 proc cover_photo*(upl: UploaderObj, files: seq[string], group_id: int,
-                  crop_x=0, crop_y=0, crop_x2=795, crop_y2=200): Future[JsonNode] =
+                  crop_x=0, crop_y=0, crop_x2=795, crop_y2=200): Future[JsonNode]
+                  {.async.} =
   ## Updates group cover photo.
   ##
   ## Arguments:
@@ -182,12 +183,14 @@ proc cover_photo*(upl: UploaderObj, files: seq[string], group_id: int,
 
 proc document*(upl: UploaderObj, files: seq[string],
                group_id=0, title="", tags="", return_tags=0,
-               is_wall=false): Future[JsonNode] =
+               is_wall=false): Future[JsonNode] {.async.} =
   ## Uploads document.
   ##
   ## Arguments:
   ##     ``files`` -- file paths.
-  ##     ``group_id`` -- community identifier (if you need to upload a document to the list of community documents).
+  ##     ``group_id`` -- community identifier
+  ##                     (if you need to upload a document to
+  ##                      the list of community documents).
   ##
   ## Keyword Arguments:
   ##     ``title`` -- document's name.
@@ -213,6 +216,37 @@ proc document*(upl: UploaderObj, files: seq[string],
   result = await upl.callAPI("docs.save", enddata)
 
 
+proc document_message*(upl: UploaderObj, files: seq[string],
+                       peer_id: int, doc_type="doc", title="",
+                       tags="", return_tags=0): Future[JsonNode] {.async.} =
+  ##Uploads document in message.
+  ##
+  ## Arguments:
+  ## -   ``files`` -- file paths.
+  ## -   ``peer_id`` -- destination identifier.
+  ##
+  ## Keyword Arguments:
+  ## -   ``doc_type`` -- type of document.
+  ##                     Possible values: doc, audio_message.
+  ## -   ``title`` -- document's name.
+  ## -   ``tags`` -- tags for search.
+  ## -   ``return_tags``
+  var data = {
+   "peer_id": %peer_id,
+   "type": %doc_type
+  }
+
+  var response = await upl.upload_files(data, files, "docs.getMessagesUploadServer")
+  var enddata = {
+   "file": response["file"],
+   "title": %title,
+   "tags": %tags,
+   "return_tags": %return_tags
+  }
+
+  return await upl.callAPI("docs.save", enddata)
+
+
 
 proc message_photo*(upl: UploaderObj, files: seq[string],
                     peer_id: int): Future[JsonNode] {.async.} =
@@ -233,3 +267,23 @@ proc message_photo*(upl: UploaderObj, files: seq[string],
       "access_token": %upl.access_token
     }
   result = await upl.callAPI("photos.saveMessagesPhoto", enddata)
+
+
+proc profile_photo*(upl: UploaderObj, file: string, owner_id=0): Future[JsonNode] {.async.} =
+  ## Updates profile photo
+  ##
+  ## Arguments:
+  ## -   ``file`` -- file path.
+  ##
+  ## Keyword Arguments:
+  ## -   ``owner_id`` -- id of the community or current user.
+  var data = %*{}
+  if owner_id != 0:
+    data["owner_id"] = %owner_id
+  var response = await upl.upload_files(data, @[file], "photos.getOwnerPhotoUploadServer")
+  var enddata = %*{
+    "hash": response["hash"],
+    "server": response["server"],
+    "photo": response["photo"]
+  }
+  result = await upl.callAPI("photos.saveOwnerPhoto", enddata)
