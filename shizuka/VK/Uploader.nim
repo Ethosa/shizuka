@@ -287,3 +287,31 @@ proc profile_photo*(upl: UploaderObj, file: string, owner_id=0): Future[JsonNode
     "photo": response["photo"]
   }
   result = await upl.callAPI("photos.saveOwnerPhoto", enddata)
+
+
+proc wall_photo*(upl: UploaderObj, files: seq[string], group_id=0, user_id=0,
+                 caption=""): Future[JObject] {.async.} =
+  ## Uploads photo in wall post.
+  ##
+  ## Arguments:
+  ## -   ``files`` -- file paths.
+  ##
+  ## Keyword Arguments:
+  ## -   ``group_id`` -- id of the community on whose wall you want to upload the photo (without a minus sign).
+  ## -   ``user_id`` -- id of the user whose wall you want to save the photo on.
+  ## -   ``caption`` -- photo description text (maximum 2048 characters).
+  var data = %*{}
+  if group_id:
+    data["group_id"] = %group_id
+  var response = await upl.upload_files(data, files, "photos.getWallUploadServer")
+
+  var enddata = %*{
+    "caption": %caption
+    "server": response["server"]
+    "hash": response["hash"]
+    "photo": response["photo"]
+  }
+  if user_id:
+    enddata["user_id"] = %user_id
+
+  return await upl.callAPI("photos.saveWallPhoto", enddata)

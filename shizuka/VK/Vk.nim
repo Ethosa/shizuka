@@ -97,7 +97,7 @@ proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
       VK_API_URL & name & "?" & encode params)
 
   if vk.debug:
-    if result.hasKey("response"):
+    if result.hasKey "response":
       echo "[DEBUG]: Successfully called method \"$#\"" % [name]
     else:
       echo:
@@ -134,7 +134,7 @@ macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
   ##     echo event
   ##   vk.start_listen
   if prc.kind == nnkProcDef:
-    result = prc.copy()
+    result = prc.copy
     let
       proc_name = $prc[0].toStrLit
       proc_ident = newIdentNode proc_name
