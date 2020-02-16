@@ -99,9 +99,8 @@ iterator listen*(lp: LongPollRef | ALongPollRef): JsonNode =
   ##   for event in vk.longpoll.listen():
   ##     echo event
   var
-    mname = ""
-    url = ""
-    key, server, ts: string
+    mname: string
+    url: string
   if lp.group_id != 0:
     mname = "groups.getLongPollServer"
     url = "$#?act=a_check&key=$#&ts=$#&wait=25"
