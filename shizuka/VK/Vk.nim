@@ -116,13 +116,10 @@ macro `~`*(vk: AsyncVkObj | SyncVkObj, body: untyped): untyped =
   ## Usage with this macro:
   ##   vk~method(param1="value", param2=15, ...)
   if body.kind == nnkCall:
-    var
-      method_name = body[0].toStrLit
-      params = newNimNode nnkTableConstr
+    var params = newNimNode nnkTableConstr
     for arg in body[1..^1]:
       params.add newTree(nnkExprColonExpr, arg[0].toStrLit, arg[1])
-    result = newCall("call_method", vk,
-                     method_name, newCall("%*", params))
+    result = newCall("call_method", vk, body[0].toStrLit, newCall("%*", params))
 
 
 macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
@@ -138,8 +135,9 @@ macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
   ##   vk.start_listen
   if prc.kind == nnkProcDef:
     result = prc.copy()
-    let proc_name = $prc[0].toStrLit
-    let proc_ident = newIdentNode proc_name
+    let
+      proc_name = $prc[0].toStrLit
+      proc_ident = newIdentNode proc_name
     result = quote do:
       `prc`
       var event = VkEvent(name: `proc_name`, prc: `proc_ident`)
@@ -156,8 +154,7 @@ macro start_listen*(vk: AsyncVkObj | SyncVkObj): untyped =
   ##   `vk.start_listen`
   result = quote do:
     for event in `vk`.longpoll.listen:
-      var etype = event["type"].getStr
       for e in `vk`.events:
-        if etype == e.name:
+        if event["type"].getStr == e.name:
           e.prc(event)
           break
