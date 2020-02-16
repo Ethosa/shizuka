@@ -81,7 +81,7 @@ proc format*(upl: UploaderObj, response: JsonNode,
 
 proc album_photo*(upl: UploaderObj, files: seq[string], album_id: int,
                   group_id=0, caption=""): Future[JsonNode] {.async.} =
-  ## upload photo in album
+  ## Uploads photo in album
   ## 
   ## Arguments:
   ## -   ``files`` -- file paths.
@@ -124,6 +124,94 @@ proc audio*(upl: UploaderObj, files: seq[string], artist="",
     "audio": response["audio"]
   }
   result = await upl.callAPI("audio.save", data)
+
+
+proc chat_photo*(upl: UploaderObj, files: seq[string], chat_id: int,
+                 crop_x=0, crop_y=0, crop_width=0): Future[JsonNode] {.async.} =
+  ## Uploads chat cover.
+  ##
+  ## Aguments:
+  ## -   ``files`` -- file paths.
+  ## -   ``chat_id`` -- id of the conversation for which you want to upload a photo.
+  ##
+  ## Keyword Arguments:
+  ## -   ``crop_x`` -- x coordinate for cropping the photo (upper right corner).
+  ## -   ``crop_y`` -- y coordinate for cropping the photo (upper right corner).
+  ## -   ``crop_width`` -- Width of the photo after cropping in px.
+  var data = %*{"caht_id": %chat_id}
+  if crop_x != 0:
+    data["crop_x"] = %crop_x
+  if crop_y != 0:
+    data["crop_y"] = %crop_y
+  if crop_width != 0:
+    data["crop_width"] = %crop_width
+
+  var response = await upl.upload_files(data, files, "photos.getChatUploadServer")
+  var enddata = %*{"file": response["response"]}
+
+  result = await upl.callAPI("messages.setChatPhoto", enddata)
+
+
+proc cover_photo*(upl: UploaderObj, files: seq[string], group_id: int,
+                  crop_x=0, crop_y=0, crop_x2=795, crop_y2=200): Future[JsonNode] =
+  ## Updates group cover photo.
+  ##
+  ## Arguments:
+  ## -   ``files`` -- file paths.
+  ## -   ``group_id`` -- community id.
+  ##
+  ## Keyword Arguments:
+  ## -   ``crop_x`` -- X coordinate of the upper left corner to crop the image.
+  ## -   ``crop_y`` --Y coordinate of the upper left corner to crop the image .
+  ## -   ``crop_x2`` -- X coordinate of the lower right corner to crop the image.
+  ## -   ``crop_y2`` -- Y coordinate of the lower right corner to crop the image.
+  var data = %*{
+    "group_id": %group_id,
+    "crop_x": %crop_x,
+    "crop_y": %crop_y,
+    "crop_x2": %crop_x2,
+    "crop_y2": %crop_y2
+  }
+  var response = await upl.upload_files(data, files, "photos.getOwnerCoverPhotoUploadServer")
+  var enddata = %*{
+    "hash": response["hash"],
+    "photo": response["photo"]
+  }
+  result = await upl.callAPI("photos.saveOwnerCoverPhoto", enddata)
+
+
+proc document*(upl: UploaderObj, files: seq[string],
+               group_id=0, title="", tags="", return_tags=0,
+               is_wall=false): Future[JsonNode] =
+  ## Uploads document.
+  ##
+  ## Arguments:
+  ##     ``files`` -- file paths.
+  ##     ``group_id`` -- community identifier (if you need to upload a document to the list of community documents).
+  ##
+  ## Keyword Arguments:
+  ##     ``title`` -- document's name.
+  ##     ``tags`` -- tags for search.
+  ##     ``return_tags``
+  ##     ``is_wall`` -- upload document in wall.
+  var data = %*{}
+  var response: JsonNode
+  if group_id != 0:
+    data["group_id"] = %group_id
+
+  if is_wall:
+    response = await upl.upload_files(data, files, "docs.getWallUploadServer")
+  else:
+    response = await upl.upload_files(data, files, "docs.getUploadServer")
+
+  var enddata = %*{
+    "file": response["file"],
+    "title": %title,
+    "tags": %tags,
+    "return_tags": %return_tags
+  }
+  result = await upl.callAPI("docs.save", enddata)
+
 
 
 proc message_photo*(upl: UploaderObj, files: seq[string],
