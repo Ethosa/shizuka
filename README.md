@@ -6,7 +6,8 @@
 </div>
 
 ## Getting started
-***Installing***: `nimble install https://github.com/Ethosa/shizuka`  
+***Install via nimble***: `nimble install shizuka`  
+***Install via git***: `nimble install https://github.com/Ethosa/shizuka`  
 ***Import***: `import shuzuka`
 
 ## Now supported
