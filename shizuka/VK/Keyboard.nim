@@ -47,6 +47,10 @@ proc add*(keyboard: KeyboardRef, button: JsonNode) =
       keyboard.add_line
       keyboard.add button
 
+proc add*(keyboard: KeyboardRef, buttons: varargs[JsonNode]) =
+  for button in buttons:
+    keyboard.add button
+
 proc compile*(keyboard: KeyboardRef): JsonNode =
   ## Compiles keyboard for send to the message.
   result = %*{"buttons" : keyboard.buttons}

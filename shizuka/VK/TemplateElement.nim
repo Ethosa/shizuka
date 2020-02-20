@@ -31,6 +31,10 @@ proc add*(te: TemplateElementRef, button: JsonNode) =
   if te.buttons.len < 3:
     te.buttons.add button
 
+proc add*(t: TemplateElementRef, buttons: varargs[JsonNode]) =
+  for button in buttons:
+    t.add button
+
 proc to_json*(te: TemplateElementRef): JsonNode =
   ## Converts a template element to place it in a template object.
   result = %*{
