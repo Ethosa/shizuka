@@ -90,7 +90,7 @@ proc album_photo*(upl: UploaderObj, files: seq[string], album_id: int,
   ## Keyword Arguments:
   ## -   ``group_id``
   ## -   ``caption`` -- photo caption.
-  data = %*{
+  var data = %*{
     "album_id": %album_id
   }
   if group_id != 0:
@@ -100,9 +100,9 @@ proc album_photo*(upl: UploaderObj, files: seq[string], album_id: int,
   var enddata = %*{
     "album_id": %album_id,
     "caption": %caption,
-    "server": %server,
-    "hash": %hash,
-    "photos_list": %photos_list
+    "server": response["server"],
+    "hash": response["hash"],
+    "photos_list": response["photos_list"]
   }
   result = await upl.callAPI("photos.save", enddata)
 
@@ -117,7 +117,7 @@ proc audio*(upl: UploaderObj, files: seq[string], artist="",
   ## Keyword Arguments:
   ## -   ``artist`` -- songwriter. The default is taken from ID3 tags.
   ## -   ``title`` -- name of the composition. The default is taken from ID3 tags.
-  var response = await upl.upload_files(%*[], files, "audio.getUploadServer")
+  var response = await upl.upload_files(%*{}, files, "audio.getUploadServer")
   var data = %*{
     "hash": response["hash"],
     "server": response["server"],
@@ -231,13 +231,13 @@ proc document_message*(upl: UploaderObj, files: seq[string],
   ## -   ``title`` -- document's name.
   ## -   ``tags`` -- tags for search.
   ## -   ``return_tags``
-  var data = {
+  var data = %*{
    "peer_id": %peer_id,
    "type": %doc_type
   }
 
   var response = await upl.upload_files(data, files, "docs.getMessagesUploadServer")
-  var enddata = {
+  var enddata = %*{
    "file": response["file"],
    "title": %title,
    "tags": %tags,
@@ -290,7 +290,7 @@ proc profile_photo*(upl: UploaderObj, file: string, owner_id=0): Future[JsonNode
 
 
 proc wall_photo*(upl: UploaderObj, files: seq[string], group_id=0, user_id=0,
-                 caption=""): Future[JObject] {.async.} =
+                 caption=""): Future[JsonNode] {.async.} =
   ## Uploads photo in wall post.
   ##
   ## Arguments:
@@ -301,17 +301,17 @@ proc wall_photo*(upl: UploaderObj, files: seq[string], group_id=0, user_id=0,
   ## -   ``user_id`` -- id of the user whose wall you want to save the photo on.
   ## -   ``caption`` -- photo description text (maximum 2048 characters).
   var data = %*{}
-  if group_id:
+  if group_id != 0:
     data["group_id"] = %group_id
   var response = await upl.upload_files(data, files, "photos.getWallUploadServer")
 
   var enddata = %*{
-    "caption": %caption
-    "server": response["server"]
-    "hash": response["hash"]
+    "caption": %caption,
+    "server": response["server"],
+    "hash": response["hash"],
     "photo": response["photo"]
   }
-  if user_id:
+  if user_id != 0:
     enddata["user_id"] = %user_id
 
   return await upl.callAPI("photos.saveWallPhoto", enddata)
