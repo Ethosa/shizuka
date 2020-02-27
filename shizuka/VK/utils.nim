@@ -45,4 +45,7 @@ proc log_in*(client: HttpClient | AsyncHttpCLient, login, password: string,
   if "error" notin answer:
     return answer["access_token"].str
   else:
+    echo "Error!"
+    echo answer
+    echo "Url: https://oauth.vk.com/token?" & encode authData
     return ""
