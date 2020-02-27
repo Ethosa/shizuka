@@ -236,11 +236,12 @@ proc document_message*(upl: UploaderObj, files: seq[string],
    "type": %doc_type
   }
 
-  discard await upl.upload_files(data, files, "docs.getMessagesUploadServer")
+  var response = await upl.upload_files(data, files, "docs.getMessagesUploadServer")
   var enddata = %*{
-   "title": %title,
-   "tags": %tags,
-   "return_tags": %return_tags
+    "file": response["file"],
+    "title": %title,
+    "tags": %tags,
+    "return_tags": %return_tags
   }
 
   return await upl.callAPI("docs.save", enddata)

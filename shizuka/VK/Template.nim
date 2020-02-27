@@ -1,8 +1,6 @@
 # author: Ethosa
 import json
 
-import TemplateElement
-
 
 type
   TemplateObj = object

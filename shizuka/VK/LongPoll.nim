@@ -6,8 +6,7 @@ from strutils import `%`
 import json
 
 from Event import to_event
-
-from consts import VK_API_URL
+import consts
 
 
 type
