@@ -10,7 +10,7 @@ var keyboard = Keyboard(one_time=true)
 keyboard.add(create_button(params = %*{"label": "hello :)"}))
 
 
-proc message_new(e: JsonNode) {. eventhandler: vk .} =
+proc message_new(e: JsonNode) {. async, eventhandler: vk .} =
   echo "NEW MESSAGE :p"
   var
     event = e["object"]["message"]  # for API version 5.103 or later.
