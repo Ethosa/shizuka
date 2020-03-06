@@ -15,7 +15,7 @@ import Uploader
 type
   VkEvent* = object  ## Object for eventhandler pragma.
     name*: string
-    prc*: proc(event: JsonNode)
+    prc*: proc(event: JsonNode): Future[void]
   VkObj[ClientType, LongPollType] = ref object
     access_token: string
     group_id*: int
@@ -129,8 +129,8 @@ macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
   ## the passed function will be called.
   ##
   ## ..code-block::Nim
-  ##   vk = Vk(...)
-  ##   proc message_new(event: JsonNode) {.eventhadler: vk.} =
+  ##   var vk = Vk(...)
+  ##   proc message_new(event: JsonNode) {.async, eventhadler: vk.} =
   ##     echo event
   ##   vk.start_listen
   if prc.kind == nnkProcDef:
@@ -145,6 +145,27 @@ macro eventhandler*(vk: AsyncVkObj | SyncVkObj, prc: untyped): untyped =
         `vk`.events.add(event)
 
 
+macro `@`*(vk: AsyncVkObj | SyncVkObj, prc, body: untyped): untyped =
+  ## This pragma provides convenient eventhandler pragma usage.
+  ##
+  ## ..code-block::Nim
+  ##   var vk = Vk(...)
+  ##   vk@message_new:
+  ##     echo event
+  if prc.kind == nnkCall:
+    let
+      proc_name = prc[0]
+      arg = prc[1]
+      string_name = $proc_name
+    result = quote do:
+      proc `proc_name`(`arg`: JsonNode) {.async.} =
+        `body`
+      var event = VkEvent(name: `string_name`, prc: `proc_name`)
+      if event notin `vk`.events:
+        `vk`.events.add(event)
+
+
+
 macro start_listen*(vk: AsyncVkObj | SyncVkObj): untyped =
   ## Starts longpoll listen.
   ##
@@ -153,8 +174,10 @@ macro start_listen*(vk: AsyncVkObj | SyncVkObj): untyped =
   ## Usage:
   ##   `vk.start_listen`
   result = quote do:
-    for event in `vk`.longpoll.listen:
-      for e in `vk`.events:
-        if event["type"].getStr == e.name:
-          e.prc(event)
-          break
+    proc vk_start_listen_proc() {.async.} =
+      for event in `vk`.longpoll.listen:
+        for e in `vk`.events:
+          if event["type"].getStr == e.name:
+            await e.prc(event)
+            break
+    waitFor vk_start_listen_proc()
