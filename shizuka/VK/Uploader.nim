@@ -66,7 +66,7 @@ proc format*(upl: UploaderObj, response: JsonNode,
   if resp.kind == JObject:
     resp = resp.get("response")
   if resp.kind == JObject and resp.hasKey("type"):
-    var tp = resp.get("type")
+    var tp = resp.get("type").str
     resp = resp.get(tp)
 
   if resp.kind == JObject:
