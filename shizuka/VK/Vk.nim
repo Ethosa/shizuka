@@ -41,8 +41,9 @@ proc Vk*(access_token: string, group_id=0,
   ## -   ``group_id`` -- group id, if available.
   ## -   ``debug`` -- debug log.
   ## -   ``version`` -- API version.
-  var client = newHttpClient()
-  var async_client = newAsyncHttpClient()
+  var
+    client = newHttpClient()
+    async_client = newAsyncHttpClient()
   SyncVkObj(access_token: access_token, group_id: group_id,
      client: client, debug: debug, version: version,
      longpoll: LongPoll(client, group_id, access_token, version, debug),
@@ -158,9 +159,10 @@ macro `@`*(vk: AsyncVkObj | SyncVkObj, prc, body: untyped): untyped =
       arg = prc[1]
       string_name = $proc_name
     result = quote do:
-      proc `proc_name`(`arg`: JsonNode) {.async.} =
-        `body`
-      var event = VkEvent(name: `string_name`, prc: `proc_name`)
+      var event = VkEvent(
+        name: `string_name`,
+        prc: proc(`arg`: JsonNode) {.async.} =
+          `body`)
       if event notin `vk`.events:
         `vk`.events.add(event)
 
