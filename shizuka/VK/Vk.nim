@@ -165,7 +165,6 @@ macro `@`*(vk: AsyncVkObj | SyncVkObj, prc, body: untyped): untyped =
         `vk`.events.add(event)
 
 
-
 macro start_listen*(vk: AsyncVkObj | SyncVkObj): untyped =
   ## Starts longpoll listen.
   ##

@@ -4,8 +4,8 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![Nim language-plastic](https://github.com/Ethosa/yukiko/blob/master/nim-lang.svg)](https://github.com/Ethosa/yukiko/blob/master/nim-lang.svg)
 [![License: LGNUv3](https://img.shields.io/github/license/Ethosa/shizuka)](https://github.com/Ethosa/shizuka/blob/master/LICENSE)
-<h4>Latest version - 0.1.9</h4>
-<h4>Stable version - 0.1.9</h4>
+<h4>Latest version - 0.2.0</h4>
+<h4>Stable version - 0.2.0</h4>
 </div>
 
 ## Getting started

@@ -64,9 +64,10 @@ proc format*(upl: UploaderObj, response: JsonNode,
   ## -   ``formtype`` -- "photo", "video", "audio" etc.
   var resp = response
   if resp.kind == JObject:
-    resp = resp.get "response"
-  if resp.kind == JObject:
-    resp = resp.get "type"
+    resp = resp.get("response")
+  if resp.kind == JObject and resp.hasKey("type"):
+    var tp = resp.get("type")
+    resp = resp.get(tp)
 
   if resp.kind == JObject:
     if resp.hasKey("owner_id") and resp.hasKey("id"):
@@ -146,8 +147,9 @@ proc chat_photo*(upl: UploaderObj, files: seq[string], chat_id: int,
   if crop_width != 0:
     data["crop_width"] = %crop_width
 
-  var response = await upl.upload_files(data, files, "photos.getChatUploadServer")
-  var enddata = %*{"file": response["response"]}
+  var
+    response = await upl.upload_files(data, files, "photos.getChatUploadServer")
+    enddata = %*{"file": response["response"]}
 
   result = await upl.callAPI("messages.setChatPhoto", enddata)
 
