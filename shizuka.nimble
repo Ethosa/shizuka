@@ -3,7 +3,7 @@ name = "shizuka"
 author = "Ethosa"
 version = "0.2.1"
 description = "The Nim framework for VK."
-license = "AGPLv3"
+license = "MIT"
 srcDir = "shizuka"
 
 [Deps]
