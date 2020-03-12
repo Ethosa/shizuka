@@ -21,16 +21,16 @@
 -   VK keyboards and templates.
 -   Very simple usage
     ```nim
-import asyncdispatch
-import shizuka
+    import asyncdispatch
+    import shizuka
 
-# auth
-var vk = AVk("8123456789", "mypassword", debug=true)
+    # auth
+    var vk = AVk("8123456789", "mypassword", debug=true)
 
-vk@message_new(event):  # real-time events handler
-  echo event
+    vk@message_new(event):  # real-time events handler
+      echo event
 
-vk.start_listen  # starts to listen longpoll.
+    vk.start_listen  # starts to listen longpoll.
     ```
 
 ## FAQ
