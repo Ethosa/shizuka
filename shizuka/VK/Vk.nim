@@ -64,7 +64,7 @@ proc Vk*(l, p: string, debug=false, version=VK_API_DEFAULT_VERSION): SyncVkObj =
 
 
 proc AVk*(access_token: string, group_id=0,
-            debug=false, version=VK_API_DEFAULT_VERSION): AsyncVkObj =
+          debug=false, version=VK_API_DEFAULT_VERSION): AsyncVkObj =
   ## Auth in VK API via token (user, service or group)
   ##
   ## see also `Vk <#Vk,string,int>`_

@@ -13,12 +13,25 @@
 ***Install via git***: `nimble install https://github.com/Ethosa/shizuka`  
 ***Import***: `import shuzuka`
 
-## Now supported
+## Features
 -   Calling any VK API method.
 -   Convenient working with longpoll.
 -   Uploader (work in progress).
 -   Sync/async.
 -   VK keyboards and templates.
+-   Very simple usage
+    ```nim
+import asyncdispatch
+import shizuka
+
+# auth
+var vk = AVk("8123456789", "mypassword", debug=true)
+
+vk@message_new(event):  # real-time events handler
+  echo event
+
+vk.start_listen  # starts to listen longpoll.
+    ```
 
 ## FAQ
 *Q*: Where I can learn this library?  
@@ -29,3 +42,8 @@
 
 *Q*: Where I can read the documentation about this library?  
 *A*: You can see the [docs](https://ethosa.github.io/shizuka/shizuka/shizuka.html)
+
+
+<div align="center">
+  Copyright 2020, Ethosa
+</div>
