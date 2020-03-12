@@ -26,3 +26,6 @@
 
 *Q*: How I can help to develop this library?  
 *A*: You can put a star :star: on this repository :3.
+
+*Q*: Where I can read the documentation about this library?  
+*A*: You can see the [docs](https://ethosa.github.io/shizuka/shizuka/shizuka.html)
