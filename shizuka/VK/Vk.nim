@@ -160,7 +160,7 @@ macro eventhandler*(vk: SyncVkObj, prc: untyped): untyped =
   ##
   ## ..code-block::Nim
   ##   var vk = Vk(...)
-  ##   proc message_new(event: JsonNode) {.async, eventhadler: vk.} =
+  ##   proc message_new(event: JsonNode) {.eventhadler: vk.} =
   ##     echo event
   ##   vk.start_listen
   if prc.kind == nnkProcDef:

@@ -21,7 +21,6 @@
 -   VK keyboards and templates.
 -   Very simple usage
     ```nim
-    import asyncdispatch
     import shizuka
 
     # auth
