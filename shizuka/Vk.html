@@ -833,14 +833,18 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#7" id="57">Types</a>
   <ul class="simple simple-toc-section">
-      <li><a class="reference" href="#VkEvent"
+      <li><a class="reference" href="#AVkEvent"
+    title="AVkEvent = object
+  name*: string
+  prc*: proc (event: JsonNode): Future[void]"><wbr />AVk<wbr />Event<span class="attachedType"></span></a></li>
+  <li><a class="reference" href="#VkEvent"
     title="VkEvent = object
   name*: string
-  prc*: proc (event: JsonNode): Future[void]"><wbr />Vk<wbr />Event<span class="attachedType"></span></a></li>
+  prc*: proc (event: JsonNode)"><wbr />Vk<wbr />Event<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#SyncVkObj"
-    title="SyncVkObj = VkObj[HttpClient, LongPollRef]"><wbr />Sync<wbr />Vk<wbr />Obj<span class="attachedType"></span></a></li>
+    title="SyncVkObj = VkObj[HttpClient, LongPollRef, VkEvent]"><wbr />Sync<wbr />Vk<wbr />Obj<span class="attachedType"></span></a></li>
   <li><a class="reference" href="#AsyncVkObj"
-    title="AsyncVkObj = VkObj[AsyncHttpClient, ALongPollRef]"><wbr />Async<wbr />Vk<wbr />Obj<span class="attachedType"></span></a></li>
+    title="AsyncVkObj = VkObj[AsyncHttpClient, ALongPollRef, AVkEvent]"><wbr />Async<wbr />Vk<wbr />Obj<span class="attachedType"></span></a></li>
 
   </ul>
 </li>
@@ -867,12 +871,18 @@ function main() {
   <ul class="simple simple-toc-section">
       <li><a class="reference" href="#~.m%2C%2Cuntyped"
     title="`~`(vk: AsyncVkObj | SyncVkObj; body: untyped): untyped"><wbr />`~`<span class="attachedType">AsyncVkObj</span></a></li>
-  <li><a class="reference" href="#eventhandler.m%2C%2Cuntyped"
-    title="eventhandler(vk: AsyncVkObj | SyncVkObj; prc: untyped): untyped"><wbr />eventhandler<span class="attachedType">AsyncVkObj</span></a></li>
-  <li><a class="reference" href="#%40.m%2C%2Cuntyped%2Cuntyped"
-    title="`@`(vk: AsyncVkObj | SyncVkObj; prc, body: untyped): untyped"><wbr />`@`<span class="attachedType">AsyncVkObj</span></a></li>
-  <li><a class="reference" href="#start_listen.m"
-    title="start_listen(vk: AsyncVkObj | SyncVkObj): untyped"><wbr />start_<wbr />listen<span class="attachedType">AsyncVkObj</span></a></li>
+  <li><a class="reference" href="#eventhandler.m%2CAsyncVkObj%2Cuntyped"
+    title="eventhandler(vk: AsyncVkObj; prc: untyped): untyped"><wbr />eventhandler<span class="attachedType">AsyncVkObj</span></a></li>
+  <li><a class="reference" href="#eventhandler.m%2CSyncVkObj%2Cuntyped"
+    title="eventhandler(vk: SyncVkObj; prc: untyped): untyped"><wbr />eventhandler<span class="attachedType">SyncVkObj</span></a></li>
+  <li><a class="reference" href="#%40.m%2CAsyncVkObj%2Cuntyped%2Cuntyped"
+    title="`@`(vk: AsyncVkObj; prc, body: untyped): untyped"><wbr />`@`<span class="attachedType">AsyncVkObj</span></a></li>
+  <li><a class="reference" href="#%40.m%2CSyncVkObj%2Cuntyped%2Cuntyped"
+    title="`@`(vk: SyncVkObj; prc, body: untyped): untyped"><wbr />`@`<span class="attachedType">SyncVkObj</span></a></li>
+  <li><a class="reference" href="#start_listen.m%2CAsyncVkObj"
+    title="start_listen(vk: AsyncVkObj): untyped"><wbr />start_<wbr />listen<span class="attachedType">AsyncVkObj</span></a></li>
+  <li><a class="reference" href="#start_listen.m%2CSyncVkObj"
+    title="start_listen(vk: SyncVkObj): untyped"><wbr />start_<wbr />listen<span class="attachedType">SyncVkObj</span></a></li>
 
   </ul>
 </li>
@@ -892,25 +902,35 @@ function main() {
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
 <dl class="item">
-<a id="VkEvent"></a>
-<dt><pre><a href="Vk.html#VkEvent"><span class="Identifier">VkEvent</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+<a id="AVkEvent"></a>
+<dt><pre><a href="Vk.html#AVkEvent"><span class="Identifier">AVkEvent</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
   <span class="Identifier">name</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
   <span class="Identifier">prc</span><span class="Operator">*</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">JsonNode</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">Future</span><span class="Other">[</span><span class="Identifier">void</span><span class="Other">]</span>
 </pre></dt>
 <dd>
 
-Object for eventhandler pragma.
+Object for async eventhandler pragma.
+
+</dd>
+<a id="VkEvent"></a>
+<dt><pre><a href="Vk.html#VkEvent"><span class="Identifier">VkEvent</span></a> <span class="Other">=</span> <span class="Keyword">object</span>
+  <span class="Identifier">name</span><span class="Operator">*</span><span class="Other">:</span> <span class="Identifier">string</span>
+  <span class="Identifier">prc</span><span class="Operator">*</span><span class="Other">:</span> <span class="Keyword">proc</span> <span class="Other">(</span><span class="Identifier">event</span><span class="Other">:</span> <span class="Identifier">JsonNode</span><span class="Other">)</span>
+</pre></dt>
+<dd>
+
+Object for sync eventhandler pragma.
 
 </dd>
 <a id="SyncVkObj"></a>
-<dt><pre><a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a> <span class="Other">=</span> <span class="Identifier">VkObj</span><span class="Other">[</span><span class="Identifier">HttpClient</span><span class="Other">,</span> <a href="LongPoll.html#LongPollRef"><span class="Identifier">LongPollRef</span></a><span class="Other">]</span></pre></dt>
+<dt><pre><a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a> <span class="Other">=</span> <span class="Identifier">VkObj</span><span class="Other">[</span><span class="Identifier">HttpClient</span><span class="Other">,</span> <a href="LongPoll.html#LongPollRef"><span class="Identifier">LongPollRef</span></a><span class="Other">,</span> <a href="Vk.html#VkEvent"><span class="Identifier">VkEvent</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
 
 </dd>
 <a id="AsyncVkObj"></a>
-<dt><pre><a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a> <span class="Other">=</span> <span class="Identifier">VkObj</span><span class="Other">[</span><span class="Identifier">AsyncHttpClient</span><span class="Other">,</span> <a href="LongPoll.html#ALongPollRef"><span class="Identifier">ALongPollRef</span></a><span class="Other">]</span></pre></dt>
+<dt><pre><a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a> <span class="Other">=</span> <span class="Identifier">VkObj</span><span class="Other">[</span><span class="Identifier">AsyncHttpClient</span><span class="Other">,</span> <a href="LongPoll.html#ALongPollRef"><span class="Identifier">ALongPollRef</span></a><span class="Other">,</span> <a href="Vk.html#AVkEvent"><span class="Identifier">AVkEvent</span></a><span class="Other">]</span></pre></dt>
 <dd>
 
 
@@ -1029,8 +1049,8 @@ Provides convenient calling VK API methods.<dl class="docutils"><dt>Usage with c
 
 
 </dd>
-<a id="eventhandler.m,,untyped"></a>
-<dt><pre><span class="Keyword">macro</span> <a href="#eventhandler.m%2C%2Cuntyped"><span class="Identifier">eventhandler</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a> <span class="Operator">|</span> <a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a><span class="Other">;</span> <span class="Identifier">prc</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="eventhandler.m,AsyncVkObj,untyped"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#eventhandler.m%2CAsyncVkObj%2Cuntyped"><span class="Identifier">eventhandler</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a><span class="Other">;</span> <span class="Identifier">prc</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 <p>This pragma will add the transferred function to the list of functions.</p>
@@ -1043,23 +1063,60 @@ Provides convenient calling VK API methods.<dl class="docutils"><dt>Usage with c
 
 
 </dd>
-<a id="@.m,,untyped,untyped"></a>
-<dt><pre><span class="Keyword">macro</span> <a href="#%40.m%2C%2Cuntyped%2Cuntyped"><span class="Identifier">`@`</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a> <span class="Operator">|</span> <a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a><span class="Other">;</span> <span class="Identifier">prc</span><span class="Other">,</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="eventhandler.m,SyncVkObj,untyped"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#eventhandler.m%2CSyncVkObj%2Cuntyped"><span class="Identifier">eventhandler</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a><span class="Other">;</span> <span class="Identifier">prc</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
-This pragma provides convenient eventhandler pragma usage.<blockquote><p>var vk = Vk(...)<dl class="docutils"><dt>vk@message_new:</dt>
+<p>This pragma will add the transferred function to the list of functions.</p>
+<p>With a new event, the type of which will be equal to the name of the passed function, the passed function will be called.</p>
+<blockquote><p>var vk = Vk(...)<dl class="docutils"><dt>proc message_new(event: JsonNode) {.async, eventhadler: vk.} =</dt>
+<dd>echo event</dd>
+</dl>
+<p>vk.start_listen</p>
+</p></blockquote>
+
+
+</dd>
+<a id="@.m,AsyncVkObj,untyped,untyped"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#%40.m%2CAsyncVkObj%2Cuntyped%2Cuntyped"><span class="Identifier">`@`</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a><span class="Other">;</span> <span class="Identifier">prc</span><span class="Other">,</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+
+This pragma provides convenient async eventhandler pragma usage.<blockquote><p>var vk = Vk(...)<dl class="docutils"><dt>vk@message_new:</dt>
 <dd>echo event</dd>
 </dl>
 </p></blockquote>
 
 
 </dd>
-<a id="start_listen.m"></a>
-<dt><pre><span class="Keyword">macro</span> <a href="#start_listen.m"><span class="Identifier">start_listen</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a> <span class="Operator">|</span> <a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<a id="@.m,SyncVkObj,untyped,untyped"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#%40.m%2CSyncVkObj%2Cuntyped%2Cuntyped"><span class="Identifier">`@`</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a><span class="Other">;</span> <span class="Identifier">prc</span><span class="Other">,</span> <span class="Identifier">body</span><span class="Other">:</span> <span class="Identifier">untyped</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+
+This pragma provides convenient sync eventhandler pragma usage.<blockquote><p>var vk = Vk(...)<dl class="docutils"><dt>vk@message_new:</dt>
+<dd>echo event</dd>
+</dl>
+</p></blockquote>
+
+
+</dd>
+<a id="start_listen.m,AsyncVkObj"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#start_listen.m%2CAsyncVkObj"><span class="Identifier">start_listen</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#AsyncVkObj"><span class="Identifier">AsyncVkObj</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
 <dd>
 
 <p>Starts longpoll listen.</p>
-<p>calls methods with <tt class="docutils literal"><span class="pre">eventhandler</span></tt> pragma, if available.</p>
+<p>calls methods with async <tt class="docutils literal"><span class="pre">eventhandler</span></tt> pragma, if available.</p>
+<dl class="docutils"><dt>Usage:</dt>
+<dd><tt class="docutils literal"><span class="pre">vk.start_listen</span></tt></dd>
+</dl>
+
+
+</dd>
+<a id="start_listen.m,SyncVkObj"></a>
+<dt><pre><span class="Keyword">macro</span> <a href="#start_listen.m%2CSyncVkObj"><span class="Identifier">start_listen</span></a><span class="Other">(</span><span class="Identifier">vk</span><span class="Other">:</span> <a href="Vk.html#SyncVkObj"><span class="Identifier">SyncVkObj</span></a><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">untyped</span></pre></dt>
+<dd>
+
+<p>Starts longpoll listen.</p>
+<p>calls methods with sync <tt class="docutils literal"><span class="pre">eventhandler</span></tt> pragma, if available.</p>
 <dl class="docutils"><dt>Usage:</dt>
 <dd><tt class="docutils literal"><span class="pre">vk.start_listen</span></tt></dd>
 </dl>
@@ -1076,7 +1133,7 @@ This pragma provides convenient eventhandler pragma usage.<blockquote><p>var vk 
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small>Made with Nim. Generated: 2020-03-11 16:30:07 UTC</small>
+        <small>Made with Nim. Generated: 2020-03-13 09:57:46 UTC</small>
       </div>
     </div>
   </div>
