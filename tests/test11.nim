@@ -1,6 +1,5 @@
 # author: Ethosa
 # convenient event handlers.
-import asyncdispatch
 import shizuka
 
 var vk = Vk("8123456789", "asdasdasd", debug=true)
