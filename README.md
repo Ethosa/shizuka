@@ -24,7 +24,7 @@
     import shizuka
 
     # auth
-    var vk = AVk("8123456789", "mypassword", debug=true)
+    var vk = Vk("8123456789", "mypassword", debug=true)
 
     vk@message_new(event):  # real-time events handler
       echo event
