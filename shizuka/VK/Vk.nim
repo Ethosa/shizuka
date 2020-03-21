@@ -100,7 +100,7 @@ proc call_method*(vk: AsyncVkObj | SyncVkObj, name: string,
   params["v"] = %vk.version
   params["access_token"] = %vk.access_token
   result = parseJson await vk.client.postContent(
-      VK_API_URL & name & "?" & encode params)
+      VK_API_URL & name, encode params)
 
   if vk.debug:
     if result.hasKey "response":
