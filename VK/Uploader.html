@@ -183,7 +183,12 @@ function main() {
     <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Creates a new Sync Uploader object.
+<p>Creates a new Sync Uploader object.</p>
+<p>Arguments:</p>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">access_token</span></tt> is an your VK access token.</li>
+<li><tt class="docutils literal"><span class="pre">v</span></tt> is API version.</li>
+</ul>
+
 
 </dd>
 <a id="format,UploaderObj,JsonNode,string"></a>
@@ -210,12 +215,10 @@ Creates a new Sync Uploader object.
 
 <p>Uploads photo in album</p>
 <p>Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> -- file paths.</li>
-<li><tt class="docutils literal"><span class="pre">album_id</span></tt></li>
-</ul>
-<p>Keyword Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">group_id</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">caption</span></tt> -- photo caption.</li>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - file paths.</li>
+<li><tt class="docutils literal"><span class="pre">album_id</span></tt> is photo album ID.</li>
+<li><tt class="docutils literal"><span class="pre">group_id</span></tt> is group ID, if needed.</li>
+<li><tt class="docutils literal"><span class="pre">caption</span></tt> - photo caption.</li>
 </ul>
 
 
@@ -228,11 +231,9 @@ Creates a new Sync Uploader object.
 
 <p>Uploads audio file</p>
 <p>Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> -- file paths.</li>
-</ul>
-<p>Keyword Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">artist</span></tt> -- songwriter. The default is taken from ID3 tags.</li>
-<li><tt class="docutils literal"><span class="pre">title</span></tt> -- name of the composition. The default is taken from ID3 tags.</li>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - file paths.</li>
+<li><tt class="docutils literal"><span class="pre">artist</span></tt> -- songwriter. The default is taken from ID3 tags.</li>
+<li><tt class="docutils literal"><span class="pre">title</span></tt> - name of the composition. The default is taken from ID3 tags.</li>
 </ul>
 
 
@@ -246,13 +247,11 @@ Creates a new Sync Uploader object.
 
 <p>Uploads chat cover.</p>
 <p>Aguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> -- file paths.</li>
-<li><tt class="docutils literal"><span class="pre">chat_id</span></tt> -- id of the conversation for which you want to upload a photo.</li>
-</ul>
-<p>Keyword Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">crop_x</span></tt> -- x coordinate for cropping the photo (upper right corner).</li>
-<li><tt class="docutils literal"><span class="pre">crop_y</span></tt> -- y coordinate for cropping the photo (upper right corner).</li>
-<li><tt class="docutils literal"><span class="pre">crop_width</span></tt> -- Width of the photo after cropping in px.</li>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - file paths.</li>
+<li><tt class="docutils literal"><span class="pre">chat_id</span></tt> - id of the conversation for which you want to upload a photo.</li>
+<li><tt class="docutils literal"><span class="pre">crop_x</span></tt> - x coordinate for cropping the photo (upper right corner).</li>
+<li><tt class="docutils literal"><span class="pre">crop_y</span></tt> - y coordinate for cropping the photo (upper right corner).</li>
+<li><tt class="docutils literal"><span class="pre">crop_width</span></tt> - Width of the photo after cropping in px.</li>
 </ul>
 
 
@@ -266,14 +265,12 @@ Creates a new Sync Uploader object.
 
 <p>Updates group cover photo.</p>
 <p>Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> -- file paths.</li>
-<li><tt class="docutils literal"><span class="pre">group_id</span></tt> -- community id.</li>
-</ul>
-<p>Keyword Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">crop_x</span></tt> -- X coordinate of the upper left corner to crop the image.</li>
-<li><tt class="docutils literal"><span class="pre">crop_y</span></tt> --Y coordinate of the upper left corner to crop the image .</li>
-<li><tt class="docutils literal"><span class="pre">crop_x2</span></tt> -- X coordinate of the lower right corner to crop the image.</li>
-<li><tt class="docutils literal"><span class="pre">crop_y2</span></tt> -- Y coordinate of the lower right corner to crop the image.</li>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - file paths.</li>
+<li><tt class="docutils literal"><span class="pre">group_id</span></tt> - community id.</li>
+<li><tt class="docutils literal"><span class="pre">crop_x</span></tt>- X coordinate of the upper left corner to crop the image.</li>
+<li><tt class="docutils literal"><span class="pre">crop_y</span></tt>-Y coordinate of the upper left corner to crop the image .</li>
+<li><tt class="docutils literal"><span class="pre">crop_x2</span></tt> - X coordinate of the lower right corner to crop the image.</li>
+<li><tt class="docutils literal"><span class="pre">crop_y2</span></tt> - Y coordinate of the lower right corner to crop the image.</li>
 </ul>
 
 
@@ -285,17 +282,15 @@ Creates a new Sync Uploader object.
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Uploads document.<dl class="docutils"><dt>Arguments:</dt>
-<dd><tt class="docutils literal"><span class="pre">files</span></tt> -- file paths.<dl class="docutils"><dt><tt class="docutils literal"><span class="pre">group_id</span></tt> -- community identifier</dt>
-<dd><dl class="docutils"><dt>(if you need to upload a document to</dt>
-<dd>the list of community documents).</dd>
-</dl>
-</dd>
-</dl>
-</dd>
-<dt>Keyword Arguments:</dt>
-<dd><tt class="docutils literal"><span class="pre">title</span></tt> -- document's name. <tt class="docutils literal"><span class="pre">tags</span></tt> -- tags for search. <tt class="docutils literal"><span class="pre">return_tags</span></tt> <tt class="docutils literal"><span class="pre">is_wall</span></tt> -- upload document in wall.</dd>
-</dl>
+<p>Uploads document.</p>
+<p>Arguments:</p>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - file paths.</li>
+<li><tt class="docutils literal"><span class="pre">group_id</span></tt> - community identifier (if you need to upload a document to the list of community documents).</li>
+<li><tt class="docutils literal"><span class="pre">title</span></tt> - document's name.</li>
+<li><tt class="docutils literal"><span class="pre">tags</span></tt> - tags for search.</li>
+<li><tt class="docutils literal"><span class="pre">return_tags</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">is_wall</span></tt> - upload document in wall.</li>
+</ul>
 
 
 </dd>
@@ -306,16 +301,11 @@ Uploads document.<dl class="docutils"><dt>Arguments:</dt>
                <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
-Uploads document in message.<blockquote><p>Arguments:<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> -- file paths.</li>
-<li><tt class="docutils literal"><span class="pre">peer_id</span></tt> -- destination identifier.</li>
-</ul>
-<p>Keyword Arguments:</p>
-<ul class="simple"><li><dl class="docutils"><dt><tt class="docutils literal"><span class="pre">doc_type</span></tt> -- type of document.</dt>
-<dd>Possible values: doc, audio_message.</dd>
-</dl>
-</li>
-<li><tt class="docutils literal"><span class="pre">title</span></tt> -- document's name.</li>
-<li><tt class="docutils literal"><span class="pre">tags</span></tt> -- tags for search.</li>
+Uploads document in message.<blockquote><p>Arguments:<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - file paths.</li>
+<li><tt class="docutils literal"><span class="pre">peer_id</span></tt> - destination identifier.</li>
+<li><tt class="docutils literal"><span class="pre">doc_type</span></tt> - type of document. Possible values: doc, audio_message.</li>
+<li><tt class="docutils literal"><span class="pre">title</span></tt> - document's name.</li>
+<li><tt class="docutils literal"><span class="pre">tags</span></tt> - tags for search.</li>
 <li><tt class="docutils literal"><span class="pre">return_tags</span></tt></li>
 </ul>
 </p></blockquote>
@@ -330,8 +320,8 @@ Uploads document in message.<blockquote><p>Arguments:<ul class="simple"><li><tt 
 
 <p>Uploads the photo in message.</p>
 <p>Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> -- sequence of file paths.</li>
-<li><tt class="docutils literal"><span class="pre">peer_id</span></tt> -- destination identifier.</li>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - sequence of file paths.</li>
+<li><tt class="docutils literal"><span class="pre">peer_id</span></tt> - destination identifier.</li>
 </ul>
 
 
@@ -344,10 +334,8 @@ Uploads document in message.<blockquote><p>Arguments:<ul class="simple"><li><tt 
 
 <p>Updates profile photo</p>
 <p>Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">file</span></tt> -- file path.</li>
-</ul>
-<p>Keyword Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">owner_id</span></tt> -- id of the community or current user.</li>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">file</span></tt> - file path.</li>
+<li><tt class="docutils literal"><span class="pre">owner_id</span></tt> - id of the community or current user.</li>
 </ul>
 
 
@@ -361,12 +349,10 @@ Uploads document in message.<blockquote><p>Arguments:<ul class="simple"><li><tt 
 
 <p>Uploads photo in wall post.</p>
 <p>Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> -- file paths.</li>
-</ul>
-<p>Keyword Arguments:</p>
-<ul class="simple"><li><tt class="docutils literal"><span class="pre">group_id</span></tt> -- id of the community on whose wall you want to upload the photo (without a minus sign).</li>
-<li><tt class="docutils literal"><span class="pre">user_id</span></tt> -- id of the user whose wall you want to save the photo on.</li>
-<li><tt class="docutils literal"><span class="pre">caption</span></tt> -- photo description text (maximum 2048 characters).</li>
+<ul class="simple"><li><tt class="docutils literal"><span class="pre">files</span></tt> - file paths.</li>
+<li><tt class="docutils literal"><span class="pre">group_id</span></tt> - id of the community on whose wall you want to upload the photo (without a minus sign).</li>
+<li><tt class="docutils literal"><span class="pre">user_id</span></tt> - id of the user whose wall you want to save the photo on.</li>
+<li><tt class="docutils literal"><span class="pre">caption</span></tt> - photo description text (maximum 2048 characters).</li>
 </ul>
 
 
@@ -381,7 +367,7 @@ Uploads document in message.<blockquote><p>Arguments:<ul class="simple"><li><tt 
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2020-05-31 17:20:48 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2020-05-31 17:39:50 UTC</small>
       </div>
     </div>
   </div>
