@@ -87,7 +87,7 @@ macro `~`*(vk: VkObj, body: untyped): untyped =
     var params = newNimNode nnkTableConstr
     for arg in body[1..^1]:
       params.add newTree(nnkExprColonExpr, arg[0].toStrLit, arg[1])
-    result = newCall("await", newCall("call_method", vk, body[0].toStrLit, newCall("%*", params)))
+    result = newCall("call_method", vk, body[0].toStrLit, newCall("%*", params))
 
 
 macro eventhandler*(vk: VkObj, prc: untyped): untyped =

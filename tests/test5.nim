@@ -14,7 +14,7 @@ proc message_new(e: JsonNode) {. async, eventhandler: vk .} =
     text = event["text"].getStr
 
   if text == "keyboard":
-    var response = vk~messages.send(
+    var response = await vk~messages.send(
       message="hello",
       keyboard=keyboard.compile,
       peer_id=event["peer_id"].num,
