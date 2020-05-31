@@ -1,5 +1,5 @@
-# author: Ethosa
-# Async version
+# --- Test 2. User log in. --- #
 import shizuka
 
-var vk = AVk(debug=true, access_token="Your access token here.")
+
+var vk = Vk("81234567890", "password")

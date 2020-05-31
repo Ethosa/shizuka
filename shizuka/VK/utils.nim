@@ -1,9 +1,9 @@
 import httpclient
 import asyncdispatch
-from uri import encodeUrl
+import uri
 import json
-from strutils import join
-from strformat import fmt
+import strutils
+import strformat
 
 
 const
@@ -17,14 +17,14 @@ proc encode*(params: JsonNode): string =
 
   for key, value in params.pairs:
     if value.kind == JString:
-      res.add encodeUrl(key) & "=" & encodeUrl(value.getStr)
+      res.add(encodeUrl(key) & "=" & encodeUrl(value.getStr))
     else:
-      res.add encodeUrl(key) & "=" & encodeUrl(fmt"{value}")
+      res.add(encodeUrl(key) & "=" & encodeUrl(fmt"{value}"))
   res.join "&"
 
 
-proc log_in*(client: HttpClient | AsyncHttpCLient, login, password: string,
-            tfcode="", scope="all", version="5.103"): Future[string] {.multisync.} =
+proc log_in*(client: AsyncHttpCLient, login, password: string,
+            tfcode="", scope="all", version="5.107"): Future[string] {.async.} =
   ## Gets access token via login and password.
   let authData = %*{
     "client_id": CLIENT_ID,
@@ -40,12 +40,12 @@ proc log_in*(client: HttpClient | AsyncHttpCLient, login, password: string,
     authData["code"] = %tfcode
 
   let
-    resp = await client.post("https://oauth.vk.com/token?" & encode authData)
+    resp = await client.post("https://oauth.vk.com/token?" & encode(authData))
     answer = parseJson(await resp.body)
   if "error" notin answer:
     return answer["access_token"].str
   else:
     echo "Error!"
     echo answer
-    echo "Url: https://oauth.vk.com/token?" & encode authData
+    echo "Url: https://oauth.vk.com/token?" & encode(authData)
     return ""

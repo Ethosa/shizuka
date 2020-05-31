@@ -2,10 +2,10 @@
 import httpclient
 import asyncdispatch
 import json
-from strutils import join
+import strutils
 
-from utils import encode
-from consts import VK_API_URL
+import utils
+import consts
 
 
 type

@@ -2,15 +2,14 @@
 import json
 
 type
-  ButtonColor* {.pure.} = enum
+  ButtonColor* {.pure, size: sizeof(int8).} = enum
     PRIMARY = "primary"
     SECONDARY = "secondary"
     NEGATIVE = "negative"
     POSITIVE = "positive"
 
 
-proc create_button*(button_type="text", color="primary",
-                   params = %*{}): JsonNode =
+proc create_button*(button_type="text", color="primary", params = %*{}): JsonNode =
   ## Creates a new button.
   result = %*{}
   if button_type == "text":

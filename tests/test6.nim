@@ -1,16 +1,11 @@
-# author: Ethosa
-# autocalling procs
+# --- Test 6. upload message photo --- #
 import shizuka
 
-var vk = Vk(access_token="...",
-            group_id=123123123, debug=true)
+var vk = AVk("89123456789", "qwertyuiop")
 
+var response = waitFor vk.uploader.message_photo(@["C://Users/Admin/Desktop/nim.png"], 2000000035)
+echo response
+var photo = "photo" & $response["response"][0]["owner_id"] & "_" & $response["response"][0]["id"]
+echo photo
 
-proc message_new(event: JsonNode) {. eventhandler: vk .} =
-  echo "NEW MESSAGE :p"
-  echo event
-
-proc message_edit(event: JsonNode) {. eventhandler: vk .} =
-  echo event
-
-vk.start_listen
+discard waitFor vk~messages.send(peer_id=2_000_000_035, attachment=photo, random_id=123)

@@ -1,5 +1,4 @@
-# author: Ethosa
-# Sync version
+# --- Test 1. Create Vk object. --- #
 import shizuka
 
-var vk = Vk(debug=true, access_token="Your access token here.")
+var vk = Vk(access_token="Your access token here.")

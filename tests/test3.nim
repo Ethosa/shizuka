@@ -1,7 +1,7 @@
-# author: Ethosa
-# Sync user log in.
+# --- Test 3. Receiving real-time events --- #
 import shizuka
 
-var vk = Vk("88005553535", "qwerty", debug=true)
+var vk = Vk("...", 123)
 
-echo vk~users.get(user_ids="akihayase")
+for event in vk.longpoll.listen():
+  echo event

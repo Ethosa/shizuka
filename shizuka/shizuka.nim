@@ -1,5 +1,14 @@
 # author: Ethosa
 
+when defined(debug):
+  import logging
+
+  var console_logger = newConsoleLogger(fmtStr="[$time]::$levelname - ")
+  addHandler(console_logger)
+
+  info("Compiled in debug mode.")
+
+
 import
   VK/Vk,
   VK/LongPoll,
@@ -8,7 +17,9 @@ import
   VK/Event,
   VK/TemplateElement,
   VK/Template,
-  VK/Uploader
+  VK/Uploader,
+  asyncdispatch,
+  json
 export
   Vk,
   LongPoll,
@@ -17,4 +28,6 @@ export
   Event,
   TemplateElement,
   Template,
-  Uploader
+  Uploader,
+  asyncdispatch,
+  json

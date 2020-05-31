@@ -5,8 +5,8 @@ import json
 type
   KeyboardObj = object
     inline*, one_time*: bool
-    buttons*: JsonNode
     max_h*, max_w*: int
+    buttons*: JsonNode
   KeyboardRef* = ref KeyboardObj
 
 

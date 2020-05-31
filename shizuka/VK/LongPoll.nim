@@ -1,54 +1,42 @@
 # author: Ethosa
 import httpclient
-import macros
 import asyncdispatch
-from strutils import `%`
+import strutils
 import json
 
-from Event import to_event
+import Event
+
+when defined(debug):
+  import logging
 
 
 type
-  LongPollObj[ClientType] = object
+  LongPollObj = object
     group_id*: int
-    client*: ClientType
-    response: JsonNode
     server*, ts*, key*: string
     access_token, v: string
-    debug*: bool
+    client*: AsyncHttpClient
+    response: JsonNode
 
-  LongPollRef* = ref LongPollObj[HttpClient]
-  ALongPollRef* = ref LongPollObj[AsyncHttpClient]
+  LongPollRef* = ref LongPollObj
 
 
-proc LongPoll*(client: HttpClient, group_id: int,
-               token, version: string, debug: bool): LongPollRef =
-  ## Creates a new Sync LongPoll object
+proc LongPoll*(client: AsyncHttpClient, group_id: int, token, version: string): LongPollRef =
+  ## Creates a new LongPoll object
   ##
   ## Arguments:
-  ## -   ``client`` -- created HttpClient  
-  ## -   ``group_id``
-  ##
-  ## Async version: `ALongPoll proc <#ALongPoll,AsyncHttpClient,int,string,string,bool>`_
-  LongPollRef(client: client, group_id: group_id, server: "", ts: "0", key: "",
-    access_token: token, v: version, debug: debug)
-
-proc ALongPoll*(client: AsyncHttpClient, group_id: int,
-                token, version: string, debug: bool): ALongPollRef =
-  ## Creates a new Async LongPoll object
-  ##
-  ## Arguments:
-  ## -   ``client`` -- created AsyncHttpClient  
-  ## -   ``group_id``
-  ##
-  ## Sync version: `LongPoll proc <#LongPoll,HttpClient,int,string,string,bool>`_
-  ALongPollRef(client: client, group_id: group_id, server: "", ts: "0", key: "",
-    access_token: token, v: version, debug: debug)
+  ## - `client` - created AsyncHttpClient  
+  ## - `group_id` is an your group ID.
+  ## - `token` is an your VK access token.
+  ## - `version` is a longpoll version.
+  LongPollRef(
+    client: client, group_id: group_id, server: "", ts: "0", key: "",
+    access_token: token, v: version)
 
 
-proc update_ts(lp: LongPollRef, mname: string) =
+proc update_ts(lp: LongPollRef, mname: string) {.async.} =
   try:
-    var sv = parseJson lp.client.getContent(mname)
+    var sv = parseJson(await lp.client.getContent(mname))
     lp.server = sv["response"]["server"].getStr
     if lp.group_id == 0:
       lp.ts = $sv["response"]["ts"]
@@ -56,46 +44,26 @@ proc update_ts(lp: LongPollRef, mname: string) =
       lp.ts = sv["response"]["ts"].getStr
     lp.key = sv["response"]["key"].getStr
   except:
-    lp.update_ts mname
+    await lp.update_ts mname
 
-proc update_server(lp: LongPollRef, url: string) =
+proc update_server(lp: LongPollRef, url: string) {.async.} =
   try:
-    lp.response = parseJson lp.client.getContent(
-      url % [lp.server, lp.key, lp.ts])
+    lp.response = parseJson(await lp.client.getContent(url % [lp.server, lp.key, lp.ts]))
   except:
-    lp.update_server url
+    await lp.update_server url
 
 
-proc update_ts(lp: ALongPollRef, mname: string) =
-  try:
-    var sv = parseJson waitFor lp.client.getContent(mname)
-    lp.server = sv["response"]["server"].getStr
-    if lp.group_id == 0:
-      lp.ts = $sv["response"]["ts"]
-    else:
-      lp.ts = sv["response"]["ts"].getStr
-    lp.key = sv["response"]["key"].getStr
-  except:
-    lp.update_ts mname
-
-proc update_server(lp: ALongPollRef, url: string) =
-  try:
-    lp.response = parseJson waitFor lp.client.getContent(
-      url % [lp.server, lp.key, lp.ts])
-  except:
-    lp.update_server url
-
-
-iterator listen*(lp: LongPollRef | ALongPollRef): JsonNode =
+iterator listen*(lp: LongPollRef): JsonNode =
   ## Starts server listen.
   ##
-  ## .. code-block::Nim
-  ##   import shizuka
-  ##   
-  ##   vk = Vk(...)
-  ##   
-  ##   for event in vk.longpoll.listen():
-  ##     echo event
+  ## .. code-block:: nim
+  ##
+  ##    import shizuka
+  ## 
+  ##    vk = Vk(...)
+  ## 
+  ##    for event in vk.longpoll.listen():
+  ##      echo event
   var
     mname: string
     url: string
@@ -111,15 +79,15 @@ iterator listen*(lp: LongPollRef | ALongPollRef): JsonNode =
   if lp.group_id != 0:
     mname &= "&group_id=" & $lp.group_id
 
-  lp.update_ts mname
+  waitFor(lp.update_ts(mname))
 
-  if lp.debug:
-    echo "Longpoll start."
+  when defined(debug):
+    info("Longpoll start.")
 
   while true:
-    lp.update_server url
+    waitFor(lp.update_server(url))
     if not lp.response.hasKey("updates"):
-      lp.update_ts mname
+      waitFor(lp.update_ts(mname))
     if lp.group_id == 0:
       lp.ts = $lp.response["ts"]
     else:

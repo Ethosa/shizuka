@@ -1,13 +1,12 @@
-# author: Ethosa
-# upload message photo
-import asyncdispatch
+# --- Test 8. add 2 and more buttons. --- #
 import shizuka
 
-var vk = AVk("89123456789", "qwertyuiop", debug=true)
+var keyboard = Keyboard(one_time=true)
 
-var response = waitFor vk.uploader.message_photo(@["C://Users/Admin/Desktop/nim.png"], 2000000035)
-echo response
-var photo = "photo" & $response["response"][0]["owner_id"] & "_" & $response["response"][0]["id"]
-echo photo
+var button = createButton(params = %*{
+  "label": "Hello from Nim"
+})
 
-discard waitFor vk~messages.send(peer_id=2_000_000_035, attachment=photo, random_id=123)
+keyboard.add(button, button, button, button)
+
+echo keyboard

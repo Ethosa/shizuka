@@ -4,16 +4,16 @@ import json
 
 type
   TemplateObj = object
-    elements: JsonNode
     template_type: string
+    elements: JsonNode
   TemplateRef* = ref TemplateObj
 
-proc Template*(ttype="carousel"): TemplateRef =
+proc Template*(`type`: string = "carousel"): TemplateRef =
   ## Creates a new Template object.
   ##
   ## Arguments:
-  ## -   ``ttype`` -- template type.
-  TemplateRef(elements: %*[], template_type: ttype)
+  ## -  `type` - template type.
+  TemplateRef(elements: %*[], template_type: `type`)
 
 proc add*(t: TemplateRef, elem: JsonNode) =
   ## Adds a new element in the template.

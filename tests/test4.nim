@@ -1,10 +1,14 @@
-# author: Ethosa
-# Sync user log in.
-from asyncdispatch import waitFor
+# --- Test 4. autocalling procs --- #
 import shizuka
 
-var vk = AVk("88005553535", "qwerty", debug=true)
+var vk = Vk("...", 123)
 
-echo waitFor vk~users.get(user_ids="akihayase")
-echo waitFor vk~users.get(user_ids=1)
-echo waitFor vk~users.get(user_ids=123123)
+
+proc message_new(event: JsonNode) {.async, eventhandler: vk .} =
+  echo "NEW MESSAGE :p"
+  echo event
+
+proc message_edit(event: JsonNode) {.async, eventhandler: vk .} =
+  echo event
+
+vk.start_listen()

@@ -18,10 +18,10 @@ proc TemplateElement*(title="", description="", photo_id="",
   ## Creates a new TemlateElement.
   ##
   ## Arguments:
-  ## -   ``title`` -- title, maximum 80 characters.
-  ## -   ``description`` -- subtitle, maximum 80 characters.
-  ## -   ``photo_id`` -- id of the image to attach.
-  ## -   ``action`` -- An object that describes the action
+  ## - `title` - title, maximum 80 characters.
+  ## - `description` - subtitle, maximum 80 characters.
+  ## - `photo_id` - id of the image to attach.
+  ## - `action` - An object that describes the action
   ##                   that must be performed when you click on the carousel element.
   TemplateElementRef(title: title, description: description, photo_id: photo_id,
                      action: action, link: link, buttons: buttons)
