@@ -1,7 +1,7 @@
 # --- Test 6. upload message photo --- #
 import shizuka
 
-var vk = AVk("89123456789", "qwertyuiop")
+var vk = Vk("89123456789", "qwertyuiop")
 
 var response = waitFor vk.uploader.message_photo(@["C://Users/Admin/Desktop/nim.png"], 2000000035)
 echo response
