@@ -46,7 +46,7 @@ jobs:
           sudo apt update -yqq
 
       - name: Generate API documents
-        run: nimble doc --index:on --project --out:docs --hints:off src/shizuka.nim
+        run: nimble doc --index:on --project --out:docs --hints:off shizuka/shizuka.nim
 
       - name: Deploy documents
         uses: peaceiris/actions-gh-pages@v3
