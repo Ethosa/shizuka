@@ -29,9 +29,7 @@ proc callAPI(upl: UploaderObj, method_name: string, data: JsonNode): Future[Json
   result = parseJson await upl.client.postContent(VK_API_URL & method_name & "?" & encode(data))
 
 
-proc upload_files(upl: UploaderObj, data: JsonNode,
-                  files: seq[string], method_name: string): Future[JsonNode]
-                 {.async.} =
+proc upload_files(upl: UploaderObj, data: JsonNode, files: seq[string], method_name: string): Future[JsonNode] {.async.} =
   var
     upload_url = await upl.callAPI(method_name, data)
     uploaded_files = newMultipartData()
@@ -219,7 +217,7 @@ proc document_message*(upl: UploaderObj, files: seq[string],
   ## - `doc_type` - type of document. Possible values: doc, audio_message.
   ## - `title` - document's name.
   ## - `tags` - tags for search.
-  ## - `return_tags``
+  ## - `return_tags`
   var data = %*{
    "peer_id": %peer_id,
    "type": %doc_type
@@ -234,7 +232,6 @@ proc document_message*(upl: UploaderObj, files: seq[string],
   }
 
   return await upl.callAPI("docs.save", enddata)
-
 
 
 proc message_photo*(upl: UploaderObj, files: seq[string],
