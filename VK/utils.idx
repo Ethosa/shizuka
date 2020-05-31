@@ -1,0 +1,2 @@
+encode	VK/utils.html#encode,JsonNode	utils: encode(params: JsonNode): string	
+log_in	VK/utils.html#log_in,AsyncHttpClient,string,string,string,string,string	utils: log_in(client: AsyncHttpClient; login, password: string; tfcode = &quot;&quot;; scope = &quot;all&quot;;\n       version = &quot;5.107&quot;): Future[string]	

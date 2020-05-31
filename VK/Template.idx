@@ -1,0 +1,5 @@
+TemplateRef	VK/Template.html#TemplateRef	Template: TemplateRef	
+Template	VK/Template.html#Template,string	Template: Template(`type`: string = &quot;carousel&quot;): TemplateRef	
+add	VK/Template.html#add,TemplateRef,JsonNode	Template: add(t: TemplateRef; elem: JsonNode)	
+add	VK/Template.html#add,TemplateRef,varargs[JsonNode]	Template: add(t: TemplateRef; elems: varargs[JsonNode])	
+compile	VK/Template.html#compile,TemplateRef	Template: compile(t: TemplateRef): JsonNode	

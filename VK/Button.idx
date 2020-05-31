@@ -1,0 +1,2 @@
+ButtonColor	VK/Button.html#ButtonColor	Button: ButtonColor	
+create_button	VK/Button.html#create_button,string,string	Button: create_button(button_type = &quot;text&quot;; color = &quot;primary&quot;; params = %*{}): JsonNode	

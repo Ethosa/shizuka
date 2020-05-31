@@ -1,0 +1,3 @@
+LongPollRef	VK/LongPoll.html#LongPollRef	LongPoll: LongPollRef	
+LongPoll	VK/LongPoll.html#LongPoll,AsyncHttpClient,int,string,string	LongPoll: LongPoll(client: AsyncHttpClient; group_id: int; token, version: string): LongPollRef	
+listen	VK/LongPoll.html#listen.i,LongPollRef	LongPoll: listen(lp: LongPollRef): JsonNode	

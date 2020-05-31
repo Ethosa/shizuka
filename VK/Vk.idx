@@ -1,0 +1,11 @@
+AVkEvent	VK/Vk.html#AVkEvent	Vk: AVkEvent	
+Vk	VK/Vk.html#Vk,string,int	Vk: Vk(access_token: string; group_id = 0; version = VK_API_DEFAULT_VERSION): VkObj	
+Vk	VK/Vk.html#Vk,string,string	Vk: Vk(l, p: string; version = VK_API_DEFAULT_VERSION): VkObj	
+call_method	VK/Vk.html#call_method,VkObj,string,JsonNode	Vk: call_method(vk: VkObj; name: string; params: JsonNode = %*{}): Future[JsonNode]	
+Usage with call_method	Vk.html#usage-with-call-method	  Usage with call_method	
+Usage with this macro	Vk.html#usage-with-this-macro	  Usage with this macro	
+`~`	VK/Vk.html#~.m,VkObj,untyped	Vk: `~`(vk: VkObj; body: untyped): untyped	
+eventhandler	VK/Vk.html#eventhandler.m,VkObj,untyped	Vk: eventhandler(vk: VkObj; prc: untyped): untyped	
+`@`	VK/Vk.html#@.m,VkObj,untyped,untyped	Vk: `@`(vk: VkObj; prc, body: untyped): untyped	
+Usage	Vk.html#usage	  Usage	
+start_listen	VK/Vk.html#start_listen.m,VkObj	Vk: start_listen(vk: VkObj): untyped	

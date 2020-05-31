@@ -1,0 +1,12 @@
+UploaderObj	VK/Uploader.html#UploaderObj	Uploader: UploaderObj	
+Uploader	VK/Uploader.html#Uploader,AsyncHttpClient,string,string	Uploader: Uploader(client: AsyncHttpClient; access_token, v: string): UploaderObj	
+format	VK/Uploader.html#format,UploaderObj,JsonNode,string	Uploader: format(upl: UploaderObj; response: JsonNode; response_type = &quot;photo&quot;): string	
+album_photo	VK/Uploader.html#album_photo,UploaderObj,seq[string],int,int,string	Uploader: album_photo(upl: UploaderObj; files: seq[string]; album_id: int; group_id = 0;\n            caption = &quot;&quot;): Future[JsonNode]	
+audio	VK/Uploader.html#audio,UploaderObj,seq[string],string,string	Uploader: audio(upl: UploaderObj; files: seq[string]; artist = &quot;&quot;; title = &quot;&quot;): Future[JsonNode]	
+chat_photo	VK/Uploader.html#chat_photo,UploaderObj,seq[string],int,int,int,int	Uploader: chat_photo(upl: UploaderObj; files: seq[string]; chat_id: int; crop_x = 0; crop_y = 0;\n           crop_width = 0): Future[JsonNode]	
+cover_photo	VK/Uploader.html#cover_photo,UploaderObj,seq[string],int,int,int,int,int	Uploader: cover_photo(upl: UploaderObj; files: seq[string]; group_id: int; crop_x = 0; crop_y = 0;\n            crop_x2 = 795; crop_y2 = 200): Future[JsonNode]	
+document	VK/Uploader.html#document,UploaderObj,seq[string],int,string,string,int	Uploader: document(upl: UploaderObj; files: seq[string]; group_id = 0; title = &quot;&quot;; tags = &quot;&quot;;\n         return_tags = 0; is_wall = false): Future[JsonNode]	
+document_message	VK/Uploader.html#document_message,UploaderObj,seq[string],int,string,string,string,int	Uploader: document_message(upl: UploaderObj; files: seq[string]; peer_id: int; doc_type = &quot;doc&quot;;\n                 title = &quot;&quot;; tags = &quot;&quot;; return_tags = 0): Future[JsonNode]	
+message_photo	VK/Uploader.html#message_photo,UploaderObj,seq[string],int	Uploader: message_photo(upl: UploaderObj; files: seq[string]; peer_id: int): Future[JsonNode]	
+profile_photo	VK/Uploader.html#profile_photo,UploaderObj,string,int	Uploader: profile_photo(upl: UploaderObj; file: string; owner_id = 0): Future[JsonNode]	
+wall_photo	VK/Uploader.html#wall_photo,UploaderObj,seq[string],int,int,string	Uploader: wall_photo(upl: UploaderObj; files: seq[string]; group_id = 0; user_id = 0; caption = &quot;&quot;): Future[\n    JsonNode]	

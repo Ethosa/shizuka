@@ -1,0 +1,5 @@
+TemplateElementRef	VK/TemplateElement.html#TemplateElementRef	TemplateElement: TemplateElementRef	
+TemplateElement	VK/TemplateElement.html#TemplateElement,string,string,string,string,string	TemplateElement: TemplateElement(title = &quot;&quot;; description = &quot;&quot;; photo_id = &quot;&quot;; action = &quot;open_link&quot;;\n                link = &quot;https://vk.com&quot;; buttons = %*[]): TemplateElementRef	
+add	VK/TemplateElement.html#add,TemplateElementRef,JsonNode	TemplateElement: add(te: TemplateElementRef; button: JsonNode)	
+add	VK/TemplateElement.html#add,TemplateElementRef,varargs[JsonNode]	TemplateElement: add(t: TemplateElementRef; buttons: varargs[JsonNode])	
+to_json	VK/TemplateElement.html#to_json,TemplateElementRef	TemplateElement: to_json(te: TemplateElementRef): JsonNode	

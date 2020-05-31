@@ -1,0 +1,7 @@
+KeyboardRef	VK/Keyboard.html#KeyboardRef	Keyboard: KeyboardRef	
+`$`	VK/Keyboard.html#$,KeyboardRef	Keyboard: `$`(keyboard: KeyboardRef): string	
+Keyboard	VK/Keyboard.html#Keyboard	Keyboard: Keyboard(one_time = false; inline = false): KeyboardRef	
+add_line	VK/Keyboard.html#add_line,KeyboardRef	Keyboard: add_line(keyboard: KeyboardRef)	
+add	VK/Keyboard.html#add,KeyboardRef,JsonNode	Keyboard: add(keyboard: KeyboardRef; button: JsonNode)	
+add	VK/Keyboard.html#add,KeyboardRef,varargs[JsonNode]	Keyboard: add(keyboard: KeyboardRef; buttons: varargs[JsonNode])	
+compile	VK/Keyboard.html#compile,KeyboardRef	Keyboard: compile(keyboard: KeyboardRef): JsonNode	
