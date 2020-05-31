@@ -16,15 +16,17 @@ type
 
 proc Uploader*(client: AsyncHttpClient, access_token, v: string): UploaderObj =
   ## Creates a new Sync Uploader object.
+  ##
+  ## Arguments:
+  ## - `access_token` is an your VK access token.
+  ## - `v` is API version.
   UploaderObj(client: client, access_token: access_token, v: v)
 
 
 proc callAPI(upl: UploaderObj, method_name: string, data: JsonNode): Future[JsonNode] {.async.} =
   data["access_token"] = %upl.access_token
   data["v"] = %upl.v
-  result = parseJson await upl.client.postContent(
-    VK_API_URL & method_name & "?" & encode data
-  )
+  result = parseJson await upl.client.postContent(VK_API_URL & method_name & "?" & encode(data))
 
 
 proc upload_files(upl: UploaderObj, data: JsonNode,
@@ -85,12 +87,10 @@ proc album_photo*(upl: UploaderObj, files: seq[string], album_id: int,
   ## Uploads photo in album
   ## 
   ## Arguments:
-  ## -   ``files`` -- file paths.
-  ## -   ``album_id``
-  ## 
-  ## Keyword Arguments:
-  ## -   ``group_id``
-  ## -   ``caption`` -- photo caption.
+  ## - `files` - file paths.
+  ## - `album_id` is photo album ID.
+  ## - `group_id` is group ID, if needed.
+  ## - `caption` - photo caption.
   var data = %*{
     "album_id": %album_id
   }
@@ -113,11 +113,9 @@ proc audio*(upl: UploaderObj, files: seq[string], artist="",
   ## Uploads audio file
   ##
   ## Arguments:
-  ## -   ``files`` -- file paths.
-  ##
-  ## Keyword Arguments:
-  ## -   ``artist`` -- songwriter. The default is taken from ID3 tags.
-  ## -   ``title`` -- name of the composition. The default is taken from ID3 tags.
+  ## - `files` - file paths.
+  ## - `artist` -- songwriter. The default is taken from ID3 tags.
+  ## - `title` - name of the composition. The default is taken from ID3 tags.
   var response = await upl.upload_files(%*{}, files, "audio.getUploadServer")
   var data = %*{
     "hash": response["hash"],
@@ -132,13 +130,11 @@ proc chat_photo*(upl: UploaderObj, files: seq[string], chat_id: int,
   ## Uploads chat cover.
   ##
   ## Aguments:
-  ## -   ``files`` -- file paths.
-  ## -   ``chat_id`` -- id of the conversation for which you want to upload a photo.
-  ##
-  ## Keyword Arguments:
-  ## -   ``crop_x`` -- x coordinate for cropping the photo (upper right corner).
-  ## -   ``crop_y`` -- y coordinate for cropping the photo (upper right corner).
-  ## -   ``crop_width`` -- Width of the photo after cropping in px.
+  ## - `files` - file paths.
+  ## - `chat_id` - id of the conversation for which you want to upload a photo.
+  ## - `crop_x` - x coordinate for cropping the photo (upper right corner).
+  ## - `crop_y` - y coordinate for cropping the photo (upper right corner).
+  ## - `crop_width` - Width of the photo after cropping in px.
   var data = %*{"caht_id": %chat_id}
   if crop_x != 0:
     data["crop_x"] = %crop_x
@@ -160,14 +156,12 @@ proc cover_photo*(upl: UploaderObj, files: seq[string], group_id: int,
   ## Updates group cover photo.
   ##
   ## Arguments:
-  ## -   ``files`` -- file paths.
-  ## -   ``group_id`` -- community id.
-  ##
-  ## Keyword Arguments:
-  ## -   ``crop_x`` -- X coordinate of the upper left corner to crop the image.
-  ## -   ``crop_y`` --Y coordinate of the upper left corner to crop the image .
-  ## -   ``crop_x2`` -- X coordinate of the lower right corner to crop the image.
-  ## -   ``crop_y2`` -- Y coordinate of the lower right corner to crop the image.
+  ## - `files` - file paths.
+  ## - `group_id` - community id.
+  ## - `crop_x`- X coordinate of the upper left corner to crop the image.
+  ## - `crop_y`-Y coordinate of the upper left corner to crop the image .
+  ## - `crop_x2` - X coordinate of the lower right corner to crop the image.
+  ## - `crop_y2` - Y coordinate of the lower right corner to crop the image.
   var data = %*{
     "group_id": %group_id,
     "crop_x": %crop_x,
@@ -189,16 +183,12 @@ proc document*(upl: UploaderObj, files: seq[string],
   ## Uploads document.
   ##
   ## Arguments:
-  ##     ``files`` -- file paths.
-  ##     ``group_id`` -- community identifier
-  ##                     (if you need to upload a document to
-  ##                      the list of community documents).
-  ##
-  ## Keyword Arguments:
-  ##     ``title`` -- document's name.
-  ##     ``tags`` -- tags for search.
-  ##     ``return_tags``
-  ##     ``is_wall`` -- upload document in wall.
+  ## - `files` - file paths.
+  ## - `group_id` - community identifier (if you need to upload a document to the list of community documents).
+  ## - `title` - document's name.
+  ## - `tags` - tags for search.
+  ## - `return_tags`
+  ## - `is_wall` - upload document in wall.
   var data = %*{}
   var response: JsonNode
   if group_id != 0:
@@ -224,15 +214,12 @@ proc document_message*(upl: UploaderObj, files: seq[string],
   ##Uploads document in message.
   ##
   ## Arguments:
-  ## -   ``files`` -- file paths.
-  ## -   ``peer_id`` -- destination identifier.
-  ##
-  ## Keyword Arguments:
-  ## -   ``doc_type`` -- type of document.
-  ##                     Possible values: doc, audio_message.
-  ## -   ``title`` -- document's name.
-  ## -   ``tags`` -- tags for search.
-  ## -   ``return_tags``
+  ## - `files` - file paths.
+  ## - `peer_id` - destination identifier.
+  ## - `doc_type` - type of document. Possible values: doc, audio_message.
+  ## - `title` - document's name.
+  ## - `tags` - tags for search.
+  ## - `return_tags``
   var data = %*{
    "peer_id": %peer_id,
    "type": %doc_type
@@ -255,8 +242,8 @@ proc message_photo*(upl: UploaderObj, files: seq[string],
   ## Uploads the photo in message.
   ##
   ## Arguments:
-  ## -   ``files`` -- sequence of file paths.
-  ## -   ``peer_id`` -- destination identifier.
+  ## - `files` - sequence of file paths.
+  ## - `peer_id` - destination identifier.
   var
     data = %*{"peer_id": %peer_id}
     response = await upl.upload_files(data, files, "photos.getMessagesUploadServer")
@@ -275,10 +262,8 @@ proc profile_photo*(upl: UploaderObj, file: string, owner_id=0): Future[JsonNode
   ## Updates profile photo
   ##
   ## Arguments:
-  ## -   ``file`` -- file path.
-  ##
-  ## Keyword Arguments:
-  ## -   ``owner_id`` -- id of the community or current user.
+  ## - `file` - file path.
+  ## - `owner_id` - id of the community or current user.
   var data = %*{}
   if owner_id != 0:
     data["owner_id"] = %owner_id
@@ -296,12 +281,10 @@ proc wall_photo*(upl: UploaderObj, files: seq[string], group_id=0, user_id=0,
   ## Uploads photo in wall post.
   ##
   ## Arguments:
-  ## -   ``files`` -- file paths.
-  ##
-  ## Keyword Arguments:
-  ## -   ``group_id`` -- id of the community on whose wall you want to upload the photo (without a minus sign).
-  ## -   ``user_id`` -- id of the user whose wall you want to save the photo on.
-  ## -   ``caption`` -- photo description text (maximum 2048 characters).
+  ## - `files` - file paths.
+  ## - `group_id` - id of the community on whose wall you want to upload the photo (without a minus sign).
+  ## - `user_id` - id of the user whose wall you want to save the photo on.
+  ## - `caption` - photo description text (maximum 2048 characters).
   var data = %*{}
   if group_id != 0:
     data["group_id"] = %group_id
