@@ -1,4 +1,5 @@
 AVkEvent	VK/Vk.html#AVkEvent	Vk: AVkEvent	
+VkObj	VK/Vk.html#VkObj	Vk: VkObj	
 Vk	VK/Vk.html#Vk,string,int	Vk: Vk(access_token: string; group_id = 0; version = VK_API_DEFAULT_VERSION): VkObj	
 Vk	VK/Vk.html#Vk,string,string	Vk: Vk(l, p: string; version = VK_API_DEFAULT_VERSION): VkObj	
 call_method	VK/Vk.html#call_method,VkObj,string,JsonNode	Vk: call_method(vk: VkObj; name: string; params: JsonNode = %*{}): Future[JsonNode]	
