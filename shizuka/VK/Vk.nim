@@ -20,7 +20,7 @@ type
     name*: string
     prc*: proc(event: JsonNode): Future[void]
 
-  VkObj = ref object
+  VkObj* = ref object
     group_id*: int
     access_token: string
     version: string
