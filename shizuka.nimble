@@ -7,4 +7,4 @@ license = "MIT"
 srcDir = "shizuka"
 
 [Deps]
-Requires: "nim >= 1.0.0"
+Requires: "nim >= 1.4.0"
