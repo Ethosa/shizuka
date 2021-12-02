@@ -4,7 +4,11 @@
 ### The Nim framework for VK
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
-[![Nim language-plastic](https://github.com/Ethosa/shizuka/blob/nightly/nim_plastic.svg)](https://github.com/Ethosa/shizuka/blob/nightly/nim_plastic.svg)
+
+<a href="https://github.com/Ethosa/shizuka/blob/nightly/nim_plastic.svg">
+  <img src="https://github.com/Ethosa/shizuka/blob/nightly/nim_plastic.svg" alt="Nim language-plastic" height="20/>
+</a>
+
 [![License: MIT](https://img.shields.io/github/license/Ethosa/shizuka)](https://github.com/Ethosa/shizuka/blob/master/LICENSE)
 [![test](https://github.com/Ethosa/shizuka/workflows/test/badge.svg)](https://github.com/Ethosa/shizuka/actions)
 
