@@ -3,6 +3,7 @@ import
   ../core/exceptions,
   ../core/enums,
   ../core/consts,
+  ../private/tools,
   asyncdispatch,
   httpclient,
   json,
@@ -31,6 +32,12 @@ proc newVk*(access_token: string,
   Vk(kind: VkUser, access_token: access_token,
      api: api_version, client: newAsyncHttpClient())
 
+proc newVk*(userlogin: SomeInteger, password: string,
+            api_version: string = DEFAULT_VK_API): Vk =
+  ## Creates a new Vk user object.
+  result = Vk(kind: VkUser, api: api_version, client: newAsyncHttpClient())
+  result.access_token = waitFor login(result.client, userlogin, password, api_version)
+
 proc newVk*(access_token: string, group_id: uint,
             api_version: string = DEFAULT_VK_API): Vk {.inline.} =
   ## Creates a new Vk group object.
@@ -48,7 +55,7 @@ proc callVkMethod*(vk: Vk, method_name: string,
     args.add((key, val.getStr($val)))
   url &= "&" & encodeQuery(args)
 
-  var response = await vk.client.getContent(url)
+  let response = await vk.client.getContent(url)
   result = parseJson(response)
 
   if result.hasKey("error"):
