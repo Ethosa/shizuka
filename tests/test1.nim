@@ -3,3 +3,9 @@ import
   unittests
 
 
+suite "User":
+  discard
+
+
+suite "Group":
+  discard
