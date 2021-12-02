@@ -1,7 +1,7 @@
 [Package]
 name = "shizuka"
 author = "Ethosa"
-version = "0.2.4"
+version = "0.3.0"
 description = "The Nim framework for VK."
 license = "MIT"
 srcDir = "shizuka"

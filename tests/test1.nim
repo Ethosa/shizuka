@@ -1,4 +1,5 @@
-# --- Test 1. Create Vk object. --- #
-import shizuka
+import
+  shizuka,
+  unittests
 
-var vk = Vk(access_token="Your access token here.")
+
