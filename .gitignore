@@ -7,4 +7,4 @@ htmldocs/
 *.log
 
 # testing
-secret.cfg
+tests/secret.cfg
