@@ -1,10 +1,28 @@
 # author: Ethosa
+## Provides working with Longpoll.
+##
+## ## Examples
+## ### Vk events
+## ```nim
+## var
+##   vk = newVk("myAccessToken")
+##   lp = newLongpoll(vk)
+## 
+## vk@message_new(event):
+##   echo event
+## ```
+##
+## ### `listen iterator <#listen.i,LongpollRef>`_
+## ```nim
+## for event in lp.listen():
+##   echo event
+## ```
 import
   ../core/compiletime,
   ../core/exceptions,
   ../core/consts,
   ../core/enums,
-  user_event,
+  ../private/user_event,
   httpclient,
   strutils,
   vk
@@ -19,13 +37,16 @@ type
     ts*, key*, server*: string
 
 
+proc extractTs(ts: JsonNode): string =
+  if ts.kind == JInt:
+    $ts
+  else:
+    ts.getStr()
+
 proc updateTs(lp: LongpollRef): Future[JsonNode] {.async.} =
   var response = await lp.client.getContent(lp.url % [lp.server, lp.key, $lp.ts])
   result = parseJson(response)
-  if result["ts"].kind == JInt:
-    lp.ts = $result["ts"]
-  else:
-    lp.ts = result["ts"].getStr()
+  lp.ts = extractTs(result["ts"])
 
   if "updates" in result:
     return result["updates"]
@@ -33,13 +54,13 @@ proc updateTs(lp: LongpollRef): Future[JsonNode] {.async.} =
   var failed = result["failed"].getInt()
   case failed
   of 1:
-    throw(VkError, "the event history is outdated or was partially lost, the application can receive events further using the new `ts` value from the response.")
+    throw(LongpollError, "the event history is outdated or was partially lost, the application can receive events further using the new `ts` value from the response.")
   of 2:
-    throw(VkError, "the key has expired, you need to get the key again using the groups.getLongPollServer method.")
+    throw(LongpollError, "the key has expired, you need to get the key again using the groups.getLongPollServer method.")
   of 3:
-    throw(VkError, "information has been lost, you need to request new keys and ts using the groups.getLongPollServer method.")
+    throw(LongpollError, "information has been lost, you need to request new keys and ts using the groups.getLongPollServer method.")
   else:
-    throw(VkError, "Unknown error: " & $failed)
+    throw(LongpollError, "Unknown error: " & $failed)
 
 
 proc newLongpoll*(vk: VkRef): LongpollRef =
@@ -50,11 +71,10 @@ proc newLongpoll*(vk: VkRef): LongpollRef =
   of VkGroup:
     response = waitFor vk~groups.getLongPollServer(group_id=vk.group_id)
     result.url = BOT_LONGPOLL_URL
-    result.ts = response["response"]["ts"].getStr()
   of VkUser:
     response = waitFor vk~messages.getLongPollServer(lp_version=3)
     result.url = USER_LONGPOLL_URL
-    result.ts = $response["response"]["ts"]
+  result.ts = extractTs(response["response"]["ts"])
   result.key = response["response"]["key"].getStr()
   result.server = response["response"]["server"].getStr()
 
@@ -67,7 +87,7 @@ proc close*(lp: LongpollRef) =
 iterator listen*(lp: LongpollRef): JsonNode =
   ## Starts longpoll events handling.
   ##
-  ## ```
+  ## ```nim
   ## for event in lp.listen():
   ##   echo event
   ## ```
@@ -78,6 +98,7 @@ iterator listen*(lp: LongpollRef): JsonNode =
       yield update
 
 proc run*(lp: LongpollRef) {.async.} =
+  ## Starts longpoll events handling.
   for event in lp.listen():
     let ev = if lp.vk.kind == VkUser: parseEvent(event) else: event
     for vkevent in lp.vk.events:

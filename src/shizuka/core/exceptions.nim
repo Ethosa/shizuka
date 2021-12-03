@@ -2,6 +2,8 @@
 {.push pure, size: sizeof(int8).}
 type
   VkError* = object of ValueError
+  LongpollError* = object of ValueError
+  KeyboardError* = object of ValueError
 {.pop.}
 
 

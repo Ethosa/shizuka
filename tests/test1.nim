@@ -34,6 +34,21 @@ proc main {.async.} =
         lp.close()
       await lp.run()
 
+    test "keyboard button test":
+      var
+        btn_link = newButton(ButtonLink)
+        btn_text = newButton(ButtonText, ColorNegative)
+      echo btn_link
+      echo btn_text
+
+    test "keyboard test":
+      var
+        keyboard = newKeyboard()
+        btn1 = newButton(ButtonText)
+      keyboard.addButton(btn1)
+      echo keyboard
+
+
   
   suite "Group":
     test "auth":

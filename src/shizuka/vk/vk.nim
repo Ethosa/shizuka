@@ -1,4 +1,35 @@
 # author: Ethosa
+## Provides working with VK API.
+##
+## ## Auth Examples:
+## ### As user:
+## ```nim
+## var vk = newVk(88005553535, "accaount password")
+## ```
+##
+## ```nim
+## var vk = newVk("myAccessToken")
+## ```
+##
+## ### As Group
+## ```nim
+## var vk = newVk("groupAccessToken", 1919822)
+## ```
+##
+## ## Calling Any VK API Method:
+## ### via `callVkMethod <#callVkMethod,VkRef,string,JsonNode>`_ proc
+## ```nim
+## vk.callVkMethod("messages.send",
+##                 %*{"message": "hello!",
+##                    "random_id": 123,
+##                    "peer_id": 123
+## })
+## ```
+##
+## ### via `~` macro
+## ```nim
+## vk~messages.send(message="hello!", random_id=123, peer_id=123)
+## ```
 import
   ../core/exceptions,
   ../core/enums,
