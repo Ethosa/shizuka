@@ -1,0 +1,1 @@
+login	shizuka/private/tools.html#login,AsyncHttpClient,SomeInteger,string,string,string,string	tools: login(client: AsyncHttpClient; login: SomeInteger; password: string;\n      version: string = DEFAULT_VK_API; tfcode: string = &quot;&quot;;\n      scope: string = &quot;all&quot;): Future[string]	

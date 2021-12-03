@@ -1,0 +1,5 @@
+DEFAULT_VK_API	shizuka/core/consts.html#DEFAULT_VK_API	consts: DEFAULT_VK_API	
+VK_API_URL	shizuka/core/consts.html#VK_API_URL	consts: VK_API_URL	
+METHOD_VK_API_URL	shizuka/core/consts.html#METHOD_VK_API_URL	consts: METHOD_VK_API_URL	
+USER_LONGPOLL_URL	shizuka/core/consts.html#USER_LONGPOLL_URL	consts: USER_LONGPOLL_URL	
+BOT_LONGPOLL_URL	shizuka/core/consts.html#BOT_LONGPOLL_URL	consts: BOT_LONGPOLL_URL	

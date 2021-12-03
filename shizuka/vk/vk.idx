@@ -1,0 +1,12 @@
+Auth Examples:	shizuka/vk/vk.html#auth-examplescolon	  Auth Examples:	
+As user:	shizuka/vk/vk.html#auth-examplescolon-as-usercolon	   As user:	
+As Group	shizuka/vk/vk.html#auth-examplescolon-as-group	   As Group	
+Calling Any VK API Method:	shizuka/vk/vk.html#calling-any-vk-api-methodcolon	  Calling Any VK API Method:	
+via callVkMethod proc	shizuka/vk/vk.html#calling-any-vk-api-methodcolon-via-callvkmethod-callvkmethod-vkref-string-jsonnode-proc	   via <a class="reference external" href="#callVkMethod,VkRef,string,JsonNode">callVkMethod</a> proc	
+via ~ macro	shizuka/vk/vk.html#calling-any-vk-api-methodcolon-via-tilde-macro	   via <tt class="docutils literal"><span class="pre">~</span></tt> macro	
+VkEvent	shizuka/vk/vk.html#VkEvent	vk: VkEvent	
+VkRef	shizuka/vk/vk.html#VkRef	vk: VkRef	
+newVk	shizuka/vk/vk.html#newVk,string,string	vk: newVk(access_token: string; api_version: string = DEFAULT_VK_API): VkRef	
+newVk	shizuka/vk/vk.html#newVk,SomeInteger,string,string	vk: newVk(userlogin: SomeInteger; password: string;\n      api_version: string = DEFAULT_VK_API): VkRef	
+newVk	shizuka/vk/vk.html#newVk,string,uint,string	vk: newVk(access_token: string; group_id: uint; api_version: string = DEFAULT_VK_API): VkRef	
+callVkMethod	shizuka/vk/vk.html#callVkMethod,VkRef,string,JsonNode	vk: callVkMethod(vk: VkRef; method_name: string; params: JsonNode = %*{}): Future[\n    JsonNode]	

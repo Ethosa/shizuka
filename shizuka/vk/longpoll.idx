@@ -1,0 +1,8 @@
+Examples	shizuka/vk/longpoll.html#examples	  Examples	
+Vk events	shizuka/vk/longpoll.html#examples-vk-events	   Vk events	
+listen iterator	shizuka/vk/longpoll.html#examples-listen-iterator-listendoti-longpollref	   <a class="reference external" href="#listen.i,LongpollRef">listen iterator</a>	
+LongpollRef	shizuka/vk/longpoll.html#LongpollRef	longpoll: LongpollRef	
+newLongpoll	shizuka/vk/longpoll.html#newLongpoll,VkRef	longpoll: newLongpoll(vk: VkRef): LongpollRef	
+close	shizuka/vk/longpoll.html#close,LongpollRef	longpoll: close(lp: LongpollRef)	
+listen	shizuka/vk/longpoll.html#listen.i,LongpollRef	longpoll: listen(lp: LongpollRef): JsonNode	
+run	shizuka/vk/longpoll.html#run,LongpollRef	longpoll: run(lp: LongpollRef): owned(Future[void])	

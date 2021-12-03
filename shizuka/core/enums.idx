@@ -1,0 +1,15 @@
+VkUser	shizuka/core/enums.html#VkUser	VkKind.VkUser	
+VkGroup	shizuka/core/enums.html#VkGroup	VkKind.VkGroup	
+VkKind	shizuka/core/enums.html#VkKind	enums: VkKind	
+ButtonText	shizuka/core/enums.html#ButtonText	ButtonAction.ButtonText	
+ButtonLink	shizuka/core/enums.html#ButtonLink	ButtonAction.ButtonLink	
+ButtonLocation	shizuka/core/enums.html#ButtonLocation	ButtonAction.ButtonLocation	
+ButtonPay	shizuka/core/enums.html#ButtonPay	ButtonAction.ButtonPay	
+ButtonApp	shizuka/core/enums.html#ButtonApp	ButtonAction.ButtonApp	
+ButtonCallback	shizuka/core/enums.html#ButtonCallback	ButtonAction.ButtonCallback	
+ButtonAction	shizuka/core/enums.html#ButtonAction	enums: ButtonAction	
+ColorPrimary	shizuka/core/enums.html#ColorPrimary	ButtonColor.ColorPrimary	
+ColorSecondary	shizuka/core/enums.html#ColorSecondary	ButtonColor.ColorSecondary	
+ColorNegative	shizuka/core/enums.html#ColorNegative	ButtonColor.ColorNegative	
+ColorPositive	shizuka/core/enums.html#ColorPositive	ButtonColor.ColorPositive	
+ButtonColor	shizuka/core/enums.html#ButtonColor	enums: ButtonColor	

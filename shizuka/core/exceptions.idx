@@ -1,0 +1,4 @@
+VkError	shizuka/core/exceptions.html#VkError	exceptions: VkError	
+LongpollError	shizuka/core/exceptions.html#LongpollError	exceptions: LongpollError	
+KeyboardError	shizuka/core/exceptions.html#KeyboardError	exceptions: KeyboardError	
+throw	shizuka/core/exceptions.html#throw.t,typedesc,string	exceptions: throw(err: typedesc; msg: string)	

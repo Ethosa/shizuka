@@ -1,0 +1,6 @@
+Usage with callVkMethod	shizuka/core/compiletime.html#usage-with-callvkmethod	  Usage with callVkMethod	
+Usage with this macro	shizuka/core/compiletime.html#usage-with-this-macro	  Usage with this macro	
+`~`	shizuka/core/compiletime.html#~.m,untyped,untyped	compiletime: `~`(vk, body: untyped): untyped	
+Usage with lambda	shizuka/core/compiletime.html#usage-with-lambda	  Usage with lambda	
+Usage with this macro	shizuka/core/compiletime.html#usage-with-this-macro	  Usage with this macro	
+`@`	shizuka/core/compiletime.html#@.m,VkRef,untyped,untyped	compiletime: `@`(vk: VkRef; event, body: untyped): untyped	
