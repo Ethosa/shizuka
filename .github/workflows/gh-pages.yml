@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: before
     env:
-      nim_version: '1.2.0'
+      nim_version: '1.4.8'
     steps:
       - uses: actions/checkout@v1
       - name: Cache nimble
@@ -40,7 +40,7 @@ jobs:
           sudo apt update -yqq
 
       - name: Generate API documents
-        run: nimble doc --index:on --project --out:docs --hints:off shizuka/shizuka.nim
+        run: nimble doc --index:on --project --out:docs --hints:off src/shizuka.nim
 
       - name: Deploy documents
         uses: peaceiris/actions-gh-pages@v3

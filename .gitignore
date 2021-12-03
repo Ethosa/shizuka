@@ -2,5 +2,9 @@ nimcache/
 nimblecache/
 htmldocs/
 
+# compiled files
 *.exe
 *.log
+
+# testing
+tests/secret.cfg
