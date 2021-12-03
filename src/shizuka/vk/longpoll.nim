@@ -16,15 +16,16 @@ type
     is_continued: bool
     client: AsyncHttpClient
     url: string
-    ts*: int
-    key*: string
-    server*: string
+    ts*, key*, server*: string
 
 
 proc updateTs(lp: LongpollRef): Future[JsonNode] {.async.} =
   var response = await lp.client.getContent(lp.url % [lp.server, lp.key, $lp.ts])
   result = parseJson(response)
-  lp.ts = result["ts"].getInt()
+  if result["ts"].kind == JInt:
+    lp.ts = $result["ts"]
+  else:
+    lp.ts = result["ts"].getStr()
 
   if "updates" in result:
     return result["updates"]
@@ -49,10 +50,11 @@ proc newLongpoll*(vk: VkRef): LongpollRef =
   of VkGroup:
     response = waitFor vk~groups.getLongPollServer(group_id=vk.group_id)
     result.url = BOT_LONGPOLL_URL
+    result.ts = response["response"]["ts"].getStr()
   of VkUser:
     response = waitFor vk~messages.getLongPollServer(lp_version=3)
     result.url = USER_LONGPOLL_URL
-  result.ts = response["response"]["ts"].getInt()
+    result.ts = $response["response"]["ts"]
   result.key = response["response"]["key"].getStr()
   result.server = response["response"]["server"].getStr()
 
