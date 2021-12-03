@@ -28,12 +28,14 @@ nimble install shizuka
     import shizuka
 
     # auth
-    var vk = Vk("8123456789", "mypassword")
+    var
+      vk = newVk(8123456789, "mypassword")
+      lp = newLongpoll(vk)
 
     vk@message_new(event):  # real-time events handler
       echo event
 
-    vk.start_listen()  # starts to listen longpoll.
+    lp.run()  # starts to listen longpoll.
     ```
 
 ## Debug mode

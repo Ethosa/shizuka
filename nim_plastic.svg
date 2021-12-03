@@ -16,7 +16,7 @@
     <stop stop-color="#bbb" stop-opacity=".1" offset="0" />
     <stop stop-opacity=".15" offset="1" />
   </linearGradient>
-  <g font-size="16" fill="#282A36" font-family="DejaVu Sans,Verdana,Geneva,sans-serif">
+  <g font-size="16" fill="#282A36" font-family="Verdana,Geneva,DejaVu Sans,sans-serif">
     <text filter="" y="16.0" x="28" fill="#e0e0e0">Programming language:</text>
     <text filter="" y="16.0" x="226" fill="#333">Nim &gt;= 1.4.0</text>
   </g>

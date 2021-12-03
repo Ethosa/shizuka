@@ -12,10 +12,10 @@ let
 
 
 proc main {.async.} =
+  var
+    vk: VkRef
+    lp: LongpollRef
   suite "User":
-  
-    var vk: Vk
-    
     test "auth":
       vk = newVk(user_token)
   
@@ -24,12 +24,18 @@ proc main {.async.} =
 
     test "~ macro test":
       discard await vk~messages.getConversations(fields="")
-  
+
+    test "longpoll test":
+      lp = newLongpoll(vk)
+
+    test "handle events":
+      vk@message_new(event):
+        echo event
+        lp.close()
+      await lp.run()
+
   
   suite "Group":
-  
-    var vk: Vk
-    
     test "auth":
       vk = newVk(group_token, group_id)
   
@@ -38,6 +44,15 @@ proc main {.async.} =
 
     test "~ macro test":
       discard await vk~messages.getConversations(fields="")
+
+    test "longpoll test":
+      lp = newLongpoll(vk)
+
+    test "handle events":
+      vk@message_new(event):
+        echo event
+        lp.close()
+      await lp.run()
   
 
 when isMainModule:

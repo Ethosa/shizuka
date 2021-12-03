@@ -1,5 +1,6 @@
 import
-  vk/vk
+  vk/vk,
+  vk/longpoll
 
 export
-  vk
+  vk, longpoll

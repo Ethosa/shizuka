@@ -15,7 +15,10 @@ export
 
 
 type
-  Vk* = ref object
+  VkEvent* = object
+    name*: string
+    action*: proc(event: JsonNode): Future[void]
+  VkRef* = ref object
     client: AsyncHttpClient
     case kind*: VkKind:
     of VkUser:
@@ -24,28 +27,41 @@ type
       group_id*: uint  ## Group ID. Uses only when auth as a vk group.
     api*: string       ## Api version
     access_token*: string
+    events*: seq[VkEvent]
 
 
 proc newVk*(access_token: string,
-            api_version: string = DEFAULT_VK_API): Vk {.inline.} =
+            api_version: string = DEFAULT_VK_API): VkRef {.inline.} =
   ## Creates a new Vk user object.
-  Vk(kind: VkUser, access_token: access_token,
+  ##
+  ## See also:
+  ## - `newVk proc <#newVk,SomeInteger,string,string>`_
+  ## - `newVk proc <#newVk,string,uint,string>`_
+  VkRef(kind: VkUser, access_token: access_token,
      api: api_version, client: newAsyncHttpClient())
 
 proc newVk*(userlogin: SomeInteger, password: string,
-            api_version: string = DEFAULT_VK_API): Vk =
+            api_version: string = DEFAULT_VK_API): VkRef =
   ## Creates a new Vk user object.
-  result = Vk(kind: VkUser, api: api_version, client: newAsyncHttpClient())
+  ##
+  ## See also:
+  ## - `newVk proc <#newVk,string,string>`_
+  ## - `newVk proc <#newVk,string,uint,string>`_
+  result = VkRef(kind: VkUser, api: api_version, client: newAsyncHttpClient())
   result.access_token = waitFor login(result.client, userlogin, password, api_version)
 
 proc newVk*(access_token: string, group_id: uint,
-            api_version: string = DEFAULT_VK_API): Vk {.inline.} =
+            api_version: string = DEFAULT_VK_API): VkRef {.inline.} =
   ## Creates a new Vk group object.
-  Vk(kind: VkGroup, access_token: access_token, group_id: group_id,
+  ##
+  ## See also:
+  ## - `newVk proc <#newVk,string,string>`_
+  ## - `newVk proc <#newVk,SomeInteger,string,string>`_
+  VkRef(kind: VkGroup, access_token: access_token, group_id: group_id,
      api: api_version, client: newAsyncHttpClient())
 
 
-proc callVkMethod*(vk: Vk, method_name: string,
+proc callVkMethod*(vk: VkRef, method_name: string,
                    params: JsonNode = %*{}): Future[JsonNode] {.async.} =
   ## Calls any VK API method by its name.
   var
