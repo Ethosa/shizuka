@@ -10,29 +10,33 @@ let
   group_token = cfg.getSectionValue("vkgroup","group_token")
   group_id = cfg.getSectionValue("vkgroup","group_id").parseUint()
 
+  user_id = 556962840
+  album_id = 280374505
+
 
 proc main {.async.} =
   var
     vk: VkRef
+    user: VkRef
     lp: LongpollRef
     upl: UploaderRef
     keyboard: KeyboardRef
 
   suite "User":
     test "auth":
-      vk = newVk(user_token)
+      user = newVk(user_token)
   
     test "callVkMethod test":
-      discard await vk.callVkMethod("messages.getConversations", %*{"fields": ""})
+      discard await user.callVkMethod("messages.getConversations", %*{"fields": ""})
 
     test "~ macro test":
-      discard await vk~messages.getConversations(fields="")
+      discard await user~messages.getConversations(fields="")
 
     test "longpoll test":
-      lp = newLongpoll(vk)
+      lp = newLongpoll(user)
 
     test "handle events":
-      vk@message_new(event):
+      user@message_new(event):
         echo event
         lp.close()
       await lp.run()
@@ -56,7 +60,7 @@ proc main {.async.} =
       echo keyboard
 
     test "uploader test":
-      upl = vk.newUploader()
+      upl = user.newUploader()
       var resp = await upl.audio(@["assets/drunk and nasty.mp3"], "ethosa", "sososa")
       echo resp
 
@@ -64,7 +68,7 @@ proc main {.async.} =
   suite "Group":
     test "auth":
       vk = newVk(group_token, group_id)
-      upl = vk.newUploader()
+      upl = user.newUploader()
   
     test "callVkMethod test":
       discard await vk.callVkMethod("messages.getConversations", %*{"fields": ""})
@@ -79,12 +83,15 @@ proc main {.async.} =
       vk@message_new(event):
         discard await vk~messages.send(peer_id=event["object"]["message"]["peer_id"],
                          keyboard=keyboard.toJson(), random_id=0, message="hi")
+        test "upload photos in message test":
+          var photos = await upl.photoMessage(@["assets/nimlogo.png", "assets/nimlogo.png"], user_id)
+          discard await vk~messages.send(peer_id=user_id, random_id=0, message="hi", attachment=photos)
         lp.close()
       await lp.run()
 
-    test "upload pgotos in message test":
-      var photos = await upl.photosMessage(@["assets/nimlogo.png", "assets/nimlogo.png"], 556962840)
-      discard await vk~messages.send(peer_id=556962840, random_id=0, message="hi", attachment=photos)
+    test "upload photo in album test":
+      var photos = await upl.photoAlbum(@["assets/nimlogo.png"], album_id, group_id, "nim logo ._.")
+      echo photos
   
 
 when isMainModule:
