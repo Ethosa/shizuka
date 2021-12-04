@@ -1,8 +1,9 @@
 import
   vk/vk,
   vk/longpoll,
-  vk/keyboard_button,
-  vk/keyboard
+  vk/button,
+  vk/keyboard,
+  vk/uploader
 
 export
-  vk, longpoll, keyboard_button, keyboard
+  vk, longpoll, button, keyboard, uploader
