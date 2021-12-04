@@ -4,6 +4,7 @@ type
   VkError* = object of ValueError
   LongpollError* = object of ValueError
   KeyboardError* = object of ValueError
+  TemplateError* = object of ValueError
 {.pop.}
 
 

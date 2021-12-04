@@ -59,9 +59,20 @@ proc main {.async.} =
       keyboard.addButton(callback_button)
       echo keyboard
 
-    test "uploader test":
+    test "template test":
       upl = user.newUploader()
-      var resp = await upl.audio(@["assets/drunk and nasty.mp3"], "ethosa", "sososa")
+      var
+        tmpl = newTemplate()
+        photos = await upl.photoMessage(@["assets/nimlogo.png"], user_id)
+        elem = newTElement("title", "description", photos.getAttachId())
+        btn1 = newButton(ButtonText)
+      btn1.label = "hi"
+      elem.addButton(btn1)
+      tmpl.addElement(elem)
+      echo tmpl
+
+    test "uploader test":
+      var resp = await upl.audio(@["assets/drunk and nasty.mp3"], "ethosa", "ethososa")
       echo resp
 
   
@@ -81,10 +92,11 @@ proc main {.async.} =
 
     test "handle events":
       vk@message_new(event):
-        discard await vk~messages.send(peer_id=event["object"]["message"]["peer_id"],
+        discard await vk~messages.send(peer_id=user_id,
                          keyboard=keyboard.toJson(), random_id=0, message="hi")
         test "upload photos in message test":
           var photos = await upl.photoMessage(@["assets/nimlogo.png", "assets/nimlogo.png"], user_id)
+          echo photos
           discard await vk~messages.send(peer_id=user_id, random_id=0, message="hi", attachment=photos)
         lp.close()
       await lp.run()
