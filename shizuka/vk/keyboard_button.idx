@@ -1,9 +1,0 @@
-ButtonObj	shizuka/vk/keyboard_button.html#ButtonObj	keyboard_button: ButtonObj	
-newButton	shizuka/vk/keyboard_button.html#newButton,ButtonAction,ButtonColor	keyboard_button: newButton(action: ButtonAction = ButtonText; color: ButtonColor = ColorPrimary): ButtonObj	
-label	shizuka/vk/keyboard_button.html#label,ButtonObj	keyboard_button: label(btn: ButtonObj): string	
-label=	shizuka/vk/keyboard_button.html#label=,ButtonObj,string	keyboard_button: label=(btn: var ButtonObj; value: string): string	
-hash	shizuka/vk/keyboard_button.html#hash,ButtonObj	keyboard_button: hash(btn: ButtonObj): string	
-hash=	shizuka/vk/keyboard_button.html#hash=,ButtonObj,string	keyboard_button: hash=(btn: var ButtonObj; value: string): string	
-`type`	shizuka/vk/keyboard_button.html#type,ButtonObj	keyboard_button: `type`(btn: ButtonObj): string	
-toJson	shizuka/vk/keyboard_button.html#toJson,ButtonObj	keyboard_button: toJson(btn: ButtonObj): JsonNode	
-`$`	shizuka/vk/keyboard_button.html#$,ButtonObj	keyboard_button: `$`(btn: ButtonObj): string	

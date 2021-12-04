@@ -63,12 +63,12 @@ function main() {
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="shizuka/core/compiletime.html">shizuka/core/compiletime</a>, <a href="shizuka/core/consts.html">shizuka/core/consts</a>, <a href="shizuka/core/enums.html">shizuka/core/enums</a>, <a href="shizuka/core/exceptions.html">shizuka/core/exceptions</a>, <a href="shizuka/private/tools.html">shizuka/private/tools</a>, <a href="shizuka/private/user_event.html">shizuka/private/user_event</a>, <a href="shizuka/vk/keyboard.html">shizuka/vk/keyboard</a>, <a href="shizuka/vk/keyboard_button.html">shizuka/vk/keyboard_button</a>, <a href="shizuka/vk/longpoll.html">shizuka/vk/longpoll</a>, <a href="shizuka/vk/vk.html">shizuka/vk/vk</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="shizuka/core/compiletime.html">shizuka/core/compiletime</a>, <a href="shizuka/core/consts.html">shizuka/core/consts</a>, <a href="shizuka/core/enums.html">shizuka/core/enums</a>, <a href="shizuka/core/exceptions.html">shizuka/core/exceptions</a>, <a href="shizuka/private/tools.html">shizuka/private/tools</a>, <a href="shizuka/private/user_event.html">shizuka/private/user_event</a>, <a href="shizuka/vk/button.html">shizuka/vk/button</a>, <a href="shizuka/vk/keyboard.html">shizuka/vk/keyboard</a>, <a href="shizuka/vk/longpoll.html">shizuka/vk/longpoll</a>, <a href="shizuka/vk/uploader.html">shizuka/vk/uploader</a>, <a href="shizuka/vk/vk.html">shizuka/vk/vk</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%24%60" href="#%60%24%60"><span>`$`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard: `$`(kb: KeyboardRef): string" href="shizuka/vk/keyboard.html#%24%2CKeyboardRef">keyboard: `$`(kb: KeyboardRef): string</a></li>
+          data-doc-search-tag="button: `$`(btn: ButtonObj): string" href="shizuka/vk/button.html#%24%2CButtonObj">button: `$`(btn: ButtonObj): string</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: `$`(btn: ButtonObj): string" href="shizuka/vk/keyboard_button.html#%24%2CButtonObj">keyboard_button: `$`(btn: ButtonObj): string</a></li>
+          data-doc-search-tag="keyboard: `$`(kb: KeyboardRef): string" href="shizuka/vk/keyboard.html#%24%2CKeyboardRef">keyboard: `$`(kb: KeyboardRef): string</a></li>
           </ul></dd>
 <dt><a name="%60%40%60" href="#%60%40%60"><span>`@`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -76,7 +76,7 @@ function main() {
           </ul></dd>
 <dt><a name="%60type%60" href="#%60type%60"><span>`type`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: `type`(btn: ButtonObj): string" href="shizuka/vk/keyboard_button.html#type%2CButtonObj">keyboard_button: `type`(btn: ButtonObj): string</a></li>
+          data-doc-search-tag="button: `type`(btn: ButtonObj): string" href="shizuka/vk/button.html#type%2CButtonObj">button: `type`(btn: ButtonObj): string</a></li>
           </ul></dd>
 <dt><a name="%60~%60" href="#%60~%60"><span>`~`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -89,6 +89,12 @@ function main() {
 <dt><a name="addLine" href="#addLine"><span>addLine:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="keyboard: addLine(kb: KeyboardRef)" href="shizuka/vk/keyboard.html#addLine%2CKeyboardRef">keyboard: addLine(kb: KeyboardRef)</a></li>
+          </ul></dd>
+<dt><a name="audio" href="#audio"><span>audio:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: audio(upl: UploaderRef; files: seq[string]; artist: string = &quot;&quot;;
+      title: string = &quot;&quot;): Future[string]" href="shizuka/vk/uploader.html#audio%2CUploaderRef%2Cseq%5Bstring%5D%2Cstring%2Cstring">uploader: audio(upl: UploaderRef; files: seq[string]; artist: string = &quot;&quot;;
+      title: string = &quot;&quot;): Future[string]</a></li>
           </ul></dd>
 <dt><a name="BOT_LONGPOLL_URL" href="#BOT_LONGPOLL_URL"><span>BOT_LONGPOLL_URL:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -120,7 +126,7 @@ function main() {
           </ul></dd>
 <dt><a name="ButtonObj" href="#ButtonObj"><span>ButtonObj:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: ButtonObj" href="shizuka/vk/keyboard_button.html#ButtonObj">keyboard_button: ButtonObj</a></li>
+          data-doc-search-tag="button: ButtonObj" href="shizuka/vk/button.html#ButtonObj">button: ButtonObj</a></li>
           </ul></dd>
 <dt><a name="ButtonPay" href="#ButtonPay"><span>ButtonPay:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -160,13 +166,39 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="consts: DEFAULT_VK_API" href="shizuka/core/consts.html#DEFAULT_VK_API">consts: DEFAULT_VK_API</a></li>
           </ul></dd>
+<dt><a name="doc" href="#doc"><span>doc:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: doc(upl: UploaderRef; files: seq[string]; group_id: int = 0; title: string = &quot;&quot;;
+    tags: string = &quot;&quot;; return_tags: int = 0; is_wall: bool = false): Future[
+    string]" href="shizuka/vk/uploader.html#doc%2CUploaderRef%2Cseq%5Bstring%5D%2Cint%2Cstring%2Cstring%2Cint%2Cbool">uploader: doc(upl: UploaderRef; files: seq[string]; group_id: int = 0; title: string = &quot;&quot;;
+    tags: string = &quot;&quot;; return_tags: int = 0; is_wall: bool = false): Future[
+    string]</a></li>
+          </ul></dd>
+<dt><a name="docMessage" href="#docMessage"><span>docMessage:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: docMessage(upl: UploaderRef; files: seq[string]; peer_id: int; doc_type = &quot;doc&quot;;
+           title = &quot;&quot;; tags = &quot;&quot;; return_tags = 0): Future[string]" href="shizuka/vk/uploader.html#docMessage%2CUploaderRef%2Cseq%5Bstring%5D%2Cint%2Cstring%2Cstring%2Cstring%2Cint">uploader: docMessage(upl: UploaderRef; files: seq[string]; peer_id: int; doc_type = &quot;doc&quot;;
+           title = &quot;&quot;; tags = &quot;&quot;; return_tags = 0): Future[string]</a></li>
+          </ul></dd>
+<dt><a name="format" href="#format"><span>format:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: format(response: JsonNode; response_type = &quot;photo&quot;): string" href="shizuka/vk/uploader.html#format%2CJsonNode%2Cstring">uploader: format(response: JsonNode; response_type = &quot;photo&quot;): string</a></li>
+          </ul></dd>
 <dt><a name="hash" href="#hash"><span>hash:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: hash(btn: ButtonObj): string" href="shizuka/vk/keyboard_button.html#hash%2CButtonObj">keyboard_button: hash(btn: ButtonObj): string</a></li>
+          data-doc-search-tag="button: hash(btn: ButtonObj): string" href="shizuka/vk/button.html#hash%2CButtonObj">button: hash(btn: ButtonObj): string</a></li>
           </ul></dd>
 <dt><a name="hash%3D" href="#hash%3D"><span>hash=:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: hash=(btn: var ButtonObj; value: string): string" href="shizuka/vk/keyboard_button.html#hash%3D%2CButtonObj%2Cstring">keyboard_button: hash=(btn: var ButtonObj; value: string): string</a></li>
+          data-doc-search-tag="button: hash=(btn: var ButtonObj; value: string)" href="shizuka/vk/button.html#hash%3D%2CButtonObj%2Cstring">button: hash=(btn: var ButtonObj; value: string)</a></li>
+          </ul></dd>
+<dt><a name="inline" href="#inline"><span>inline:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="keyboard: inline(kb: KeyboardRef): bool" href="shizuka/vk/keyboard.html#inline%2CKeyboardRef">keyboard: inline(kb: KeyboardRef): bool</a></li>
+          </ul></dd>
+<dt><a name="inline%3D" href="#inline%3D"><span>inline=:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="keyboard: inline=(kb: KeyboardRef; val: bool)" href="shizuka/vk/keyboard.html#inline%3D%2CKeyboardRef%2Cbool">keyboard: inline=(kb: KeyboardRef; val: bool)</a></li>
           </ul></dd>
 <dt><a name="KeyboardError" href="#KeyboardError"><span>KeyboardError:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -178,11 +210,11 @@ function main() {
           </ul></dd>
 <dt><a name="label" href="#label"><span>label:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: label(btn: ButtonObj): string" href="shizuka/vk/keyboard_button.html#label%2CButtonObj">keyboard_button: label(btn: ButtonObj): string</a></li>
+          data-doc-search-tag="button: label(btn: ButtonObj): string" href="shizuka/vk/button.html#label%2CButtonObj">button: label(btn: ButtonObj): string</a></li>
           </ul></dd>
 <dt><a name="label%3D" href="#label%3D"><span>label=:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: label=(btn: var ButtonObj; value: string): string" href="shizuka/vk/keyboard_button.html#label%3D%2CButtonObj%2Cstring">keyboard_button: label=(btn: var ButtonObj; value: string): string</a></li>
+          data-doc-search-tag="button: label=(btn: var ButtonObj; value: string)" href="shizuka/vk/button.html#label%3D%2CButtonObj%2Cstring">button: label=(btn: var ButtonObj; value: string)</a></li>
           </ul></dd>
 <dt><a name="listen" href="#listen"><span>listen:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -210,15 +242,19 @@ function main() {
           </ul></dd>
 <dt><a name="newButton" href="#newButton"><span>newButton:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: newButton(action: ButtonAction = ButtonText; color: ButtonColor = ColorPrimary): ButtonObj" href="shizuka/vk/keyboard_button.html#newButton%2CButtonAction%2CButtonColor">keyboard_button: newButton(action: ButtonAction = ButtonText; color: ButtonColor = ColorPrimary): ButtonObj</a></li>
+          data-doc-search-tag="button: newButton(action: ButtonAction = ButtonText; color: ButtonColor = ColorPrimary): ButtonObj" href="shizuka/vk/button.html#newButton%2CButtonAction%2CButtonColor">button: newButton(action: ButtonAction = ButtonText; color: ButtonColor = ColorPrimary): ButtonObj</a></li>
           </ul></dd>
 <dt><a name="newKeyboard" href="#newKeyboard"><span>newKeyboard:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard: newKeyboard(inline: bool = true; one_time: bool = true): KeyboardRef" href="shizuka/vk/keyboard.html#newKeyboard%2Cbool%2Cbool">keyboard: newKeyboard(inline: bool = true; one_time: bool = true): KeyboardRef</a></li>
+          data-doc-search-tag="keyboard: newKeyboard(inline: bool = true; one_time: bool = false): KeyboardRef" href="shizuka/vk/keyboard.html#newKeyboard%2Cbool%2Cbool">keyboard: newKeyboard(inline: bool = true; one_time: bool = false): KeyboardRef</a></li>
           </ul></dd>
 <dt><a name="newLongpoll" href="#newLongpoll"><span>newLongpoll:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="longpoll: newLongpoll(vk: VkRef): LongpollRef" href="shizuka/vk/longpoll.html#newLongpoll%2CVkRef">longpoll: newLongpoll(vk: VkRef): LongpollRef</a></li>
+          </ul></dd>
+<dt><a name="newUploader" href="#newUploader"><span>newUploader:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: newUploader(vk: VkRef): UploaderRef" href="shizuka/vk/uploader.html#newUploader%2CVkRef">uploader: newUploader(vk: VkRef): UploaderRef</a></li>
           </ul></dd>
 <dt><a name="newVk" href="#newVk"><span>newVk:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -230,9 +266,51 @@ function main() {
           <li><a class="reference external"
           data-doc-search-tag="vk: newVk(access_token: string; group_id: uint; api_version: string = DEFAULT_VK_API): VkRef" href="shizuka/vk/vk.html#newVk%2Cstring%2Cuint%2Cstring">vk: newVk(access_token: string; group_id: uint; api_version: string = DEFAULT_VK_API): VkRef</a></li>
           </ul></dd>
+<dt><a name="one_time" href="#one_time"><span>one_time:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="keyboard: one_time(kb: KeyboardRef): bool" href="shizuka/vk/keyboard.html#one_time%2CKeyboardRef">keyboard: one_time(kb: KeyboardRef): bool</a></li>
+          </ul></dd>
+<dt><a name="one_time%3D" href="#one_time%3D"><span>one_time=:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="keyboard: one_time=(kb: KeyboardRef; val: bool)" href="shizuka/vk/keyboard.html#one_time%3D%2CKeyboardRef%2Cbool">keyboard: one_time=(kb: KeyboardRef; val: bool)</a></li>
+          </ul></dd>
 <dt><a name="parseEvent" href="#parseEvent"><span>parseEvent:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="user_event: parseEvent(arr: JsonNode): JsonNode" href="shizuka/private/user_event.html#parseEvent%2CJsonNode">user_event: parseEvent(arr: JsonNode): JsonNode</a></li>
+          </ul></dd>
+<dt><a name="photoAlbum" href="#photoAlbum"><span>photoAlbum:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: photoAlbum(upl: UploaderRef; files: seq[string]; album_id: int;
+           group_id: uint = 0; caption: string = &quot;&quot;): Future[string]" href="shizuka/vk/uploader.html#photoAlbum%2CUploaderRef%2Cseq%5Bstring%5D%2Cint%2Cuint%2Cstring">uploader: photoAlbum(upl: UploaderRef; files: seq[string]; album_id: int;
+           group_id: uint = 0; caption: string = &quot;&quot;): Future[string]</a></li>
+          </ul></dd>
+<dt><a name="photoChat" href="#photoChat"><span>photoChat:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: photoChat(upl: UploaderRef; files: seq[string]; chat_id: int; crop_x: int = 0;
+          crop_y: int = 0; crop_width: int = 0): Future[string]" href="shizuka/vk/uploader.html#photoChat%2CUploaderRef%2Cseq%5Bstring%5D%2Cint%2Cint%2Cint%2Cint">uploader: photoChat(upl: UploaderRef; files: seq[string]; chat_id: int; crop_x: int = 0;
+          crop_y: int = 0; crop_width: int = 0): Future[string]</a></li>
+          </ul></dd>
+<dt><a name="photoCover" href="#photoCover"><span>photoCover:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: photoCover(upl: UploaderRef; files: seq[string]; group_id: int; crop_x: int = 0;
+           crop_y: int = 0; crop_x2: int = 795; crop_y2: int = 200): Future[
+    string]" href="shizuka/vk/uploader.html#photoCover%2CUploaderRef%2Cseq%5Bstring%5D%2Cint%2Cint%2Cint%2Cint%2Cint">uploader: photoCover(upl: UploaderRef; files: seq[string]; group_id: int; crop_x: int = 0;
+           crop_y: int = 0; crop_x2: int = 795; crop_y2: int = 200): Future[
+    string]</a></li>
+          </ul></dd>
+<dt><a name="photoMessage" href="#photoMessage"><span>photoMessage:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: photoMessage(upl: UploaderRef; files: seq[string]; peer_id: int): Future[string]" href="shizuka/vk/uploader.html#photoMessage%2CUploaderRef%2Cseq%5Bstring%5D%2Cint">uploader: photoMessage(upl: UploaderRef; files: seq[string]; peer_id: int): Future[string]</a></li>
+          </ul></dd>
+<dt><a name="photoProfile" href="#photoProfile"><span>photoProfile:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: photoProfile(upl: UploaderRef; file: string; owner_id: int = 0): Future[string]" href="shizuka/vk/uploader.html#photoProfile%2CUploaderRef%2Cstring%2Cint">uploader: photoProfile(upl: UploaderRef; file: string; owner_id: int = 0): Future[string]</a></li>
+          </ul></dd>
+<dt><a name="photoWall" href="#photoWall"><span>photoWall:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: photoWall(upl: UploaderRef; files: seq[string]; group_id: int = 0;
+          user_id: int = 0; caption: string = &quot;&quot;): Future[string]" href="shizuka/vk/uploader.html#photoWall%2CUploaderRef%2Cseq%5Bstring%5D%2Cint%2Cint%2Cstring">uploader: photoWall(upl: UploaderRef; files: seq[string]; group_id: int = 0;
+          user_id: int = 0; caption: string = &quot;&quot;): Future[string]</a></li>
           </ul></dd>
 <dt><a name="run" href="#run"><span>run:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -244,9 +322,13 @@ function main() {
           </ul></dd>
 <dt><a name="toJson" href="#toJson"><span>toJson:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
-          data-doc-search-tag="keyboard: toJson(kb: KeyboardRef): JsonNode" href="shizuka/vk/keyboard.html#toJson%2CKeyboardRef">keyboard: toJson(kb: KeyboardRef): JsonNode</a></li>
+          data-doc-search-tag="button: toJson(btn: ButtonObj): JsonNode" href="shizuka/vk/button.html#toJson%2CButtonObj">button: toJson(btn: ButtonObj): JsonNode</a></li>
           <li><a class="reference external"
-          data-doc-search-tag="keyboard_button: toJson(btn: ButtonObj): JsonNode" href="shizuka/vk/keyboard_button.html#toJson%2CButtonObj">keyboard_button: toJson(btn: ButtonObj): JsonNode</a></li>
+          data-doc-search-tag="keyboard: toJson(kb: KeyboardRef): JsonNode" href="shizuka/vk/keyboard.html#toJson%2CKeyboardRef">keyboard: toJson(kb: KeyboardRef): JsonNode</a></li>
+          </ul></dd>
+<dt><a name="UploaderRef" href="#UploaderRef"><span>UploaderRef:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: UploaderRef" href="shizuka/vk/uploader.html#UploaderRef">uploader: UploaderRef</a></li>
           </ul></dd>
 <dt><a name="USER_LONGPOLL_URL" href="#USER_LONGPOLL_URL"><span>USER_LONGPOLL_URL:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -285,7 +367,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-12-03 14:04:44 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-12-04 09:11:11 UTC</small>
       </div>
     </div>
   </div>

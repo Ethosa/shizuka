@@ -1,0 +1,9 @@
+ButtonObj	shizuka/vk/button.html#ButtonObj	button: ButtonObj	
+newButton	shizuka/vk/button.html#newButton,ButtonAction,ButtonColor	button: newButton(action: ButtonAction = ButtonText; color: ButtonColor = ColorPrimary): ButtonObj	
+label	shizuka/vk/button.html#label,ButtonObj	button: label(btn: ButtonObj): string	
+label=	shizuka/vk/button.html#label=,ButtonObj,string	button: label=(btn: var ButtonObj; value: string)	
+hash	shizuka/vk/button.html#hash,ButtonObj	button: hash(btn: ButtonObj): string	
+hash=	shizuka/vk/button.html#hash=,ButtonObj,string	button: hash=(btn: var ButtonObj; value: string)	
+`type`	shizuka/vk/button.html#type,ButtonObj	button: `type`(btn: ButtonObj): string	
+toJson	shizuka/vk/button.html#toJson,ButtonObj	button: toJson(btn: ButtonObj): JsonNode	
+`$`	shizuka/vk/button.html#$,ButtonObj	button: `$`(btn: ButtonObj): string	

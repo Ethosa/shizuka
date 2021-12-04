@@ -1,6 +1,10 @@
 KeyboardRef	shizuka/vk/keyboard.html#KeyboardRef	keyboard: KeyboardRef	
-newKeyboard	shizuka/vk/keyboard.html#newKeyboard,bool,bool	keyboard: newKeyboard(inline: bool = true; one_time: bool = true): KeyboardRef	
+newKeyboard	shizuka/vk/keyboard.html#newKeyboard,bool,bool	keyboard: newKeyboard(inline: bool = true; one_time: bool = false): KeyboardRef	
 addLine	shizuka/vk/keyboard.html#addLine,KeyboardRef	keyboard: addLine(kb: KeyboardRef)	
 addButton	shizuka/vk/keyboard.html#addButton,KeyboardRef,ButtonObj	keyboard: addButton(kb: KeyboardRef; btn: ButtonObj)	
+inline	shizuka/vk/keyboard.html#inline,KeyboardRef	keyboard: inline(kb: KeyboardRef): bool	
+inline=	shizuka/vk/keyboard.html#inline=,KeyboardRef,bool	keyboard: inline=(kb: KeyboardRef; val: bool)	
+one_time	shizuka/vk/keyboard.html#one_time,KeyboardRef	keyboard: one_time(kb: KeyboardRef): bool	
+one_time=	shizuka/vk/keyboard.html#one_time=,KeyboardRef,bool	keyboard: one_time=(kb: KeyboardRef; val: bool)	
 toJson	shizuka/vk/keyboard.html#toJson,KeyboardRef	keyboard: toJson(kb: KeyboardRef): JsonNode	
 `$`	shizuka/vk/keyboard.html#$,KeyboardRef	keyboard: `$`(kb: KeyboardRef): string	

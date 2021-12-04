@@ -1,0 +1,14 @@
+Examples	shizuka/vk/uploader.html#examples	  Examples	
+messagePhoto	shizuka/vk/uploader.html#examples-messagephoto	   messagePhoto	
+UploaderRef	shizuka/vk/uploader.html#UploaderRef	uploader: UploaderRef	
+newUploader	shizuka/vk/uploader.html#newUploader,VkRef	uploader: newUploader(vk: VkRef): UploaderRef	
+format	shizuka/vk/uploader.html#format,JsonNode,string	uploader: format(response: JsonNode; response_type = &quot;photo&quot;): string	
+audio	shizuka/vk/uploader.html#audio,UploaderRef,seq[string],string,string	uploader: audio(upl: UploaderRef; files: seq[string]; artist: string = &quot;&quot;;\n      title: string = &quot;&quot;): Future[string]	
+doc	shizuka/vk/uploader.html#doc,UploaderRef,seq[string],int,string,string,int,bool	uploader: doc(upl: UploaderRef; files: seq[string]; group_id: int = 0; title: string = &quot;&quot;;\n    tags: string = &quot;&quot;; return_tags: int = 0; is_wall: bool = false): Future[\n    string]	
+docMessage	shizuka/vk/uploader.html#docMessage,UploaderRef,seq[string],int,string,string,string,int	uploader: docMessage(upl: UploaderRef; files: seq[string]; peer_id: int; doc_type = &quot;doc&quot;;\n           title = &quot;&quot;; tags = &quot;&quot;; return_tags = 0): Future[string]	
+photoAlbum	shizuka/vk/uploader.html#photoAlbum,UploaderRef,seq[string],int,uint,string	uploader: photoAlbum(upl: UploaderRef; files: seq[string]; album_id: int;\n           group_id: uint = 0; caption: string = &quot;&quot;): Future[string]	
+photoChat	shizuka/vk/uploader.html#photoChat,UploaderRef,seq[string],int,int,int,int	uploader: photoChat(upl: UploaderRef; files: seq[string]; chat_id: int; crop_x: int = 0;\n          crop_y: int = 0; crop_width: int = 0): Future[string]	
+photoCover	shizuka/vk/uploader.html#photoCover,UploaderRef,seq[string],int,int,int,int,int	uploader: photoCover(upl: UploaderRef; files: seq[string]; group_id: int; crop_x: int = 0;\n           crop_y: int = 0; crop_x2: int = 795; crop_y2: int = 200): Future[\n    string]	
+photoMessage	shizuka/vk/uploader.html#photoMessage,UploaderRef,seq[string],int	uploader: photoMessage(upl: UploaderRef; files: seq[string]; peer_id: int): Future[string]	
+photoProfile	shizuka/vk/uploader.html#photoProfile,UploaderRef,string,int	uploader: photoProfile(upl: UploaderRef; file: string; owner_id: int = 0): Future[string]	
+photoWall	shizuka/vk/uploader.html#photoWall,UploaderRef,seq[string],int,int,string	uploader: photoWall(upl: UploaderRef; files: seq[string]; group_id: int = 0;\n          user_id: int = 0; caption: string = &quot;&quot;): Future[string]	
