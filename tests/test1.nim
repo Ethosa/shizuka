@@ -15,6 +15,7 @@ proc main {.async.} =
   var
     vk: VkRef
     lp: LongpollRef
+    upl: UploaderRef
     keyboard: KeyboardRef
 
   suite "User":
@@ -46,16 +47,24 @@ proc main {.async.} =
     test "keyboard test":
       var
         btn1 = newButton(ButtonText)
+        callback_button = newButton(ButtonCallback, ColorPositive)
       btn1.label = "hi"
+      callback_button.label = "callback"
       keyboard = newKeyboard()
       keyboard.addButton(btn1)
+      keyboard.addButton(callback_button)
       echo keyboard
 
+    test "uploader test":
+      upl = vk.newUploader()
+      var resp = await upl.audio(@["assets/drunk and nasty.mp3"], "ethosa", "sososa")
+      echo resp
 
   
   suite "Group":
     test "auth":
       vk = newVk(group_token, group_id)
+      upl = vk.newUploader()
   
     test "callVkMethod test":
       discard await vk.callVkMethod("messages.getConversations", %*{"fields": ""})
@@ -72,6 +81,10 @@ proc main {.async.} =
                          keyboard=keyboard.toJson(), random_id=0, message="hi")
         lp.close()
       await lp.run()
+
+    test "upload pgotos in message test":
+      var photos = await upl.photosMessage(@["assets/nimlogo.png", "assets/nimlogo.png"], 556962840)
+      discard await vk~messages.send(peer_id=556962840, random_id=0, message="hi", attachment=photos)
   
 
 when isMainModule:

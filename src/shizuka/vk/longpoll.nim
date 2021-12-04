@@ -101,6 +101,7 @@ proc run*(lp: LongpollRef) {.async.} =
   ## Starts longpoll events handling.
   for event in lp.listen():
     let ev = if lp.vk.kind == VkUser: parseEvent(event) else: event
+    echo ev
     for vkevent in lp.vk.events:
       if vkevent.name == ev["type"].getStr():
         await vkevent.action(ev)
