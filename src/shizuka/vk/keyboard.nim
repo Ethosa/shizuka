@@ -3,20 +3,20 @@
 import
   ../core/exceptions,
   ../core/enums,
-  keyboard_button,
   asyncdispatch,
+  button,
   json
 
 
 type
   KeyboardRef* = ref object
     btn_count: int
-    inline*, one_time*: bool
+    inline, one_time: bool
     max_size*: tuple[w, h, count: int]
     btns*: JsonNode
 
 
-proc newKeyboard*(inline: bool = true, one_time: bool = true): KeyboardRef =
+proc newKeyboard*(inline: bool = true, one_time: bool = false): KeyboardRef =
   result = KeyboardRef(one_time: one_time, inline: inline, btns: %*[[]])
   if inline:
     result.max_size = (5, 6, 10)
@@ -34,12 +34,28 @@ proc addLine*(kb: KeyboardRef) =
 proc addButton*(kb: KeyboardRef, btn: ButtonObj) =
   if kb.btn_count >= kb.max_size[2]:
     throw(KeyboardError, "Maximum buttons count is " & $kb.max_size[2])
-  if kb.btns.getElems[^1].len() < kb.max_size[0]:
-    kb.btns.getElems[^1].add(btn.toJson())
+  let last = kb.btns.len() - 1
+  if kb.btns[last].len() < kb.max_size[0]:
+    kb.btns[last].add(btn.toJson())
   elif kb.btns.len() < kb.max_size[1]:
     kb.btns.add(newJArray())
   else:
     throw(KeyboardError, "Buttons maximum length is 10")
+
+
+proc `inline`*(kb: KeyboardRef): bool {.inline.} = kb.inline
+proc `inline=`*(kb: KeyboardRef, val: bool) =
+  if not kb.one_time:
+    kb.inline = val
+  else:
+    throw(KeyboardError, "inline param isn't available for one_time button.")
+
+proc `one_time`*(kb: KeyboardRef): bool {.inline.} = kb.one_time
+proc `one_time=`*(kb: KeyboardRef, val: bool) =
+  if not kb.inline:
+    kb.one_time = val
+  else:
+    throw(KeyboardError, "one_time param isn't available for inline button.")
 
 
 proc toJson*(kb: KeyboardRef): JsonNode =

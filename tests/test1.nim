@@ -15,6 +15,8 @@ proc main {.async.} =
   var
     vk: VkRef
     lp: LongpollRef
+    keyboard: KeyboardRef
+
   suite "User":
     test "auth":
       vk = newVk(user_token)
@@ -43,8 +45,9 @@ proc main {.async.} =
 
     test "keyboard test":
       var
-        keyboard = newKeyboard()
         btn1 = newButton(ButtonText)
+      btn1.label = "hi"
+      keyboard = newKeyboard()
       keyboard.addButton(btn1)
       echo keyboard
 
@@ -65,7 +68,8 @@ proc main {.async.} =
 
     test "handle events":
       vk@message_new(event):
-        echo event
+        discard await vk~messages.send(peer_id=event["object"]["message"]["peer_id"],
+                         keyboard=keyboard.toJson(), random_id=0, message="hi")
         lp.close()
       await lp.run()
   
