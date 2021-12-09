@@ -93,15 +93,13 @@ iterator listen*(lp: LongpollRef): JsonNode =
   ## ```
   lp.is_continued = true
   while lp.is_continued:
-    var updates = waitFor lp.updateTs()
+    let updates = waitFor lp.updateTs()
     for update in updates.items():
-      yield update
+      yield if lp.vk.kind == VkUser: parseEvent(update) else: update
 
 proc run*(lp: LongpollRef) {.async.} =
   ## Starts longpoll events handling.
   for event in lp.listen():
-    let ev = if lp.vk.kind == VkUser: parseEvent(event) else: event
-    echo ev
     for vkevent in lp.vk.events:
-      if vkevent.name == ev["type"].getStr():
-        await vkevent.action(ev)
+      if vkevent.name == event["type"].getStr():
+        await vkevent.action(event)
