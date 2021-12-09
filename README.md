@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/github/license/Ethosa/shizuka)](https://github.com/Ethosa/shizuka/blob/master/LICENSE)
 [![test](https://github.com/Ethosa/shizuka/workflows/test/badge.svg)](https://github.com/Ethosa/shizuka/actions)
 
-#### Stable version - 0.3.0
+#### Stable version - 1.0.0
 
 </div>
 

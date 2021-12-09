@@ -17,4 +17,7 @@ type
     ColorSecondary = "secondary"
     ColorNegative = "negative",
     ColorPositive = "positive"
+  TElementAction* = enum
+    TElementLink = "open_link"
+    TElementPhoto = "open_photo"
 {.pop.}

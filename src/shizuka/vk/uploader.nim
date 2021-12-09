@@ -12,16 +12,15 @@
 ##                  random_id=0)
 ## ```
 import
-  ../core/compiletime,
   ../core/exceptions,
-  ../core/consts,
   ../core/enums,
   asyncdispatch,
   httpclient,
   strutils,
   json,
   vk,
-  os
+  os,
+  re
 
 
 type
@@ -85,6 +84,19 @@ proc format*(response: JsonNode, response_type="photo"): string =
       if obj.hasKey("owner_id") and obj.hasKey("id"):
         output.add("$1$2_$3" % [response_type, $(obj["owner_id"]), $(obj["id"])])
     return output.join(",")
+
+proc getInfo*(formatted: string): seq[(string, string, string)] =
+  result = @[]
+  for attachment in formatted.split(','):
+    let attach_data = attachment.findAll(re"([a-zA-Z]+)|(\-*\d+)")
+    result.add((attach_data[0], attach_data[1], attach_data[2]))
+
+proc getAttachId*(formatted: string): string =
+  let fmted = formatted.getInfo()
+  var tmp_seq: seq[string] = @[]
+  for f in fmted:
+    tmp_seq = @[f[1] & "_" & f[2]]
+  return tmp_seq.join(",")
 
 
 proc audio*(upl: UploaderRef, files: seq[string], artist: string = "",

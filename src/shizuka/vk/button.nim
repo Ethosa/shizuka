@@ -22,8 +22,8 @@ type
       app_id*, owner_id*: int
     of ButtonLocation:
       discard
-    payload*: string
-    color*: ButtonColor
+    payload*: string  ## additional information. It is returned in the messages_new event inside the payload property
+    color*: ButtonColor  ## Button color. This parameter is used only for buttons with the text type. 
 
 
 proc newButton*(action: ButtonAction = ButtonText,
@@ -45,6 +45,7 @@ proc newButton*(action: ButtonAction = ButtonText,
 
 
 proc `label`*(btn: ButtonObj): string =
+  ## button text. It is sent by the user to the chat after pressing
   case btn.btn_type
   of ButtonText, ButtonCallback:
     btn.text_label
@@ -67,6 +68,14 @@ proc `label=`*(btn: var ButtonObj, value: string) =
     throw(KeyboardError, "Button " & $btn.btn_type & " haven't contains label.")
 
 proc `hash`*(btn: ButtonObj): string =
+  ## if btn type ...
+  ##   is App:
+  ##     hash for navigation inside the app;
+  ##     is sent inside the launch parameters string after the # symbol
+  ##   is Pay:
+  ##     a string containing VK Pay payment parameters and the id of the app
+  ##     in the aid parameter, separated by &.
+  ##     Example: ``action=transfer-to-group&group_id=1&aid=10``
   case btn.btn_type
   of ButtonPay:
     btn.pay_hash
@@ -90,12 +99,12 @@ proc `type`*(btn: ButtonObj): string =
 
 proc toJson*(btn: ButtonObj): JsonNode =
   result = %*{
-    "action": {"type": $btn.btn_type, "payload": btn.payload},
-    "color": $btn.color
+    "action": {"type": $btn.btn_type, "payload": btn.payload}
   }
   case btn.btn_type
   of ButtonText, ButtonCallback:
     result["action"]["label"] = newJString(btn.text_label)
+    result["color"] = newJString($btn.color)
   of ButtonLink:
     result["action"]["label"] = newJString(btn.link_label)
     result["action"]["link"] = newJString(btn.link)
