@@ -1,5 +1,8 @@
 # author: Ethosa
 ## Provides working with templates.
+## Bots can send special messages using templates.
+## Such messages differ from regular ones both visually and functionally.
+## Currently, the carousel is the only template available.
 import
   ../core/compiletime,
   ../core/exceptions,
@@ -20,6 +23,8 @@ proc newTemplate*(`type`: string = "carousel",
 
 proc addElement*(t: TemplateRef, elem: TElementObj) =
   ## Adds a new element to template.
+  ##
+  ## Max amount of elements in a carousel – 10, minimum – 1.
   if t.elements.len > 9:
     throw(TemplateError, "0 < template elements count < 11")
   t.elements.add(elem.toJson())

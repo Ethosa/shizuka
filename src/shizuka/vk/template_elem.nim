@@ -20,7 +20,9 @@ type
 
 
 proc newTElement*(title: string, description: string, photo_id: string,
-                  buttons: JsonNode = newJArray(), action: TElementAction = TElementPhoto): TElementObj =
+                  buttons: JsonNode = newJArray(),
+                  action: TElementAction = TElementPhoto
+                  ): TElementObj =
   ## Creates a new template element.
   result = TElementObj(title: title, desc: description, photo_id: photo_id,
                        buttons: buttons, action: action)
@@ -30,6 +32,7 @@ proc newTElement*(title: string, description: string, photo_id: string,
 
 proc `title`*(elem: TElementObj): string {.inline.} =
   ## Returns template element `title`.
+  ## Maximum 80 characters.
   elem.title
 proc `title=`*(elem: var TElementObj, val: string) =
   ## Changes template element `title` to `val`.
@@ -40,6 +43,7 @@ proc `title=`*(elem: var TElementObj, val: string) =
 
 proc `description`*(elem: TElementObj): string {.inline.} =
   ## Returns template element `description`.
+  ## Subtitle, maximum 80 characters.
   elem.desc
 proc `description=`*(elem: var TElementObj, val: string) =
   ## Changes template element `description` to `val`.
@@ -50,6 +54,7 @@ proc `description=`*(elem: var TElementObj, val: string) =
 
 proc `photo_id`*(elem: TElementObj): string {.inline.} =
   ## Returns template element `photo_id`.
+  ## ID of an image that needs to be attached.
   elem.photo_id
 proc `photo_id=`*(elem: var TElementObj, val: string) =
   ## Changes template element `photo_id` to `val`.

@@ -2,8 +2,6 @@
 ## Provides working with VK keyboards.
 import
   ../core/exceptions,
-  ../core/enums,
-  asyncdispatch,
   button,
   json
 
@@ -43,14 +41,20 @@ proc addButton*(kb: KeyboardRef, btn: ButtonObj) =
     throw(KeyboardError, "Buttons maximum length is 10")
 
 
-proc `inline`*(kb: KeyboardRef): bool {.inline.} = kb.inline
+proc `inline`*(kb: KeyboardRef): bool {.inline.} =
+  ## Shows the keyboard inside the message.
+  kb.inline
 proc `inline=`*(kb: KeyboardRef, val: bool) =
   if not kb.one_time:
     kb.inline = val
   else:
     throw(KeyboardError, "inline param isn't available for one_time button.")
 
-proc `one_time`*(kb: KeyboardRef): bool {.inline.} = kb.one_time
+proc `one_time`*(kb: KeyboardRef): bool {.inline.} =
+  ## Hides the keyboard after the initial use.
+  ## This parameter only works for buttons that send a message (type field – text, location).
+  ## For open_app and vk_pay type, this parameter is ignored.
+  kb.one_time
 proc `one_time=`*(kb: KeyboardRef, val: bool) =
   if not kb.inline:
     kb.one_time = val
