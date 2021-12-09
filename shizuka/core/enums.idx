@@ -13,3 +13,6 @@ ColorSecondary	shizuka/core/enums.html#ColorSecondary	ButtonColor.ColorSecondary
 ColorNegative	shizuka/core/enums.html#ColorNegative	ButtonColor.ColorNegative	
 ColorPositive	shizuka/core/enums.html#ColorPositive	ButtonColor.ColorPositive	
 ButtonColor	shizuka/core/enums.html#ButtonColor	enums: ButtonColor	
+TElementLink	shizuka/core/enums.html#TElementLink	TElementAction.TElementLink	
+TElementPhoto	shizuka/core/enums.html#TElementPhoto	TElementAction.TElementPhoto	
+TElementAction	shizuka/core/enums.html#TElementAction	enums: TElementAction	

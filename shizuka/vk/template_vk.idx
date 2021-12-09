@@ -1,0 +1,4 @@
+newTemplate	shizuka/vk/template_vk.html#newTemplate,string,JsonNode	template_vk: newTemplate(type: string = &quot;carousel&quot;; elements: JsonNode = newJArray()): TemplateRef	
+addElement	shizuka/vk/template_vk.html#addElement,TemplateRef,TElementObj	template_vk: addElement(t: TemplateRef; elem: TElementObj)	
+toJson	shizuka/vk/template_vk.html#toJson,TemplateRef	template_vk: toJson(t: TemplateRef): JsonNode	
+`$`	shizuka/vk/template_vk.html#$,TemplateRef	template_vk: `$`(t: TemplateRef): string	

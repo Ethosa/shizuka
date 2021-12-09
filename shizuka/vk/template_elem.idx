@@ -1,0 +1,13 @@
+TElementObj	shizuka/vk/template_elem.html#TElementObj	template_elem: TElementObj	
+newTElement	shizuka/vk/template_elem.html#newTElement,string,string,string,JsonNode,TElementAction	template_elem: newTElement(title: string; description: string; photo_id: string;\n            buttons: JsonNode = newJArray();\n            action: TElementAction = TElementPhoto): TElementObj	
+title	shizuka/vk/template_elem.html#title,TElementObj	template_elem: title(elem: TElementObj): string	
+title=	shizuka/vk/template_elem.html#title=,TElementObj,string	template_elem: title=(elem: var TElementObj; val: string)	
+description	shizuka/vk/template_elem.html#description,TElementObj	template_elem: description(elem: TElementObj): string	
+description=	shizuka/vk/template_elem.html#description=,TElementObj,string	template_elem: description=(elem: var TElementObj; val: string)	
+photo_id	shizuka/vk/template_elem.html#photo_id,TElementObj	template_elem: photo_id(elem: TElementObj): string	
+photo_id=	shizuka/vk/template_elem.html#photo_id=,TElementObj,string	template_elem: photo_id=(elem: var TElementObj; val: string)	
+link	shizuka/vk/template_elem.html#link,TElementObj	template_elem: link(elem: TElementObj): string	
+link=	shizuka/vk/template_elem.html#link=,TElementObj,string	template_elem: link=(elem: var TElementObj; val: string)	
+addButton	shizuka/vk/template_elem.html#addButton,TElementObj,ButtonObj	template_elem: addButton(elem: var TElementObj; btn: ButtonObj)	
+toJson	shizuka/vk/template_elem.html#toJson,TElementObj	template_elem: toJson(elem: TElementObj): JsonNode	
+`$`	shizuka/vk/template_elem.html#$,TElementObj	template_elem: `$`(t: TElementObj): string	

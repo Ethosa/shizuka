@@ -3,6 +3,8 @@ messagePhoto	shizuka/vk/uploader.html#examples-messagephoto	   messagePhoto
 UploaderRef	shizuka/vk/uploader.html#UploaderRef	uploader: UploaderRef	
 newUploader	shizuka/vk/uploader.html#newUploader,VkRef	uploader: newUploader(vk: VkRef): UploaderRef	
 format	shizuka/vk/uploader.html#format,JsonNode,string	uploader: format(response: JsonNode; response_type = &quot;photo&quot;): string	
+getInfo	shizuka/vk/uploader.html#getInfo,string	uploader: getInfo(formatted: string): seq[(string, string, string)]	
+getAttachId	shizuka/vk/uploader.html#getAttachId,string	uploader: getAttachId(formatted: string): string	
 audio	shizuka/vk/uploader.html#audio,UploaderRef,seq[string],string,string	uploader: audio(upl: UploaderRef; files: seq[string]; artist: string = &quot;&quot;;\n      title: string = &quot;&quot;): Future[string]	
 doc	shizuka/vk/uploader.html#doc,UploaderRef,seq[string],int,string,string,int,bool	uploader: doc(upl: UploaderRef; files: seq[string]; group_id: int = 0; title: string = &quot;&quot;;\n    tags: string = &quot;&quot;; return_tags: int = 0; is_wall: bool = false): Future[\n    string]	
 docMessage	shizuka/vk/uploader.html#docMessage,UploaderRef,seq[string],int,string,string,string,int	uploader: docMessage(upl: UploaderRef; files: seq[string]; peer_id: int; doc_type = &quot;doc&quot;;\n           title = &quot;&quot;; tags = &quot;&quot;; return_tags = 0): Future[string]	

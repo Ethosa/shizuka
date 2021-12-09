@@ -134,6 +134,11 @@ function main() {
           user_id: int = 0; caption: string = &quot;&quot;): Future[string]">photoWall,<wbr>UploaderRef,<wbr>seq[string],<wbr>int,<wbr>int,<wbr>string</a></li>
 
   </ul>
+  <ul class="simple nested-toc-section">getInfo
+      <li><a class="reference" href="#getInfo%2Cstring"
+    title="getInfo(formatted: string): seq[(string, string, string)]">getInfo,<wbr>string</a></li>
+
+  </ul>
   <ul class="simple nested-toc-section">photoChat
       <li><a class="reference" href="#photoChat%2CUploaderRef%2Cseq%5Bstring%5D%2Cint%2Cint%2Cint%2Cint"
     title="photoChat(upl: UploaderRef; files: seq[string]; chat_id: int; crop_x: int = 0;
@@ -150,6 +155,11 @@ function main() {
     title="doc(upl: UploaderRef; files: seq[string]; group_id: int = 0; title: string = &quot;&quot;;
     tags: string = &quot;&quot;; return_tags: int = 0; is_wall: bool = false): Future[
     string]">doc,<wbr>UploaderRef,<wbr>seq[string],<wbr>int,<wbr>string,<wbr>string,<wbr>int,<wbr>bool</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">getAttachId
+      <li><a class="reference" href="#getAttachId%2Cstring"
+    title="getAttachId(formatted: string): string">getAttachId,<wbr>string</a></li>
 
   </ul>
   <ul class="simple nested-toc-section">docMessage
@@ -198,7 +208,7 @@ function main() {
   <div class="section" id="6">
 <h1><a class="toc-backref" href="#6">Imports</a></h1>
 <dl class="item">
-<a class="reference external" href="../core/compiletime.html">../core/compiletime</a>, <a class="reference external" href="../core/exceptions.html">../core/exceptions</a>, <a class="reference external" href="../core/consts.html">../core/consts</a>, <a class="reference external" href="../core/enums.html">../core/enums</a>, <a class="reference external" href="vk.html">vk</a>
+<a class="reference external" href="../core/exceptions.html">../core/exceptions</a>, <a class="reference external" href="../core/enums.html">../core/enums</a>, <a class="reference external" href="vk.html">vk</a>
 </dl></div>
 <div class="section" id="7">
 <h1><a class="toc-backref" href="#7">Types</a></h1>
@@ -237,6 +247,21 @@ Creates a new UploaderRef object.
 <p>Keyword Arguments:</p>
 <ul class="simple"><li><tt class="docutils literal"><span class="pre">formtype</span></tt> - &quot;photo&quot;, &quot;video&quot;, &quot;audio&quot; etc.</li>
 </ul>
+
+
+</dd>
+<a id="getInfo,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#getInfo%2Cstring"><span class="Identifier">getInfo</span></a><span class="Other">(</span><span class="Identifier">formatted</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">seq</span><span class="Other">[</span><span class="Other">(</span><span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">,</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">]</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma">
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RegexError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+
+
+</dd>
+<a id="getAttachId,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#getAttachId%2Cstring"><span class="Identifier">getAttachId</span></a><span class="Other">(</span><span class="Identifier">formatted</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">)</span><span class="Other">:</span> <span class="Identifier">string</span> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RegexError</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
 
 
 </dd>
@@ -405,7 +430,7 @@ Uploads document in message.<blockquote><p>Arguments:<ul class="simple"><li><tt 
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-12-04 09:11:11 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-12-09 17:29:41 UTC</small>
       </div>
     </div>
   </div>

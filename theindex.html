@@ -63,12 +63,16 @@ function main() {
 <div class="document" id="documentId">
   <div class="container">
     <h1 class="title">Index</h1>
-    Modules: <a href="shizuka/core/compiletime.html">shizuka/core/compiletime</a>, <a href="shizuka/core/consts.html">shizuka/core/consts</a>, <a href="shizuka/core/enums.html">shizuka/core/enums</a>, <a href="shizuka/core/exceptions.html">shizuka/core/exceptions</a>, <a href="shizuka/private/tools.html">shizuka/private/tools</a>, <a href="shizuka/private/user_event.html">shizuka/private/user_event</a>, <a href="shizuka/vk/button.html">shizuka/vk/button</a>, <a href="shizuka/vk/keyboard.html">shizuka/vk/keyboard</a>, <a href="shizuka/vk/longpoll.html">shizuka/vk/longpoll</a>, <a href="shizuka/vk/uploader.html">shizuka/vk/uploader</a>, <a href="shizuka/vk/vk.html">shizuka/vk/vk</a>.<br/><p /><h2>API symbols</h2>
+    Modules: <a href="shizuka/core/compiletime.html">shizuka/core/compiletime</a>, <a href="shizuka/core/consts.html">shizuka/core/consts</a>, <a href="shizuka/core/enums.html">shizuka/core/enums</a>, <a href="shizuka/core/exceptions.html">shizuka/core/exceptions</a>, <a href="shizuka/private/tools.html">shizuka/private/tools</a>, <a href="shizuka/private/user_event.html">shizuka/private/user_event</a>, <a href="shizuka/vk/button.html">shizuka/vk/button</a>, <a href="shizuka/vk/keyboard.html">shizuka/vk/keyboard</a>, <a href="shizuka/vk/longpoll.html">shizuka/vk/longpoll</a>, <a href="shizuka/vk/template_elem.html">shizuka/vk/template_elem</a>, <a href="shizuka/vk/template_vk.html">shizuka/vk/template_vk</a>, <a href="shizuka/vk/uploader.html">shizuka/vk/uploader</a>, <a href="shizuka/vk/vk.html">shizuka/vk/vk</a>.<br/><p /><h2>API symbols</h2>
 <dl><dt><a name="%60%24%60" href="#%60%24%60"><span>`$`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="button: `$`(btn: ButtonObj): string" href="shizuka/vk/button.html#%24%2CButtonObj">button: `$`(btn: ButtonObj): string</a></li>
           <li><a class="reference external"
           data-doc-search-tag="keyboard: `$`(kb: KeyboardRef): string" href="shizuka/vk/keyboard.html#%24%2CKeyboardRef">keyboard: `$`(kb: KeyboardRef): string</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="template_elem: `$`(t: TElementObj): string" href="shizuka/vk/template_elem.html#%24%2CTElementObj">template_elem: `$`(t: TElementObj): string</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="template_vk: `$`(t: TemplateRef): string" href="shizuka/vk/template_vk.html#%24%2CTemplateRef">template_vk: `$`(t: TemplateRef): string</a></li>
           </ul></dd>
 <dt><a name="%60%40%60" href="#%60%40%60"><span>`@`:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -85,6 +89,12 @@ function main() {
 <dt><a name="addButton" href="#addButton"><span>addButton:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="keyboard: addButton(kb: KeyboardRef; btn: ButtonObj)" href="shizuka/vk/keyboard.html#addButton%2CKeyboardRef%2CButtonObj">keyboard: addButton(kb: KeyboardRef; btn: ButtonObj)</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="template_elem: addButton(elem: var TElementObj; btn: ButtonObj)" href="shizuka/vk/template_elem.html#addButton%2CTElementObj%2CButtonObj">template_elem: addButton(elem: var TElementObj; btn: ButtonObj)</a></li>
+          </ul></dd>
+<dt><a name="addElement" href="#addElement"><span>addElement:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_vk: addElement(t: TemplateRef; elem: TElementObj)" href="shizuka/vk/template_vk.html#addElement%2CTemplateRef%2CTElementObj">template_vk: addElement(t: TemplateRef; elem: TElementObj)</a></li>
           </ul></dd>
 <dt><a name="addLine" href="#addLine"><span>addLine:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -166,6 +176,14 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="consts: DEFAULT_VK_API" href="shizuka/core/consts.html#DEFAULT_VK_API">consts: DEFAULT_VK_API</a></li>
           </ul></dd>
+<dt><a name="description" href="#description"><span>description:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: description(elem: TElementObj): string" href="shizuka/vk/template_elem.html#description%2CTElementObj">template_elem: description(elem: TElementObj): string</a></li>
+          </ul></dd>
+<dt><a name="description%3D" href="#description%3D"><span>description=:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: description=(elem: var TElementObj; val: string)" href="shizuka/vk/template_elem.html#description%3D%2CTElementObj%2Cstring">template_elem: description=(elem: var TElementObj; val: string)</a></li>
+          </ul></dd>
 <dt><a name="doc" href="#doc"><span>doc:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="uploader: doc(upl: UploaderRef; files: seq[string]; group_id: int = 0; title: string = &quot;&quot;;
@@ -183,6 +201,14 @@ function main() {
 <dt><a name="format" href="#format"><span>format:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="uploader: format(response: JsonNode; response_type = &quot;photo&quot;): string" href="shizuka/vk/uploader.html#format%2CJsonNode%2Cstring">uploader: format(response: JsonNode; response_type = &quot;photo&quot;): string</a></li>
+          </ul></dd>
+<dt><a name="getAttachId" href="#getAttachId"><span>getAttachId:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: getAttachId(formatted: string): string" href="shizuka/vk/uploader.html#getAttachId%2Cstring">uploader: getAttachId(formatted: string): string</a></li>
+          </ul></dd>
+<dt><a name="getInfo" href="#getInfo"><span>getInfo:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="uploader: getInfo(formatted: string): seq[(string, string, string)]" href="shizuka/vk/uploader.html#getInfo%2Cstring">uploader: getInfo(formatted: string): seq[(string, string, string)]</a></li>
           </ul></dd>
 <dt><a name="hash" href="#hash"><span>hash:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -215,6 +241,14 @@ function main() {
 <dt><a name="label%3D" href="#label%3D"><span>label=:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="button: label=(btn: var ButtonObj; value: string)" href="shizuka/vk/button.html#label%3D%2CButtonObj%2Cstring">button: label=(btn: var ButtonObj; value: string)</a></li>
+          </ul></dd>
+<dt><a name="link" href="#link"><span>link:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: link(elem: TElementObj): string" href="shizuka/vk/template_elem.html#link%2CTElementObj">template_elem: link(elem: TElementObj): string</a></li>
+          </ul></dd>
+<dt><a name="link%3D" href="#link%3D"><span>link=:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: link=(elem: var TElementObj; val: string)" href="shizuka/vk/template_elem.html#link%3D%2CTElementObj%2Cstring">template_elem: link=(elem: var TElementObj; val: string)</a></li>
           </ul></dd>
 <dt><a name="listen" href="#listen"><span>listen:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -251,6 +285,18 @@ function main() {
 <dt><a name="newLongpoll" href="#newLongpoll"><span>newLongpoll:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="longpoll: newLongpoll(vk: VkRef): LongpollRef" href="shizuka/vk/longpoll.html#newLongpoll%2CVkRef">longpoll: newLongpoll(vk: VkRef): LongpollRef</a></li>
+          </ul></dd>
+<dt><a name="newTElement" href="#newTElement"><span>newTElement:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: newTElement(title: string; description: string; photo_id: string;
+            buttons: JsonNode = newJArray();
+            action: TElementAction = TElementPhoto): TElementObj" href="shizuka/vk/template_elem.html#newTElement%2Cstring%2Cstring%2Cstring%2CJsonNode%2CTElementAction">template_elem: newTElement(title: string; description: string; photo_id: string;
+            buttons: JsonNode = newJArray();
+            action: TElementAction = TElementPhoto): TElementObj</a></li>
+          </ul></dd>
+<dt><a name="newTemplate" href="#newTemplate"><span>newTemplate:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_vk: newTemplate(type: string = &quot;carousel&quot;; elements: JsonNode = newJArray()): TemplateRef" href="shizuka/vk/template_vk.html#newTemplate%2Cstring%2CJsonNode">template_vk: newTemplate(type: string = &quot;carousel&quot;; elements: JsonNode = newJArray()): TemplateRef</a></li>
           </ul></dd>
 <dt><a name="newUploader" href="#newUploader"><span>newUploader:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -298,6 +344,14 @@ function main() {
            crop_y: int = 0; crop_x2: int = 795; crop_y2: int = 200): Future[
     string]</a></li>
           </ul></dd>
+<dt><a name="photo_id" href="#photo_id"><span>photo_id:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: photo_id(elem: TElementObj): string" href="shizuka/vk/template_elem.html#photo_id%2CTElementObj">template_elem: photo_id(elem: TElementObj): string</a></li>
+          </ul></dd>
+<dt><a name="photo_id%3D" href="#photo_id%3D"><span>photo_id=:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: photo_id=(elem: var TElementObj; val: string)" href="shizuka/vk/template_elem.html#photo_id%3D%2CTElementObj%2Cstring">template_elem: photo_id=(elem: var TElementObj; val: string)</a></li>
+          </ul></dd>
 <dt><a name="photoMessage" href="#photoMessage"><span>photoMessage:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="uploader: photoMessage(upl: UploaderRef; files: seq[string]; peer_id: int): Future[string]" href="shizuka/vk/uploader.html#photoMessage%2CUploaderRef%2Cseq%5Bstring%5D%2Cint">uploader: photoMessage(upl: UploaderRef; files: seq[string]; peer_id: int): Future[string]</a></li>
@@ -316,15 +370,47 @@ function main() {
 <li><a class="reference external"
           data-doc-search-tag="longpoll: run(lp: LongpollRef): owned(Future[void])" href="shizuka/vk/longpoll.html#run%2CLongpollRef">longpoll: run(lp: LongpollRef): owned(Future[void])</a></li>
           </ul></dd>
+<dt><a name="TElementAction" href="#TElementAction"><span>TElementAction:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="enums: TElementAction" href="shizuka/core/enums.html#TElementAction">enums: TElementAction</a></li>
+          </ul></dd>
+<dt><a name="TElementLink" href="#TElementLink"><span>TElementLink:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="TElementAction.TElementLink" href="shizuka/core/enums.html#TElementLink">TElementAction.TElementLink</a></li>
+          </ul></dd>
+<dt><a name="TElementObj" href="#TElementObj"><span>TElementObj:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: TElementObj" href="shizuka/vk/template_elem.html#TElementObj">template_elem: TElementObj</a></li>
+          </ul></dd>
+<dt><a name="TElementPhoto" href="#TElementPhoto"><span>TElementPhoto:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="TElementAction.TElementPhoto" href="shizuka/core/enums.html#TElementPhoto">TElementAction.TElementPhoto</a></li>
+          </ul></dd>
+<dt><a name="TemplateError" href="#TemplateError"><span>TemplateError:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="exceptions: TemplateError" href="shizuka/core/exceptions.html#TemplateError">exceptions: TemplateError</a></li>
+          </ul></dd>
 <dt><a name="throw" href="#throw"><span>throw:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="exceptions: throw(err: typedesc; msg: string)" href="shizuka/core/exceptions.html#throw.t%2Ctypedesc%2Cstring">exceptions: throw(err: typedesc; msg: string)</a></li>
+          </ul></dd>
+<dt><a name="title" href="#title"><span>title:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: title(elem: TElementObj): string" href="shizuka/vk/template_elem.html#title%2CTElementObj">template_elem: title(elem: TElementObj): string</a></li>
+          </ul></dd>
+<dt><a name="title%3D" href="#title%3D"><span>title=:</span></a></dt><dd><ul class="simple">
+<li><a class="reference external"
+          data-doc-search-tag="template_elem: title=(elem: var TElementObj; val: string)" href="shizuka/vk/template_elem.html#title%3D%2CTElementObj%2Cstring">template_elem: title=(elem: var TElementObj; val: string)</a></li>
           </ul></dd>
 <dt><a name="toJson" href="#toJson"><span>toJson:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
           data-doc-search-tag="button: toJson(btn: ButtonObj): JsonNode" href="shizuka/vk/button.html#toJson%2CButtonObj">button: toJson(btn: ButtonObj): JsonNode</a></li>
           <li><a class="reference external"
           data-doc-search-tag="keyboard: toJson(kb: KeyboardRef): JsonNode" href="shizuka/vk/keyboard.html#toJson%2CKeyboardRef">keyboard: toJson(kb: KeyboardRef): JsonNode</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="template_elem: toJson(elem: TElementObj): JsonNode" href="shizuka/vk/template_elem.html#toJson%2CTElementObj">template_elem: toJson(elem: TElementObj): JsonNode</a></li>
+          <li><a class="reference external"
+          data-doc-search-tag="template_vk: toJson(t: TemplateRef): JsonNode" href="shizuka/vk/template_vk.html#toJson%2CTemplateRef">template_vk: toJson(t: TemplateRef): JsonNode</a></li>
           </ul></dd>
 <dt><a name="UploaderRef" href="#UploaderRef"><span>UploaderRef:</span></a></dt><dd><ul class="simple">
 <li><a class="reference external"
@@ -367,7 +453,7 @@ function main() {
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-12-04 09:11:11 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2021-12-09 17:29:41 UTC</small>
       </div>
     </div>
   </div>
