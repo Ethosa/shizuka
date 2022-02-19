@@ -7,6 +7,8 @@ via ~ macro	shizuka/vk/vk.html#calling-any-vk-api-methodcolon-via-tilde-macro	  
 VkEvent	shizuka/vk/vk.html#VkEvent	vk: VkEvent	
 VkRef	shizuka/vk/vk.html#VkRef	vk: VkRef	
 newVk	shizuka/vk/vk.html#newVk,string,string	vk: newVk(access_token: string; api_version: string = DEFAULT_VK_API): VkRef	
-newVk	shizuka/vk/vk.html#newVk,SomeInteger,string,string	vk: newVk(userlogin: SomeInteger; password: string;\n      api_version: string = DEFAULT_VK_API): VkRef	
+newVk	shizuka/vk/vk.html#newVk,int,string,string	vk: newVk(userlogin: int; password: string; api_version: string = DEFAULT_VK_API): VkRef	
 newVk	shizuka/vk/vk.html#newVk,string,uint,string	vk: newVk(access_token: string; group_id: uint; api_version: string = DEFAULT_VK_API): VkRef	
+newUserVk	shizuka/vk/vk.html#newUserVk,int,string,string	vk: newUserVk(userlogin: int; password: string; api_version: string = DEFAULT_VK_API): VkRef	
+newGroupVk	shizuka/vk/vk.html#newGroupVk,string,uint,string	vk: newGroupVk(access_token: string; group_id: uint;\n           api_version: string = DEFAULT_VK_API): VkRef	
 callVkMethod	shizuka/vk/vk.html#callVkMethod,VkRef,string,JsonNode	vk: callVkMethod(vk: VkRef; method_name: string; params: JsonNode = %*{}): Future[\n    JsonNode]	

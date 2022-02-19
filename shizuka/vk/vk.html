@@ -129,7 +129,12 @@ function main() {
 <li>
   <a class="reference reference-toplevel" href="#12" id="62">Procs</a>
   <ul class="simple simple-toc-section">
-      <ul class="simple nested-toc-section">callVkMethod
+      <ul class="simple nested-toc-section">newUserVk
+      <li><a class="reference" href="#newUserVk%2Cint%2Cstring%2Cstring"
+    title="newUserVk(userlogin: int; password: string; api_version: string = DEFAULT_VK_API): VkRef">newUserVk,<wbr>int,<wbr>string,<wbr>string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">callVkMethod
       <li><a class="reference" href="#callVkMethod%2CVkRef%2Cstring%2CJsonNode"
     title="callVkMethod(vk: VkRef; method_name: string; params: JsonNode = %*{}): Future[
     JsonNode]">callVkMethod,<wbr>VkRef,<wbr>string,<wbr>JsonNode</a></li>
@@ -138,11 +143,16 @@ function main() {
   <ul class="simple nested-toc-section">newVk
       <li><a class="reference" href="#newVk%2Cstring%2Cstring"
     title="newVk(access_token: string; api_version: string = DEFAULT_VK_API): VkRef">newVk,<wbr>string,<wbr>string</a></li>
-  <li><a class="reference" href="#newVk%2CSomeInteger%2Cstring%2Cstring"
-    title="newVk(userlogin: SomeInteger; password: string;
-      api_version: string = DEFAULT_VK_API): VkRef">newVk,<wbr>SomeInteger,<wbr>string,<wbr>string</a></li>
+  <li><a class="reference" href="#newVk%2Cint%2Cstring%2Cstring"
+    title="newVk(userlogin: int; password: string; api_version: string = DEFAULT_VK_API): VkRef">newVk,<wbr>int,<wbr>string,<wbr>string</a></li>
   <li><a class="reference" href="#newVk%2Cstring%2Cuint%2Cstring"
     title="newVk(access_token: string; group_id: uint; api_version: string = DEFAULT_VK_API): VkRef">newVk,<wbr>string,<wbr>uint,<wbr>string</a></li>
+
+  </ul>
+  <ul class="simple nested-toc-section">newGroupVk
+      <li><a class="reference" href="#newGroupVk%2Cstring%2Cuint%2Cstring"
+    title="newGroupVk(access_token: string; group_id: uint;
+           api_version: string = DEFAULT_VK_API): VkRef">newGroupVk,<wbr>string,<wbr>uint,<wbr>string</a></li>
 
   </ul>
 
@@ -231,9 +241,11 @@ function main() {
 
 
 </dd>
-<a id="newVk,SomeInteger,string,string"></a>
-<dt><pre><span class="Keyword">proc</span> <a href="#newVk%2CSomeInteger%2Cstring%2Cstring"><span class="Identifier">newVk</span></a><span class="Other">(</span><span class="Identifier">userlogin</span><span class="Other">:</span> <span class="Identifier">SomeInteger</span><span class="Other">;</span> <span class="Identifier">password</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
-           <span class="Identifier">api_version</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_VK_API</span><span class="Other">)</span><span class="Other">:</span> <a href="vk.html#VkRef"><span class="Identifier">VkRef</span></a></pre></dt>
+<a id="newVk,int,string,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#newVk%2Cint%2Cstring%2Cstring"><span class="Identifier">newVk</span></a><span class="Other">(</span><span class="Identifier">userlogin</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">password</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+           <span class="Identifier">api_version</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_VK_API</span><span class="Other">)</span><span class="Other">:</span> <a href="vk.html#VkRef"><span class="Identifier">VkRef</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Creates a new Vk user object.</p>
@@ -248,6 +260,35 @@ function main() {
 <dt><pre><span class="Keyword">proc</span> <a href="#newVk%2Cstring%2Cuint%2Cstring"><span class="Identifier">newVk</span></a><span class="Other">(</span><span class="Identifier">access_token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">group_id</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">;</span>
            <span class="Identifier">api_version</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_VK_API</span><span class="Other">)</span><span class="Other">:</span> <a href="vk.html#VkRef"><span class="Identifier">VkRef</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span> <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span>
     <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Creates a new Vk group object.</p>
+<p>See also:</p>
+<ul class="simple"><li><a class="reference external" href="#newVk,string,string">newVk proc</a></li>
+<li><a class="reference external" href="#newVk,SomeInteger,string,string">newVk proc</a></li>
+</ul>
+
+
+</dd>
+<a id="newUserVk,int,string,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#newUserVk%2Cint%2Cstring%2Cstring"><span class="Identifier">newUserVk</span></a><span class="Other">(</span><span class="Identifier">userlogin</span><span class="Other">:</span> <span class="Identifier">int</span><span class="Other">;</span> <span class="Identifier">password</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span>
+               <span class="Identifier">api_version</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_VK_API</span><span class="Other">)</span><span class="Other">:</span> <a href="vk.html#VkRef"><span class="Identifier">VkRef</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">Exception</span><span class="Other">,</span> <span class="Identifier">ValueError</span><span class="Other">,</span> <span class="Identifier">OSError</span><span class="Other">]</span><span class="Other">,</span>
+    <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Identifier">RootEffect</span><span class="Other">,</span> <span class="Identifier">TimeEffect</span><span class="Other">,</span> <span class="Identifier">ReadIOEffect</span><span class="Other">,</span> <span class="Identifier">WriteIOEffect</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
+<dd>
+
+<p>Creates a new Vk user object.</p>
+<p>See also:</p>
+<ul class="simple"><li><a class="reference external" href="#newVk,string,string">newVk proc</a></li>
+<li><a class="reference external" href="#newVk,string,uint,string">newVk proc</a></li>
+</ul>
+
+
+</dd>
+<a id="newGroupVk,string,uint,string"></a>
+<dt><pre><span class="Keyword">proc</span> <a href="#newGroupVk%2Cstring%2Cuint%2Cstring"><span class="Identifier">newGroupVk</span></a><span class="Other">(</span><span class="Identifier">access_token</span><span class="Other">:</span> <span class="Identifier">string</span><span class="Other">;</span> <span class="Identifier">group_id</span><span class="Other">:</span> <span class="Identifier">uint</span><span class="Other">;</span>
+                <span class="Identifier">api_version</span><span class="Other">:</span> <span class="Identifier">string</span> <span class="Other">=</span> <span class="Identifier">DEFAULT_VK_API</span><span class="Other">)</span><span class="Other">:</span> <a href="vk.html#VkRef"><span class="Identifier">VkRef</span></a> <span><span class="Other">{</span><span class="Other pragmadots">...</span><span class="Other">}</span></span><span class="pragmawrap"><span class="Other">{.</span><span class="pragma"><span class="Identifier">inline</span><span class="Other">,</span>
+    <span class="Identifier">raises</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span><span class="Other">,</span> <span class="Identifier">tags</span><span class="Other">:</span> <span class="Other">[</span><span class="Other">]</span></span><span class="Other">.}</span></span></pre></dt>
 <dd>
 
 <p>Creates a new Vk group object.</p>
@@ -277,7 +318,7 @@ Calls any VK API method by its name.
       <div class="twelve-columns footer">
         <span class="nim-sprite"></span>
         <br/>
-        <small style="color: var(--hint);">Made with Nim. Generated: 2021-12-09 17:29:41 UTC</small>
+        <small style="color: var(--hint);">Made with Nim. Generated: 2022-02-19 17:45:21 UTC</small>
       </div>
     </div>
   </div>
