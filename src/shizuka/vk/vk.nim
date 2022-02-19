@@ -37,7 +37,6 @@ import
   ../private/tools,
   asyncdispatch,
   httpclient,
-  nimpy,
   json,
   uri
 
@@ -47,10 +46,10 @@ export
 
 
 type
-  VkEvent* = object of PyNimObjectExperimental
+  VkEvent* = object
     name*: string
     action*: proc(event: JsonNode): Future[void]
-  VkRef* = ref object of PyNimObjectExperimental
+  VkRef* = ref
     client: AsyncHttpClient
     case kind*: VkKind:
     of VkUser:
@@ -94,7 +93,7 @@ proc newVk*(access_token: string, group_id: uint,
 
 
 proc newUserVk*(userlogin: int, password: string,
-                api_version: string = DEFAULT_VK_API): VkRef {.inline, exportpy.} =
+                api_version: string = DEFAULT_VK_API): VkRef {.inline.} =
   ## Creates a new Vk user object.
   ##
   ## See also:
@@ -104,7 +103,7 @@ proc newUserVk*(userlogin: int, password: string,
   result.access_token = waitFor login(result.client, userlogin, password, api_version)
 
 proc newGroupVk*(access_token: string, group_id: uint,
-                 api_version: string = DEFAULT_VK_API): VkRef {.inline, exportpy.} =
+                 api_version: string = DEFAULT_VK_API): VkRef {.inline.} =
   ## Creates a new Vk group object.
   ##
   ## See also:
@@ -115,7 +114,7 @@ proc newGroupVk*(access_token: string, group_id: uint,
 
 
 proc callVkMethod*(vk: VkRef, method_name: string,
-                   params: JsonNode = %*{}): Future[JsonNode] {.async, exportpy.} =
+                   params: JsonNode = %*{}): Future[JsonNode] {.async.} =
   ## Calls any VK API method by its name.
   var
     url = METHOD_VK_API_URL & method_name & "?"
