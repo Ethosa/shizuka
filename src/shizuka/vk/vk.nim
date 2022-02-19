@@ -37,6 +37,7 @@ import
   ../private/tools,
   asyncdispatch,
   httpclient,
+  nimpy,
   json,
   uri
 
@@ -46,10 +47,10 @@ export
 
 
 type
-  VkEvent* = object
+  VkEvent* = object of PyNimObjectExperimental
     name*: string
     action*: proc(event: JsonNode): Future[void]
-  VkRef* = ref object
+  VkRef* = ref object of PyNimObjectExperimental
     client: AsyncHttpClient
     case kind*: VkKind:
     of VkUser:
@@ -71,8 +72,8 @@ proc newVk*(access_token: string,
   VkRef(kind: VkUser, access_token: access_token,
      api: api_version, client: newAsyncHttpClient())
 
-proc newVk*(userlogin: SomeInteger, password: string,
-            api_version: string = DEFAULT_VK_API): VkRef =
+proc newVk*(userlogin: int, password: string,
+            api_version: string = DEFAULT_VK_API): VkRef {.inline.} =
   ## Creates a new Vk user object.
   ##
   ## See also:
@@ -92,8 +93,29 @@ proc newVk*(access_token: string, group_id: uint,
      api: api_version, client: newAsyncHttpClient())
 
 
+proc newUserVk*(userlogin: int, password: string,
+                api_version: string = DEFAULT_VK_API): VkRef {.inline, exportpy.} =
+  ## Creates a new Vk user object.
+  ##
+  ## See also:
+  ## - `newVk proc <#newVk,string,string>`_
+  ## - `newVk proc <#newVk,string,uint,string>`_
+  result = VkRef(kind: VkUser, api: api_version, client: newAsyncHttpClient())
+  result.access_token = waitFor login(result.client, userlogin, password, api_version)
+
+proc newGroupVk*(access_token: string, group_id: uint,
+                 api_version: string = DEFAULT_VK_API): VkRef {.inline, exportpy.} =
+  ## Creates a new Vk group object.
+  ##
+  ## See also:
+  ## - `newVk proc <#newVk,string,string>`_
+  ## - `newVk proc <#newVk,SomeInteger,string,string>`_
+  VkRef(kind: VkGroup, access_token: access_token, group_id: group_id,
+     api: api_version, client: newAsyncHttpClient())
+
+
 proc callVkMethod*(vk: VkRef, method_name: string,
-                   params: JsonNode = %*{}): Future[JsonNode] {.async.} =
+                   params: JsonNode = %*{}): Future[JsonNode] {.async, exportpy.} =
   ## Calls any VK API method by its name.
   var
     url = METHOD_VK_API_URL & method_name & "?"
