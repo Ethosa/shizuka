@@ -49,7 +49,7 @@ type
   VkEvent* = object
     name*: string
     action*: proc(event: JsonNode): Future[void]
-  VkRef* = ref
+  VkRef* = ref object
     client: AsyncHttpClient
     case kind*: VkKind:
     of VkUser:
